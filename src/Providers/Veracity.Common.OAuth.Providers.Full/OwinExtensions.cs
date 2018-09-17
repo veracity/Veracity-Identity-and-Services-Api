@@ -1,4 +1,15 @@
-﻿using System;
+﻿using Microsoft.Identity.Client;
+using Microsoft.IdentityModel.Protocols;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Owin.Security.Notifications;
+using Microsoft.Owin.Security.OpenIdConnect;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Owin;
+using Stardust.Interstellar.Rest.Annotations;
+using Stardust.Interstellar.Rest.Common;
+using Stardust.Particles;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -8,18 +19,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
-using Microsoft.Identity.Client;
-using Microsoft.IdentityModel.Protocols;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.Notifications;
-using Microsoft.Owin.Security.OpenIdConnect;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Owin;
-using Stardust.Interstellar.Rest.Annotations;
-using Stardust.Interstellar.Rest.Common;
-using Stardust.Particles;
+using System.Web.Mvc;
 using Veracity.Services.Api;
 using Veracity.Services.Api.Models;
 using OpenIdConnectMessage = Microsoft.IdentityModel.Protocols.OpenIdConnect.OpenIdConnectMessage;
@@ -185,7 +185,7 @@ namespace Veracity.Common.OAuth.Providers
 
         private static async Task ValidatePolicies(AuthorizationCodeReceivedNotification notification)
         {
-            await ClientFactory.CreateClient(VeracityApiUrl, null)
+            await ClientFactory.CreateClient(VeracityApiUrl, new LocatorWrapper(System.Web.Mvc.DependencyResolver.Current))
                 .My
                 .ValidatePolicies(notification.RedirectUri);
             notification.OwinContext.Authentication.SignIn(notification.AuthenticationTicket.Identity);
@@ -202,6 +202,21 @@ namespace Veracity.Common.OAuth.Providers
                 notification.Response.Redirect(ex.GetErrorData<ValidationError>().Url);
                 notification.HandleResponse();
             }
+        }
+    }
+
+    internal class LocatorWrapper : IServiceProvider
+    {
+        private readonly IDependencyResolver _current;
+
+        public LocatorWrapper(IDependencyResolver current)
+        {
+            _current = current;
+        }
+
+        public object GetService(Type serviceType)
+        {
+            return _current.GetService(serviceType);
         }
     }
 

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0.1-rc007</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>DNVGL</Company>
+    <Authors>Veracity by DNVGL</Authors>
+    <Copyright>Copyright © Veracity by DNVGL 2018</Copyright>
+    <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632?s=200&amp;v=4</PackageIconUrl>
+    <PackageTags>Veracity Services SDK</PackageTags>
+    <Product>Veracity.Services.Api</Product>
+    <PackageProjectUrl>https://developer.veracity.com/docs</PackageProjectUrl>
+    <PackageLicenseUrl>https://developer.veracity.com/doc/open-source-projects</PackageLicenseUrl>
+    <Description>SDK for accessing Veracity MyServices and Profile api. 
+
+Veracity MyServices is your access point for engagement of digital interaction with DNV GL. You will find digital services like “Rules and Standards”, digital tools such as our OnDemand hosted service “Secure File Transfer“, our collaboration solution “Meeting Places” (SharePoint) and many other services. Some of the services are open to all users (like “Rules and Standards” and “Secure File Transfer”), while other services require an invitation from a DNV GL employee</Description>
+    <PackageReleaseNotes>This is the Public Preview release of our new open industry data platform
+Learn more at https://www.veracity.com</PackageReleaseNotes>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>apiModelStrongNameKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.0.0" />
+    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.1.4" />
+    <PackageReference Include="Stardust.Interstellar.Rest.Annotations" Version="3.1.0" />
+    <PackageReference Include="Stardust.Nucleus" Version="5.0.3" />
+    <PackageReference Include="Stardust.Particles" Version="5.0.1" />
+  </ItemGroup>
+
+</Project>

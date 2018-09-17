@@ -1,0 +1,26 @@
+﻿@using System.Configuration
+@model Veracity.Services.Api.Models.UserInfo
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>@Model.Id</h1>
+    <p class="lead">User information collected from myDNVGL api V3 using the SDK</p>
+    <p><a href="@ConfigurationManager.AppSettings["myApiV3Url"]" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Name:</h2>
+        <p>
+            @Model.Name
+        </p>
+        <p><span class="btn btn-default">@Model.ServicesUrl</span></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Email</h2>
+        <p>@Model.Email</p>
+    </div>
+
+</div>

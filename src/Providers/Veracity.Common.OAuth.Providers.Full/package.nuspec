@@ -1,0 +1,58 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <!--*-->
+    <id>Veracity.Common.OAuth</id>
+    <!--*-->
+    <version>1.0.1-rc007</version>
+    <title>Veracity.Common.OAuth</title>
+    <!--*-->
+    <authors>Veracity by DNVGL</authors> 
+    <owners>DNVGL Veracity</owners>
+    <licenseUrl>https://developer.veracity.com/doc/open-source-projects</licenseUrl>
+    <projectUrl>https://developer.veracity.com/docs</projectUrl>
+    <iconUrl>https://avatars3.githubusercontent.com/u/28704632</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Authentication library for the veracity services sdk</description>
+    <releaseNotes> </releaseNotes>
+    <copyright>Copyright © Veracity by DNVGL 2018</copyright>
+    <tags>Veracity Services SDK Authentication OAuth B2C</tags>
+    <dependencies>
+      <group targetFramework="net471">
+        <dependency id="Microsoft.Extensions.Caching.Abstractions" version="2.0.0" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="2.0.0" />
+        <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
+        <dependency id="Stardust.Particles" version="5.0.1"/>
+        <dependency id="Veracity.Services.Api" version="1.0.1-rc005"  />
+        <dependency id="Stardust.Interstellar.Rest" version="3.1.3" />
+        <dependency id="Stardust.Interstellar.Rest.Annotations" version="3.1.0" />
+        <dependency id="Microsoft.Identity.Client" version="1.1.2-preview0008" />
+      </group>
+      <group targetFramework="netcoreapp2.0">
+        <dependency id="Microsoft.Extensions.Caching.Abstractions" version="2.0.0" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="2.0.0" />
+        <dependency id="Microsoft.AspNetCore" version="2.0.1" />
+        <dependency id="Microsoft.AspNetCore.Authentication" version="2.0.1" />
+        <dependency id="Microsoft.AspNetCore.Authentication.Abstractions" version="2.0.1" />
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
+        <dependency id="Stardust.Particles" version="5.0.1"/>
+        <dependency id="Veracity.Services.Api" version="1.0.1-rc006"  />
+        <dependency id="Stardust.Interstellar.Rest" version="3.1.3" />
+        <dependency id="Stardust.Interstellar.Rest.Service" version="3.1.9" />
+        <dependency id="Stardust.Interstellar.Rest.Annotations" version="3.1.0" />
+        <dependency id="Microsoft.Identity.Client" version="1.1.2-preview0008" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src=".\bin\Release\Veracity.Common.OAuth.Providers.dll" target="lib\net471" />
+    <file src=".\bin\Release\Veracity.Common.OAuth.Providers.pdb" target="lib\net471" />
+    <file src="..\Veracity.Common.OAuth.Providers\bin\Release\netcoreapp2.1\Veracity.Common.OAuth.Providers.dll" target="lib\netcoreapp2.1" />
+    <file src="..\Veracity.Common.OAuth.Providers\bin\Release\netcoreapp2.1\Veracity.Common.OAuth.Providers.pdb" target="lib\netcoreapp2.1" />
+    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.dll" target="lib\net471" />
+    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.pdb" target="lib\net471" />
+    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.dll" target="lib\netcoreapp2.1" />
+    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.pdb" target="lib\netcoreapp2.1" />
+  </files>
+</package>

@@ -1,15 +1,13 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Configuration;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.Ajax.Utilities;
-using Microsoft.Owin.Security.Cookies;
 using Veracity.Common.OAuth.Providers;
 using Veracity.Services.Api;
 using Veracity.Services.Api.Models;
@@ -55,9 +53,14 @@ namespace HelloWorld.Controllers
                 var client = new HttpClient
                 {
                     BaseAddress = new Uri(ConfigurationManager.AppSettings["myApiV3Url"]),
-                    DefaultRequestHeaders = { Authorization = AuthenticationHeaderValue.Parse(new Veracity.Common.OAuth.Providers.TokenProvider().GetBearerToken()) }
+                    DefaultRequestHeaders =
+                    {
+                        Authorization = AuthenticationHeaderValue.Parse(new TokenProvider().GetBearerToken())
+
+                    }
                 };
-                var companies = await client.GetAsync("/my/companies");
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", ConfigurationManager.AppSettings["subscriptionKey"]);
+                var companies = await client.GetAsync("my/companies");
 
                 ViewBag.CompaniesRawData = await companies.Content.ReadAsStringAsync();
 

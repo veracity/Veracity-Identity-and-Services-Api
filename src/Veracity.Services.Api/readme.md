@@ -3,7 +3,7 @@
 ## Defining the url's and actions 
 
 An api is a collection of paths pointing at resources. In our api the reaources are grouped as My 
-(the logged in user), This (the external services), [Our (the company)] and Discover (lookup services, currently users, companies and services)
+(the logged in user), This (the external services), [Our (the company, not implemented at the moment)] and Directory (lookup services, currently users, companies and services)
 
 In code the api is grouped in controllers that are automatically implemented at runtime based on an interface.
 This interface is decorated to instruct the tool how to generate the controller. The tool uses standard WebApi attributes whenever possible.
@@ -11,8 +11,8 @@ This interface is decorated to instruct the tool how to generate the controller.
 Make all actions task-async to optimize resource utilization on the server side (and in the client sdk)
 
 ```CSharp
-    [IRoutePrefix("discover"), Oauth, ServiceInformation,  CircuitBreaker(100, 5), SupportCode, ErrorHandler(typeof(ExceptionWrapper)), AuthorizeWrapper]
-    public interface ICompanies
+    [IRoutePrefix("directory"), Oauth, ServiceInformation,  CircuitBreaker(100, 5), SupportCode, ErrorHandler(typeof(ExceptionWrapper)), AuthorizeWrapper]
+    public interface ICompaniesDirectory
     {
         [Get, Route("companies/{id}")]
         Task<CompanyInfo> CompanyById([In(InclutionTypes.Path)]string id);
@@ -63,9 +63,9 @@ If a create, update or similar operations need extra parameters to describe beha
 
 ```JSON
 {
-  "firstName": "Jonas",
-  "lastName": "Syrstad",
-  "email": "jonas.syrstad@dnvgl.com",
+  "firstName": "Test",
+  "lastName": "user",
+  "email": "dest.user@veracity.com",
   "options": {
     "SendMail": true
   }
@@ -89,14 +89,14 @@ For plurals (list) return a collection of reference objects that has as a minimu
 ```JSON
 [
   {
-    "url": "/discover/companies/ac87edd9-5468-4619-b985-b3e3bd886972",
-    "name": "A/S Norske Shell",
-    "id": "ac87edd9-5468-4619-b985-b3e3bd886972"
+    "url": "/discover/companies/ac87efaf-5462-4319-b485-b343bd886972",
+    "name": "TestCompany1",
+    "id": "ac87efaf-5462-4319-b485-b343bd886972"
   },
   {
-    "url": "/discover/companies/26bd798c-2284-4894-8424-796188dcfaf4",
-    "name": "Aker Contracting AS",
-    "id": "26bd798c-2284-4894-8424-796188dcfaf4"
+    "url": "/discover/companies/26bd7dfc-2184-4394-8324-796448dcfaf4",
+    "name": "Test compay 2,
+    "id": "26bd7dfc-2184-4394-8324-796448dcfaf4"
   }
 ]
 ```
@@ -104,10 +104,10 @@ For plurals (list) return a collection of reference objects that has as a minimu
 For Creates return a reference object with the http code 200 or 201 and the url in the http header x-location
 ```JSON
 {
-    "url": "/discover/companies/26bd798c-2284-4894-8424-796188dcfaf4",
-    "name": "Aker Contracting AS",
-    "id": "26bd798c-2284-4894-8424-796188dcfaf4"
-  }
+    "url": "/discover/companies/ac87efaf-5462-4319-b485-b343bd886972",
+    "name": "TestCompany1",
+    "id": "ac87efaf-5462-4319-b485-b343bd886972"
+}
 ```
 
 ### Failure

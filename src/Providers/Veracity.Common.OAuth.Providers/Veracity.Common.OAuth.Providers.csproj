@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>1.0.1-rc007</Version>
+    <Version>1.0.1-rc008</Version>
     <Company>DNVGL</Company>
     <Authors>Veracity by DNVGL</Authors>
     <SignAssembly>false</SignAssembly>

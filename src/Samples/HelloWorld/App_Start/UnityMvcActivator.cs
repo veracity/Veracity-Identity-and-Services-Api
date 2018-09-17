@@ -16,7 +16,7 @@ namespace HelloWorld
         /// <summary>
         /// Integrates Unity when the application starts.
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
             FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(UnityConfig.Container));
@@ -24,7 +24,7 @@ namespace HelloWorld
             DependencyResolver.SetResolver(new UnityDependencyResolver(UnityConfig.Container));
 
             // TODO: Uncomment if you want to use PerRequestLifetimeManager
-            // Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
+            Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
         }
 
         /// <summary>

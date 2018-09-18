@@ -23,9 +23,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "Samples\Hello
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IoCIntegration", "IoCIntegration", "{4AA6A8D8-D929-4BAB-B2FC-34E9C10A72BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veracity.Services.Api.Unity", "Veracity.Services.Api.Unity\Veracity.Services.Api.Unity.csproj", "{62AC6238-DDC2-4A54-B2F2-79AFED13CCED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veracity.Services.Api.Unity", "IocIntegrations\Veracity.Services.Api.Unity\Veracity.Services.Api.Unity.csproj", "{62AC6238-DDC2-4A54-B2F2-79AFED13CCED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veracity.Services.Api.Autofac", "Veracity.Services.Api.Autofac\Veracity.Services.Api.Autofac.csproj", "{C6216B9D-9E30-4D00-A9A7-379522FE7DDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veracity.Services.Api.Autofac", "IocIntegrations\Veracity.Services.Api.Autofac\Veracity.Services.Api.Autofac.csproj", "{C6216B9D-9E30-4D00-A9A7-379522FE7DDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

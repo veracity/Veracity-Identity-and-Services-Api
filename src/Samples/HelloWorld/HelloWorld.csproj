@@ -207,6 +207,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\IocIntegrations\Veracity.Services.Api.Unity\Veracity.Services.Api.Unity.csproj">
+      <Project>{62ac6238-ddc2-4a54-b2f2-79afed13cced}</Project>
+      <Name>Veracity.Services.Api.Unity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth.Providers.Full\Veracity.Common.OAuth.Providers.Full.csproj">
       <Project>{0d5c1d5e-8312-46ee-80fc-086cd806f161}</Project>
       <Name>Veracity.Common.OAuth.Providers.Full</Name>
@@ -214,10 +218,6 @@
     <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth\Veracity.Common.OAuth.csproj">
       <Project>{8485b920-bac4-42cb-8727-9c8b80557137}</Project>
       <Name>Veracity.Common.OAuth</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Veracity.Services.Api.Unity\Veracity.Services.Api.Unity.csproj">
-      <Project>{62AC6238-DDC2-4A54-B2F2-79AFED13CCED}</Project>
-      <Name>Veracity.Services.Api.Unity</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Veracity.Services.Api\Veracity.Services.Api.csproj">
       <Project>{63feb620-6e8f-4d4e-86cb-3db68c8047c7}</Project>

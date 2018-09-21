@@ -78,5 +78,6 @@ namespace Veracity.Common.OAuth
             get => ConfigurationManagerHelper.GetValueOnKey("subscriptionKey");
             set => ConfigurationManagerHelper.SetValueOnKey("subscriptionKey", value, true);
         }
+ 
     }
 }

@@ -1,0 +1,120 @@
+﻿@using System.Configuration
+@model Veracity.Services.Api.Models.UserInfo
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>@Model.Id</h1>
+    <p class="lead">User information collected from myDNVGL api V3 using the SDK</p>
+    <p><a href="@ConfigurationManager.AppSettings["myApiV3Url"]" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Name:</h2>
+        <p>
+            @Model.Name
+        </p>
+        <p><span class="btn btn-default">@Model.ServicesUrl</span></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Email</h2>
+        <p>@Model.Email</p>
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="col-md-4">
+            <h2>Proxy service:</h2>
+            <p><a href="/my/profile">My Profile Proxy Service</a></p>
+        </div>
+    }
+    <div class="col-lg-12">
+        <h2>Usage</h2>
+        <p>
+            Global.asax:
+            <pre>
+        protected void Application_Start()
+        {
+            this.AddDependencyInjection&#x3C;AppServiceConfig&#x3E;(); //Uses Microsoft.Extensions.DependencyInjection as the IoC container and configures the veracity sdk bindings
+            AreaRegistration.RegisterAllAreas();
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ClientFactory.RegisterTokenProvider(new TokenProvider());//Registers the token provider for the veracity sdk
+
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            var lastError = Server.GetLastError();
+            var exception = lastError as ServerException;
+            if (exception != null && exception.Status == HttpStatusCode.Unauthorized)
+                HttpContext.Current.Response.Redirect("/");
+        }
+</pre>
+            
+            Startup.cs:
+            <pre>
+public class Startup
+    {
+        public void Configuration(IAppBuilder app)
+        {
+            app.UseCookieAuthentication(new CookieAuthenticationOptions { CookieName = "a.c" }); //set auth cookie
+            app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType); //set default auth type 
+            //configure veracity auth
+            app.UseVeracityAuthentication(new TokenProviderConfiguration()) //Add Azure Ad B2C authentication and access token cache
+                .UseTokenCache(CacheFactoryFunc); //add access token cache and set cache strategy
+        }
+
+        private static DistributedTokenCache CacheFactoryFunc()
+        {
+            return new DistributedTokenCache(HttpContext.Current.User as ClaimsPrincipal, DistributedCache, null, null);
+        }
+
+        private static MemoryDistributedCache DistributedCache { get; } =
+            new MemoryDistributedCache(
+                new OptionsWrapper&#x3C;MemoryDistributedCacheOptions&#x3E;(new MemoryDistributedCacheOptions()));
+    }
+
+   
+</pre>
+            
+            add a new class AppServiceConfig.cs
+            <pre>
+ public class AppServiceConfig : ServicesConfig
+    {
+        public override bool IncludeProxies => true;
+
+        protected override IServiceCollection Configure(IServiceCollection services)
+        {
+            //add your own service bindings (just as in asp.net core)
+            return base.Configure(services);
+        }
+    }
+</pre>
+            Web.Config:
+            <pre>
+ &#x3C;appSettings&#x3E;
+    &#x3C;add key=&#x22;aspnet:UseTaskFriendlySynchronizationContext&#x22; value=&#x22;true&#x22;/&#x3E;
+    &#x3C;add key=&#x22;webpages:Version&#x22; value=&#x22;3.0.0.0&#x22;/&#x3E;
+    &#x3C;add key=&#x22;webpages:Enabled&#x22; value=&#x22;false&#x22;/&#x3E;
+    &#x3C;add key=&#x22;ClientValidationEnabled&#x22; value=&#x22;true&#x22;/&#x3E;
+    &#x3C;add key=&#x22;UnobtrusiveJavaScriptEnabled&#x22; value=&#x22;true&#x22;/&#x3E;
+    &#x3C;add key=&#x22;apiGW:clientId&#x22; value=&#x22;db4b6456-8873-4358-8c5d-96c39750ec28&#x22;/&#x3E;
+    &#x3C;add key=&#x22;apiGW:policy&#x22; value=&#x22;B2C_1A_SignInWithADFSIdp&#x22;/&#x3E;
+    &#x3C;!--&#x3C;add key=&#x22;apiGW:scope&#x22; value=&#x22;https://dnvglb2ctest.onmicrosoft.com/aa307cec-db8a-4224-8d5f-e864f16b1ad0/user_impersonation&#x22; /&#x3E;--&#x3E;
+    &#x3C;add key=&#x22;apiGW:scope&#x22; value=&#x22;https://dnvglb2ctest.onmicrosoft.com/a4a8e726-c1cc-407c-83a0-4ce37f1ce130/user_impersonation&#x22;/&#x3E;
+    &#x3C;add key=&#x22;apiGW:redirectUrl&#x22; value=&#x22;https://localhost:44330/&#x22;/&#x3E;
+    &#x3C;add key=&#x22;apiGW:idp&#x22; value=&#x22;ed815121-cdfa-4097-b524-e2b23cd36eb6&#x22;/&#x3E;
+    &#x3C;!-- The azure ad b2c id --&#x3E;
+    &#x3C;!--&#x3C;add key=&#x22;myApiV3Url&#x22; value=&#x22;https://localhost:44337/&#x22; /&#x3E;--&#x3E;
+    &#x3C;add key=&#x22;myApiV3Url&#x22; value=&#x22;https://api-test.veracity.com/platform/&#x22;/&#x3E;
+    &#x3C;add key=&#x22;apiGW:clientSecret&#x22; value=&#x22;#}r8ix&#x26;gt;-qWFu98-8&#x22;/&#x3E;
+    &#x3C;add key=&#x22;subscriptionKey&#x22; value=&#x22;532981632ce043019fb8aa387e6909c6&#x22;/&#x3E;
+  &#x3C;/appSettings&#x3E;
+</pre>
+        </p>
+    </div>
+</div>

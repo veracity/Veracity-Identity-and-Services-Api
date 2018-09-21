@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veracity.Services.Api.Unity
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veracity.Services.Api.Autofac", "IocIntegrations\Veracity.Services.Api.Autofac\Veracity.Services.Api.Autofac.csproj", "{C6216B9D-9E30-4D00-A9A7-379522FE7DDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldVanilla", "HelloWorldVanilla\HelloWorldVanilla.csproj", "{FBB4FD6A-1286-4479-9AC9-B8ADE79F0ED3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldVanilla", "Samples\HelloWorldVanilla\HelloWorldVanilla.csproj", "{FBB4FD6A-1286-4479-9AC9-B8ADE79F0ED3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

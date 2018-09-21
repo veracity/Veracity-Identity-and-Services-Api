@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Client;
+using System;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Identity.Client;
 using Veracity.Services.Api;
 using Veracity.Services.Api.Extensions;
 using Veracity.Services.Api.Models;

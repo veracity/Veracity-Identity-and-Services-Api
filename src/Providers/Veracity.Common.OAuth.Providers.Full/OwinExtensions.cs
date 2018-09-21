@@ -1,4 +1,5 @@
-﻿using Microsoft.Identity.Client;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin.Security.Notifications;
@@ -8,6 +9,8 @@ using Newtonsoft.Json.Linq;
 using Owin;
 using Stardust.Interstellar.Rest.Annotations;
 using Stardust.Interstellar.Rest.Common;
+using Stardust.Interstellar.Rest.Dependencyinjection;
+using Stardust.Interstellar.Rest.Service;
 using Stardust.Particles;
 using System;
 using System.Collections.Generic;
@@ -19,6 +22,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
+using System.Web.Http;
+using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using Veracity.Services.Api;
 using Veracity.Services.Api.Models;
@@ -51,8 +56,44 @@ namespace Veracity.Common.OAuth.Providers
             return new ConfigurationWrapper(app, config);
         }
 
+        /// <summary>
+        /// Call this to add the veracity services to the ioc
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="veracityApiBaseUrl"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddVeracity(this IServiceCollection services, string veracityApiBaseUrl)
+        {
+            return services.AddInterstellarClient()
+                .AddInterstellarClient<IMy>(veracityApiBaseUrl)
+                .AddInterstellarClient<IThis>(veracityApiBaseUrl)
+                .AddInterstellarClient<IServicesDirectory>(veracityApiBaseUrl)
+                .AddInterstellarClient<IUsersDirectory>(veracityApiBaseUrl)
+                .AddInterstellarClient<ICompaniesDirectory>(veracityApiBaseUrl)
+                .AddSingleton<IApiClient, ApiClient>()
+                .AddInterstellarClient<IDataContainerService>(veracityApiBaseUrl)
+                .AddSingleton<IApiClientConfiguration>(s => new ApiClientConfiguration(veracityApiBaseUrl));
+        }
+
+        public static IServiceCollection AddVeracityProxies(this IServiceCollection services, bool doFinalize = true)
+        {
+            services.AddInterstellarServices();
+            var locator = new Locator(services.BuildServiceProvider());
+            services.AddScoped(ServiceFactory.CreateServiceImplementation<IMy>(locator));
+            services.AddScoped(ServiceFactory.CreateServiceImplementation<IThis>(locator));
+            if (doFinalize)
+            {
+                //GlobalConfiguration.Configuration.Services
+                services.FinalizeRegistration()
+                    .AddSingleton<IHttpControllerTypeResolver>(s => new CustomAssebliesResolver());
+                GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerTypeResolver), new WrapperResolver(new CustomAssebliesResolver()));
+            }
+            return services;
+        }
+
         public static IAppBuilder UseVeracityAuthentication(this IAppBuilder app, TokenProviderConfiguration configuration)
         {
+
             app.UseOpenIdConnectAuthentication(
                 new OpenIdConnectAuthenticationOptions
                 {
@@ -81,6 +122,19 @@ namespace Veracity.Common.OAuth.Providers
                 }
             );
             return app;
+        }
+
+        /// <summary>
+        /// Configure Veracity Id and use default dependency injection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="app"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        public static IAppBuilder UseVeracityAuthentication<T>(this IAppBuilder app, TokenProviderConfiguration configuration) where T : ServicesConfiguration, new()
+        {
+            return app.AddDependencyInjection<T>().UseVeracityAuthentication(configuration);
+
         }
 
         private static Func<TokenCacheBase> CacheFactoryFunc()
@@ -202,6 +256,22 @@ namespace Veracity.Common.OAuth.Providers
                 notification.Response.Redirect(ex.GetErrorData<ValidationError>().Url);
                 notification.HandleResponse();
             }
+        }
+    }
+
+    public class WrapperResolver : IHttpControllerTypeResolver
+    {
+        private readonly CustomAssebliesResolver _customAssebliesResolver;
+
+        public WrapperResolver(CustomAssebliesResolver customAssebliesResolver)
+        {
+            _customAssebliesResolver = customAssebliesResolver;
+        }
+
+        public ICollection<Type> GetControllerTypes(IAssembliesResolver assembliesResolver)
+        {
+
+            return _customAssebliesResolver.GetControllerTypes(assembliesResolver);
         }
     }
 

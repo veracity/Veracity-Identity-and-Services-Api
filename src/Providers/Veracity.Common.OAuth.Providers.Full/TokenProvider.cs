@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Microsoft.Identity.Client;
 using Microsoft.Owin.Security.Cookies;
+using Stardust.Particles;
 using Veracity.Services.Api.Extensions;
 using Veracity.Services.Api.Models;
 
@@ -13,6 +14,10 @@ namespace Veracity.Common.OAuth.Providers
 {
     public class TokenProvider : IOAuthTokenProvider
     {
+        static TokenProvider()
+        {
+            ConfigurationManagerHelper.SetManager(new ConfigManager());
+        }
         public TokenProvider() : this(new TokenProviderConfiguration())
         {
 

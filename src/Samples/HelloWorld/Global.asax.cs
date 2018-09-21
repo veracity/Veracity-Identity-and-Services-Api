@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Configuration;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Stardust.Interstellar.Rest.Client;
-using Stardust.Interstellar.Rest.Extensions;
-using Stardust.Particles;
+using Veracity.Common.OAuth.Providers;
 using Veracity.Services.Api;
 
 namespace HelloWorld
@@ -18,10 +13,7 @@ namespace HelloWorld
     {
         protected void Application_Start()
         {
-            ConfigurationManagerHelper.SetManager(new ConfigManager());
-            ClientFactory.RegisterTokenProvider(new Veracity.Common.OAuth.Providers.TokenProvider());
-
-
+            ClientFactory.RegisterTokenProvider(new TokenProvider());//Enable Veracity components to obtain an access token for the logged on  user.
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -39,8 +31,5 @@ namespace HelloWorld
 
 
 
-    public class ConfigManager : IConfigurationReader
-    {
-        public NameValueCollection AppSettings { get { return ConfigurationManager.AppSettings; } }
-    }
+
 }

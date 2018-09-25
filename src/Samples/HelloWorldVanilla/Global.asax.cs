@@ -15,7 +15,7 @@ namespace HelloWorldVanilla
     {
         protected void Application_Start()
         {
-            this.AddDependencyInjection<AppServiceConfig>();
+            this.AddDependencyInjection<AppServiceConfig>();//Uses Microsoft.Extensions.DependencyInjection as the IoC container and configures the veracity sdk bindings
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

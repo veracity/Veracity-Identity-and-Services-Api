@@ -17,7 +17,8 @@
     <releaseNotes>
       This is the General Avaiability release of our new open industry data platform
       Learn more at https://www.veracity.com
-      We have moved this from preview even if we have a pre-release dependency in Microsoft.Identity.Client. 
+      We have moved this from preview even if we have a pre-release dependency in Microsoft.Identity.Client.
+      See https://github.com/veracity/veracity.services.api for sample code.
     </releaseNotes>
     <copyright>Copyright © Veracity by DNVGL 2018</copyright>
     <tags>Veracity Services SDK Authentication OAuth B2C</tags>

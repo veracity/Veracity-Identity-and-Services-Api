@@ -18,6 +18,8 @@ Veracity MyServices is your access point for engagement of digital interaction w
     <PackageReleaseNotes>This is the General Avaiability release of our new open industry data platform
 Learn more at https://www.veracity.com
 
+ See https://github.com/veracity/veracity.services.api for sample code.
+
 We have moved this from prerelease event if</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>apiModelStrongNameKey.pfx</AssemblyOriginatorKeyFile>

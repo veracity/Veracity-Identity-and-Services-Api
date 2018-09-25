@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.1-rc008</Version>
+    <Version>1.0.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>DNVGL</Company>
     <Authors>Veracity by DNVGL</Authors>
@@ -15,8 +15,10 @@
     <Description>SDK for accessing Veracity MyServices and Profile api. 
 
 Veracity MyServices is your access point for engagement of digital interaction with DNV GL. You will find digital services like “Rules and Standards”, digital tools such as our OnDemand hosted service “Secure File Transfer“, our collaboration solution “Meeting Places” (SharePoint) and many other services. Some of the services are open to all users (like “Rules and Standards” and “Secure File Transfer”), while other services require an invitation from a DNV GL employee</Description>
-    <PackageReleaseNotes>This is the Public Preview release of our new open industry data platform
-Learn more at https://www.veracity.com</PackageReleaseNotes>
+    <PackageReleaseNotes>This is the General Avaiability release of our new open industry data platform
+Learn more at https://www.veracity.com
+
+We have moved this from prerelease event if</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>apiModelStrongNameKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -26,7 +28,6 @@ Learn more at https://www.veracity.com</PackageReleaseNotes>
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.0.0" />
     <PackageReference Include="Stardust.Interstellar.Rest" Version="3.2.0" />
     <PackageReference Include="Stardust.Interstellar.Rest.Annotations" Version="3.2.0" />
-    <PackageReference Include="Stardust.Nucleus" Version="5.0.3" />
     <PackageReference Include="Stardust.Particles" Version="5.0.1" />
   </ItemGroup>
 

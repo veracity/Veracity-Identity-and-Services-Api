@@ -1,11 +1,9 @@
 using HelloWorld.Controllers;
-using Stardust.Interstellar.Rest.Client;
 using Stardust.Interstellar.Rest.Common;
+using Stardust.Interstellar.Rest.Extensions;
 using System;
-using System.Configuration;
 using Unity;
 using Unity.Injection;
-using Veracity.Services.Api;
 using Veracity.Services.Api.UnityAdapter;
 
 namespace HelloWorld
@@ -43,8 +41,8 @@ namespace HelloWorld
         public static void RegisterTypes(IUnityContainer container)
         {
 
-           container.AddVeracity()
-                .RegisterType<HomeController, HomeController>();
+            container.AddVeracity()
+                 .RegisterType<HomeController, HomeController>();
             // .RegisterType<IMy>(new InjectionFactory(s => (s as IServiceProvider).CreateRestClient<IMy>(ConfigurationManager.AppSettings["myApiV3Url"])));
             //container.RegisterType<IServiceProvider, UnityContainer>();
             // NOTE: To load from web.config uncomment the line below.
@@ -56,6 +54,6 @@ namespace HelloWorld
         }
     }
 
-   
+
 
 }

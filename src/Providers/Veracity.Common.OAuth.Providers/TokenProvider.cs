@@ -49,7 +49,7 @@ namespace Veracity.Common.OAuth.Providers
                 //var cache = new MSALSessionCache(signedInUserID, _httpContext.HttpContext.GetOwinContext().Environment["System.Web.HttpContextBase"] as HttpContextBase).GetMsalCacheInstance();
                 var clientCred = new ClientCredential(_configuration.ClientSecret);
                 var context = new ConfidentialClientApplication(_configuration.ClientId, Authority(_configuration), _configuration.RedirectUrl, clientCred, cache, null);
-                var user = context.Users.FirstOrDefault();
+                var user = Task.Run(async () => await context.GetAccountsAsync()).Result.FirstOrDefault();
                 if (user == null)
                 {
                     throw new ServerException(new ErrorDetail
@@ -76,7 +76,7 @@ namespace Veracity.Common.OAuth.Providers
                 //var cache = new MSALSessionCache(signedInUserID, _httpContext.HttpContext.GetOwinContext().Environment["System.Web.HttpContextBase"] as HttpContextBase).GetMsalCacheInstance();
                 var clientCred = new ClientCredential(_configuration.ClientSecret);
                 var context = new ConfidentialClientApplication(_configuration.ClientId, Authority(_configuration), _configuration.RedirectUrl, clientCred, cache, null);
-                var user = context.Users.FirstOrDefault();
+                var user = (await context.GetAccountsAsync()).FirstOrDefault();
                 if (user == null)
                 {
                     throw new ServerException(new ErrorDetail

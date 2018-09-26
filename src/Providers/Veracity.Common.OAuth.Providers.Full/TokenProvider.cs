@@ -33,7 +33,7 @@ namespace Veracity.Common.OAuth.Providers
             var signedInUserID = (HttpContext.Current.User.Identity as ClaimsIdentity)?.FindFirst("userId").Value;
             var cache = GetCache();
             var context = new ConfidentialClientApplication(tokenProviderConfiguration.ClientId, tokenProviderConfiguration.Authority, tokenProviderConfiguration.RedirectUrl, new ClientCredential(tokenProviderConfiguration.ClientSecret), cache, null);
-            var user = context.Users.FirstOrDefault();
+            var user = Task.Run(async ()=>await context.GetAccountsAsync() ).Result.FirstOrDefault();
             if (user == null)
             {
                 HttpContext.Current.GetOwinContext().Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
@@ -51,7 +51,7 @@ namespace Veracity.Common.OAuth.Providers
             var signedInUserID = (HttpContext.Current.User.Identity as ClaimsIdentity)?.FindFirst("userId").Value;
             var cache = GetCache();
             var context = new ConfidentialClientApplication(tokenProviderConfiguration.ClientId, tokenProviderConfiguration.Authority, tokenProviderConfiguration.RedirectUrl, new ClientCredential(tokenProviderConfiguration.ClientSecret), cache, null);
-            var user = context.Users.FirstOrDefault();
+            var user = (await context.GetAccountsAsync()).FirstOrDefault();
             if (user == null)
             {
                 HttpContext.Current.GetOwinContext().Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);

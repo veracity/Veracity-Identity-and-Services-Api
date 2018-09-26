@@ -1,10 +1,10 @@
 ﻿using Stardust.Interstellar.Rest.Client;
 using Stardust.Interstellar.Rest.Common;
+using Stardust.Interstellar.Rest.Extensions;
 using System;
 using System.Configuration;
 using Unity;
 using Unity.Injection;
-using Unity.Lifetime;
 
 namespace Veracity.Services.Api.UnityAdapter
 {
@@ -13,8 +13,9 @@ namespace Veracity.Services.Api.UnityAdapter
         public static IUnityContainer AddVeracity<TLogger>(this IUnityContainer container) where TLogger : ILogger
         {
             container.RegisterType<IProxyFactory>(new InjectionFactory(s =>
-                new ProxyFactoryImplementation(new Locator(new UnityServiceLocator(s)))));
-            container.RegisterType<IServiceProvider>(new InjectionFactory(s => new UnityServiceLocator(s)))
+                new ProxyFactoryImplementation(new Locator(new UnityServiceLocator(s)))))
+                .RegisterType<IServiceLocator>(new InjectionFactory(s => new Locator(s as IServiceProvider)))
+            .RegisterType<IServiceProvider>(new InjectionFactory(s => new UnityServiceLocator(s)))
                 .RegisterType<IApiClientConfiguration, ApiClientConfigurationHelper>()
                 .RegisterType<IMy>(new InjectionFactory(s =>
                     s.Resolve<IServiceProvider>()

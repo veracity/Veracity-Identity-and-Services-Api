@@ -4,7 +4,7 @@
     <!--*-->
     <id>Veracity.Common.OAuth</id>
     <!--*-->
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>Veracity.Common.OAuth</title>
     <!--*-->
     <authors>Veracity by DNVGL</authors> 
@@ -32,7 +32,7 @@
         <dependency id="Microsoft.Extensions.Caching.Memory" version="2.0.0" />
         <dependency id="Newtonsoft.Json" version="10.0.3" />
         <dependency id="Stardust.Particles" version="5.0.1"/>
-        <dependency id="Veracity.Services.Api" version="1.0.1-rc008"  />
+        <dependency id="Veracity.Services.Api" version="1.0.1"  />
         <dependency id="Stardust.Interstellar.Rest" version="3.2.0" />
         <dependency id="Stardust.Interstellar.Rest.Service" version="3.2.0" />
         <dependency id="Stardust.Interstellar.Rest.DependencyInjection" version="1.0.2" />

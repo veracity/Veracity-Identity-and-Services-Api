@@ -5,6 +5,8 @@ using System;
 using System.Configuration;
 using Unity;
 using Unity.Injection;
+using Veracity.Common.OAuth.Providers;
+using Veracity.Services.Api.Extensions;
 
 namespace Veracity.Services.Api.UnityAdapter
 {
@@ -15,6 +17,7 @@ namespace Veracity.Services.Api.UnityAdapter
             container.RegisterType<IProxyFactory>(new InjectionFactory(s =>
                 new ProxyFactoryImplementation(new Locator(new UnityServiceLocator(s)))))
                 .RegisterType<IServiceLocator>(new InjectionFactory(s => new Locator(s as IServiceProvider)))
+                .RegisterType<IOAuthTokenProvider,TokenProvider>()
             .RegisterType<IServiceProvider>(new InjectionFactory(s => new UnityServiceLocator(s)))
                 .RegisterType<IApiClientConfiguration, ApiClientConfigurationHelper>()
                 .RegisterType<IMy>(new InjectionFactory(s =>

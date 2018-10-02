@@ -1,4 +1,5 @@
 ﻿using Stardust.Interstellar.Rest.Dependencyinjection;
+using Stardust.Particles;
 using System;
 using System.Net;
 using System.Web;
@@ -15,13 +16,14 @@ namespace HelloWorldVanilla
     {
         protected void Application_Start()
         {
+            ConfigurationManagerHelper.SetManager(new ConfigManager());
             this.AddDependencyInjection<AppServiceConfig>();//Uses Microsoft.Extensions.DependencyInjection as the IoC container and configures the veracity sdk bindings
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            ClientFactory.RegisterTokenProvider(new TokenProvider());
+            //ClientFactory.RegisterTokenProvider(new TokenProvider());
 
         }
 

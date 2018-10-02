@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Stardust.Interstellar.Rest.Dependencyinjection;
 using System.Configuration;
+using Veracity.Services.Api.Extensions;
 
 namespace Veracity.Common.OAuth.Providers
 {
@@ -10,6 +11,7 @@ namespace Veracity.Common.OAuth.Providers
 
         protected override IServiceCollection Configure(IServiceCollection services)
         {
+            services.AddScoped<IOAuthTokenProvider,TokenProvider>();
             if (IncludeProxies)
                 AddProxies(services);
             services.AddVeracity(ConfigurationManager.AppSettings["myApiV3Url"]);

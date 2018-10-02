@@ -36,14 +36,13 @@
             <pre>
         protected void Application_Start()
         {
+            ConfigurationManagerHelper.SetManager(new ConfigManager());
             this.AddDependencyInjection&#x3C;AppServiceConfig&#x3E;(); //Uses Microsoft.Extensions.DependencyInjection as the IoC container and configures the veracity sdk bindings
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            ClientFactory.RegisterTokenProvider(new TokenProvider());//Registers the token provider for the veracity sdk
-
         }
 
         protected void Application_Error(object sender, EventArgs e)

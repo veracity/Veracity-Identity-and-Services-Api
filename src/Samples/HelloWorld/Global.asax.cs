@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Stardust.Particles;
 using Veracity.Common.OAuth.Providers;
 using Veracity.Services.Api;
 
@@ -13,7 +14,8 @@ namespace HelloWorld
     {
         protected void Application_Start()
         {
-            ClientFactory.RegisterTokenProvider(new TokenProvider());//Enable Veracity components to obtain an access token for the logged on  user.
+            ConfigurationManagerHelper.SetManager(new ConfigManager());
+            //ClientFactory.RegisterTokenProvider(new TokenProvider());//Enable Veracity components to obtain an access token for the logged on  user.
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

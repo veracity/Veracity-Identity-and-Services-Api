@@ -1,8 +1,3 @@
-using System;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -15,9 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using Stardust.Interstellar.Rest.Service;
 using Stardust.Particles;
+using System;
 using Veracity.Common.OAuth;
 using Veracity.Common.OAuth.Providers;
 using Veracity.Services.Api.Extensions;
@@ -40,6 +34,8 @@ namespace HelloAspNetCore
         {
             //Stardust.Interstellar.Rest.Common.ExtensionsFactory.SetServiceLocator();
             services.AddVeracity(Configuration)
+                .AddScoped<IOAuthTokenProvider, TokenProvider>()
+                .AddSingleton<TokenProviderConfiguration, TokenProviderConfiguration>()
                 .AddHttpContextAccessor()
                 .AddSingleton<ILogger, LogWrapper>()
                 .AddSingleton<ILogging, LogWrapper>()

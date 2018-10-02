@@ -1,6 +1,7 @@
 using Stardust.Interstellar.Rest.Annotations;
 using Stardust.Interstellar.Rest.Extensions;
 using Stardust.Particles;
+using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -8,14 +9,25 @@ namespace Veracity.Services.Api.Extensions
 {
     public class OauthAttribute : AuthenticationInspectorAttributeBase, IAuthenticationHandler
     {
-        private static IOAuthTokenProvider _provider;
+        private IOAuthTokenProvider _provider;
+
+        public OauthAttribute()
+        {
+
+        }
+
+        private OauthAttribute(IOAuthTokenProvider iOAuthTokenProvider)
+        {
+            _provider = iOAuthTokenProvider;
+        }
+
         //public OauthAttribute(string serviceName)
         //{
 
         //}
-        public override IAuthenticationHandler GetHandler()
+        public override IAuthenticationHandler GetHandler(IServiceProvider provider)
         {
-            return this;
+            return new OauthAttribute(provider.GetService<IOAuthTokenProvider>());
         }
 
         public void Apply(HttpWebRequest req)
@@ -28,12 +40,6 @@ namespace Veracity.Services.Api.Extensions
         {
             req.Headers.Add("Authorization", await _provider.GetBearerTokenAsync());
             req.Headers.Add("Ocp-Apim-Subscription-Key", ConfigurationManagerHelper.GetValueOnKey("subscriptionKey"));
-        }
-
-        public static void SetOauthProvider(IOAuthTokenProvider tokenProvider)
-        {
-            _provider = tokenProvider;
-
         }
     }
 }

@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
-using Stardust.Interstellar.Rest.Common;
-using Veracity.Services.Api.Extensions;
+using System;
 
 namespace Veracity.Common.OAuth.Providers
 {
@@ -27,8 +25,8 @@ namespace Veracity.Common.OAuth.Providers
 
         public static IApplicationBuilder UseVeracity(this IApplicationBuilder app)
         {
-            
-            OauthAttribute.SetOauthProvider(new TokenProvider(app.ApplicationServices));
+
+            //OauthAttribute.SetOauthProvider(new TokenProvider(app.ApplicationServices));
             return app;
         }
     }

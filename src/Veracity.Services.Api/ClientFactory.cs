@@ -1,6 +1,4 @@
 using System;
-using Stardust.Particles;
-using Veracity.Services.Api.Extensions;
 using Veracity.Services.Api.Models;
 
 namespace Veracity.Services.Api
@@ -8,10 +6,10 @@ namespace Veracity.Services.Api
 
     public static class ClientFactory
     {
-        public static void RegisterTokenProvider(IOAuthTokenProvider provider)
-        {
-            OauthAttribute.SetOauthProvider(provider);
-        }
+        //public static void RegisterTokenProvider(IOAuthTokenProvider provider)
+        //{
+        //    OauthAttribute.SetOauthProvider(provider);
+        //}
 
         public static void SetServiceProviderFactory(Func<IServiceProvider> factoryMethod)
         {
@@ -21,10 +19,10 @@ namespace Veracity.Services.Api
         private static string _baseUrl;
         private static Func<IServiceProvider> _factory;
 
-        public static IApiClient CreateClient(string baseUrl,IServiceProvider serviceProvider)
+        public static IApiClient CreateClient(string baseUrl, IServiceProvider serviceProvider)
         {
             _baseUrl = baseUrl;
-            return new ApiClient(baseUrl,serviceProvider??_factory?.Invoke());
+            return new ApiClient(baseUrl, serviceProvider ?? _factory?.Invoke());
         }
 
         internal static IApiClient CreateClient(this ItemReference reference, IServiceProvider serviceProvider)

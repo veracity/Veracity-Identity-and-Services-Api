@@ -46,10 +46,12 @@ namespace Veracity.Services.Api
         [Get]
         [IRoute("messages/{messageId}")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
+        [Obsolete]
         Task<Message> GetMessageAsync([In(InclutionTypes.Path)] string messageId);
 
         [Patch]
         [IRoute("messages/{messageId}")]
+        [Obsolete]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
         Task MarkMessageAsRead();
 

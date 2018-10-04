@@ -23,8 +23,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.0.0" />
     <PackageReference Include="Microsoft.Identity.Client" Version="2.0.1-preview" />
     <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="5.2.1" />
-    <PackageReference Include="Stardust.Interstellar.Rest.Service" Version="3.3.0" />
-    <PackageReference Include="Stardust.Particles" Version="5.0.1" />
+    <PackageReference Include="Stardust.Interstellar.Rest.Service" Version="3.4.0" />
+    <PackageReference Include="Stardust.Particles" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>

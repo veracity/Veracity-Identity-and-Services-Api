@@ -10,11 +10,11 @@
     <PackageReference Include="Microsoft.Identity.Client" Version="2.0.1-preview" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" PrivateAssets="All" />
     <PackageReference Include="NetEscapades.Extensions.Logging.RollingFile" Version="1.0.0" />
-    <PackageReference Include="Stardust.Aadb2c.AuthenticationFilter.Core" Version="1.0.0.6" />
-    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.3.0" />
-    <PackageReference Include="Stardust.Interstellar.Rest.Service" Version="3.3.0" />
+    <PackageReference Include="Stardust.Aadb2c.AuthenticationFilter.Core" Version="1.0.0.7" />
+    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.4.0" />
+    <PackageReference Include="Stardust.Interstellar.Rest.Service" Version="3.4.0" />
     <PackageReference Include="Stardust.Nucleus" Version="5.0.3" />
-    <PackageReference Include="Stardust.Particles" Version="5.0.1" />
+    <PackageReference Include="Stardust.Particles" Version="5.0.2" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />

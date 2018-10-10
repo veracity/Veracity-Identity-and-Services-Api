@@ -1,0 +1,29 @@
+2018-10-09 15:11:59.738 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/signin-oidc  
+2018-10-09 15:11:59.751 +02:00 [Warning] Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler: .AspNetCore.Correlation. state property not found.
+2018-10-09 15:11:59.752 +02:00 [Information] Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler: Error from RemoteAuthentication: Correlation failed..
+2018-10-09 15:11:59.755 +02:00 [Debug] Veracity.Common.OAuth.Providers.AzureAdB2CAuthenticationBuilderExtensions.ConfigureAzureOptions: Failure
+2018-10-09 15:11:59.756 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 19.5152ms 302 
+2018-10-09 15:11:59.760 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/Error  
+2018-10-09 15:12:00.241 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet with arguments ((null)) - ModelState is Valid
+2018-10-09 15:12:00.249 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Error in 9.0204ms
+2018-10-09 15:12:00.249 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 488.9421ms 200 text/html; charset=utf-8
+2018-10-09 16:31:09.266 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 POST http://localhost:44326/signin-oidc application/x-www-form-urlencoded 696
+2018-10-09 16:31:09.320 +02:00 [Warning] Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler: .AspNetCore.Correlation. state property not found.
+2018-10-09 16:31:09.320 +02:00 [Information] Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler: Error from RemoteAuthentication: Correlation failed..
+2018-10-09 16:31:09.320 +02:00 [Debug] Veracity.Common.OAuth.Providers.AzureAdB2CAuthenticationBuilderExtensions.ConfigureAzureOptions: Failure
+2018-10-09 16:31:09.320 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 55.1563ms 302 
+2018-10-09 16:31:09.358 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/Error  
+2018-10-09 16:31:09.360 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: Cookies was not authenticated. Failure message: Ticket expired
+2018-10-09 16:31:09.365 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet with arguments ((null)) - ModelState is Valid
+2018-10-09 16:31:09.372 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Error in 7.6471ms
+2018-10-09 16:31:09.372 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 14.5168ms 200 text/html; charset=utf-8
+2018-10-09 16:33:02.441 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 POST http://localhost:44326/signin-oidc application/x-www-form-urlencoded 696
+2018-10-09 16:33:02.442 +02:00 [Warning] Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler: .AspNetCore.Correlation. state property not found.
+2018-10-09 16:33:02.442 +02:00 [Information] Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler: Error from RemoteAuthentication: Correlation failed..
+2018-10-09 16:33:02.442 +02:00 [Debug] Veracity.Common.OAuth.Providers.AzureAdB2CAuthenticationBuilderExtensions.ConfigureAzureOptions: Failure
+2018-10-09 16:33:02.443 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 2.3058ms 302 
+2018-10-09 16:33:02.563 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/Error  
+2018-10-09 16:33:02.564 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: Cookies was not authenticated. Failure message: Ticket expired
+2018-10-09 16:33:02.564 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet with arguments ((null)) - ModelState is Valid
+2018-10-09 16:33:02.565 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Error in 1.07ms
+2018-10-09 16:33:02.565 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 1.9415ms 200 text/html; charset=utf-8

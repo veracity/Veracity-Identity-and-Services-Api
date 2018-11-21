@@ -8,7 +8,6 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Stardust.Particles;
 using System;
@@ -32,7 +31,6 @@ namespace HelloAspNetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Stardust.Interstellar.Rest.Common.ExtensionsFactory.SetServiceLocator();
             services.AddVeracity(Configuration)
                 .AddScoped<IOAuthTokenProvider, TokenProvider>()
                 .AddSingleton<TokenProviderConfiguration, TokenProviderConfiguration>()
@@ -43,7 +41,6 @@ namespace HelloAspNetCore
                 .AddSingleton(ConstructDataProtector)
                 .AddSingleton(ConstructDistributedCache)
                 .AddScoped<TokenCacheBase, DistributedTokenCache>()
-
                 .AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"))
                 .AddAuthentication(sharedOptions =>
                 {
@@ -83,49 +80,6 @@ namespace HelloAspNetCore
                 .UseVeracity()
                 .UseAuthentication()
                 .UseMvc();
-        }
-    }
-
-    public class LogWrapper : ILogger, ILogging
-    {
-        private readonly Microsoft.Extensions.Logging.ILogger _logger;
-
-        public LogWrapper(ILogger<Startup> logger)
-        {
-            _logger = logger;
-        }
-        public void Error(Exception error)
-        {
-            _logger.LogError(error, error.Message);
-        }
-
-        public void Message(string message)
-        {
-            _logger.LogDebug(message);
-        }
-
-        public void Message(string format, params object[] args)
-        {
-            Message(string.Format(format, args));
-        }
-
-        public void Exception(Exception exceptionToLog, string additionalDebugInformation = null)
-        {
-            Error(exceptionToLog);
-        }
-
-        public void HeartBeat()
-        {
-
-        }
-
-        public void DebugMessage(string message, LogType entryType = LogType.Information, string additionalDebugInformation = null)
-        {
-            Message(message);
-        }
-
-        public void SetCommonProperties(string logName)
-        {
         }
     }
 }

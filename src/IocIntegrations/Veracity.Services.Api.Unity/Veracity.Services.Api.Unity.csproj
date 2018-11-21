@@ -49,13 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Stardust.Interstellar.Rest">
-      <Version>3.4.3</Version>
+      <Version>3.4.5</Version>
     </PackageReference>
     <PackageReference Include="Stardust.Interstellar.Rest.Annotations">
       <Version>3.4.1</Version>
     </PackageReference>
     <PackageReference Include="System.Net.Http">
-      <Version>4.3.3</Version>
+      <Version>4.3.4</Version>
     </PackageReference>
     <PackageReference Include="Unity">
       <Version>5.8.11</Version>

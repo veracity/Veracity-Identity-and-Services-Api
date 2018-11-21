@@ -13,6 +13,7 @@ namespace Veracity.Common.OAuth.Providers
             builder.AddAzureAdB2C(options);
             return builder;
         }
+
         public static AuthenticationBuilder AddVeracityAuthentication(this AuthenticationBuilder builder, IConfiguration configuration)
         {
             builder.AddVeracityAuthentication(options =>

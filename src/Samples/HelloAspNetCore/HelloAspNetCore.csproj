@@ -4,14 +4,14 @@
     <UserSecretsId>aspnet-HelloAspNetCore-350B3C8A-6281-4AED-844C-0077207104F3</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="2.8.0" />
     <PackageReference Include="Microsoft.Identity.Client" Version="2.0.1-preview" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" PrivateAssets="All" />
     <PackageReference Include="NetEscapades.Extensions.Logging.RollingFile" Version="1.0.0" />
-    <PackageReference Include="Stardust.Aadb2c.AuthenticationFilter.Core" Version="1.0.0.7" />
-    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.4.0" />
+    <PackageReference Include="Stardust.Aadb2c.AuthenticationFilter.Core" Version="2.1.0" />
+    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.4.5" />
     <PackageReference Include="Stardust.Interstellar.Rest.Service" Version="3.4.0" />
     <PackageReference Include="Stardust.Nucleus" Version="5.0.3" />
     <PackageReference Include="Stardust.Particles" Version="5.0.2" />

@@ -40,7 +40,6 @@ namespace Veracity.Common.OAuth.Providers
                 opts.ClientSecret = configuration.ClientSecret;
                 opts.AuthenticationMethod = OpenIdConnectRedirectBehavior.FormPost;
                 opts.ResponseType = "code id_token";
-
             });
 
             return builder;

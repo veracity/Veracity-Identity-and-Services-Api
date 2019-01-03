@@ -32,7 +32,10 @@ namespace HelloWorld
             return new DistributedTokenCache(HttpContext.Current.User as ClaimsPrincipal, DistributedCache, null, null);
         }
 
-        private static MemoryDistributedCache DistributedCache { get; } = new MemoryDistributedCache(new OptionsWrapper<MemoryDistributedCacheOptions>(new MemoryDistributedCacheOptions()));
+        private static MemoryDistributedCache DistributedCache { get; } = new MemoryDistributedCache(new OptionsWrapper<MemoryDistributedCacheOptions>(new MemoryDistributedCacheOptions
+        {
+            
+        }));
 
     }
 }

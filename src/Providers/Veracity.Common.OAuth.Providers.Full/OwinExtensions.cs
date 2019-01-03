@@ -40,6 +40,8 @@ namespace Veracity.Common.OAuth.Providers
             return app;
         }
         private static Func<TokenCacheBase> _tokenCacheCreator;
+        private static Action<Exception> _exceptionLogger;
+        private static Action<string> _debugLogger;
 
         public static IAppBuilder ConfigureVeracity(this IAppBuilder app, string environment)
         {
@@ -220,10 +222,19 @@ namespace Veracity.Common.OAuth.Providers
             }
             catch (Exception ex)
             {
-
-                //ExtensionsFactory.GetLocator()?.GetService<ILogging>()?.Exception(ex);
-                throw;
+                if (_exceptionLogger == null) throw;
+                _exceptionLogger.Invoke(ex);
+                notification.Response.Redirect(notification.RedirectUri);
+                notification.HandleResponse();
             }
+        }
+
+        public static IAppBuilder UseLoggingHook(this IAppBuilder builder, Action<Exception> exceptionLogger,
+            Action<string> debugLogger=null)
+        {
+            _exceptionLogger = exceptionLogger;
+            _debugLogger = debugLogger;
+            return builder;
         }
 
         private static async Task ExchangeAuthCodeWithToken(AuthorizationCodeReceivedNotification notification,
@@ -239,7 +250,8 @@ namespace Veracity.Common.OAuth.Providers
 
         private static async Task ValidatePolicies(AuthorizationCodeReceivedNotification notification)
         {
-            await ClientFactory.CreateClient(VeracityApiUrl, new LocatorWrapper(System.Web.Mvc.DependencyResolver.Current))
+            _debugLogger?.Invoke($"Validating policies with api: {VeracityApiUrl}");
+            await ClientFactory.CreateClient(VeracityApiUrl, new LocatorWrapper(DependencyResolver.Current))
                 .My
                 .ValidatePolicies(notification.RedirectUri);
             notification.OwinContext.Authentication.SignIn(notification.AuthenticationTicket.Identity);
@@ -254,6 +266,14 @@ namespace Veracity.Common.OAuth.Providers
             if (ex.Status == HttpStatusCode.NotAcceptable)
             {
                 notification.Response.Redirect(ex.GetErrorData<ValidationError>().Url);
+                notification.HandleResponse();
+            }
+            else
+            {
+                _debugLogger?.Invoke(ex.ErrorData);
+                _debugLogger?.Invoke(ex.Message);
+                _exceptionLogger?.Invoke(ex);
+                notification.Response.Redirect(notification.RedirectUri);
                 notification.HandleResponse();
             }
         }

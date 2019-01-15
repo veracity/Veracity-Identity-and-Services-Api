@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Net;
-using System.Security.Claims;
-using System.Threading;
 using System.Threading.Tasks;
-using HelloAspNetCore;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Client;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Stardust.Particles;
@@ -20,7 +13,6 @@ using Veracity.Common.OAuth;
 using Veracity.Services.Api;
 using Veracity.Services.Api.Models;
 using ClientCredential = Microsoft.Identity.Client.ClientCredential;
-using TokenCache = Microsoft.Identity.Client.TokenCache;
 
 namespace Microsoft.AspNetCore.Authentication
 {

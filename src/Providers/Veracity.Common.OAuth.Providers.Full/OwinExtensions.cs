@@ -203,26 +203,32 @@ namespace Veracity.Common.OAuth.Providers
          */
         private static async Task OnAuthorizationCodeReceived(AuthorizationCodeReceivedNotification notification, TokenProviderConfiguration configuration)
         {
-            try
+	        var c = HttpContext.Current;
+			try
             {
-                await ExchangeAuthCodeWithToken(notification, configuration);
-                try
+				await ExchangeAuthCodeWithToken(notification, configuration);
+	           
+				try
                 {
                     await ValidatePolicies(notification);
-                }
+	                HttpContext.Current = c;
+				}
                 catch (AggregateException aex)
                 {
-                    if (aex.InnerException is ServerException serverException)
+	                HttpContext.Current = c;
+					if (aex.InnerException is ServerException serverException)
                         HandlePolicyViolation(notification, serverException);
                 }
                 catch (ServerException ex)
                 {
-                    HandlePolicyViolation(notification, ex);
+	                HttpContext.Current = c;
+					HandlePolicyViolation(notification, ex);
                 }
             }
             catch (Exception ex)
             {
-                if (_exceptionLogger == null) throw;
+	            HttpContext.Current = c;
+				if (_exceptionLogger == null) throw;
                 _exceptionLogger.Invoke(ex);
                 notification.Response.Redirect(notification.RedirectUri);
                 notification.HandleResponse();
@@ -240,12 +246,14 @@ namespace Veracity.Common.OAuth.Providers
         private static async Task ExchangeAuthCodeWithToken(AuthorizationCodeReceivedNotification notification,
             TokenProviderConfiguration configuration)
         {
+	        var c = HttpContext.Current;
             HttpContext.Current.User = new ClaimsPrincipal(notification.AuthenticationTicket.Identity);
             var cache = CacheFactoryFunc().Invoke();
             var context = new ConfidentialClientApplication(ClientId(configuration), Authority(configuration),
                 configuration.RedirectUrl, new ClientCredential(configuration.ClientSecret), cache, null);
             var user = await context.AcquireTokenByAuthorizationCodeAsync(notification.Code,
                 new[] { configuration.Scope }); //Keep the user for debugging purposes
+	        HttpContext.Current = c;
         }
 
         private static async Task ValidatePolicies(AuthorizationCodeReceivedNotification notification)

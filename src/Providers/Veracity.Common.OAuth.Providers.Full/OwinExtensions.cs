@@ -206,11 +206,13 @@ namespace Veracity.Common.OAuth.Providers
 	        var c = HttpContext.Current;
 			try
             {
+				
 				await ExchangeAuthCodeWithToken(notification, configuration);
 	           
 				try
                 {
                     await ValidatePolicies(notification);
+	                notification.OwinContext.Authentication.SignIn(notification.AuthenticationTicket.Identity);
 	                HttpContext.Current = c;
 				}
                 catch (AggregateException aex)

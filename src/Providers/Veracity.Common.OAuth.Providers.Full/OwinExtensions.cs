@@ -274,6 +274,7 @@ namespace Veracity.Common.OAuth.Providers
 			notification.OwinContext.Authentication.SignIn(notification.AuthenticationTicket.Identity);
 			notification.Response.Redirect(notification.RedirectUri);
 			notification.HandleResponse();
+			_debugLogger?.Invoke($"policies validated");
 		}
 
 		private static string VeracityApiUrl => ConfigurationManagerHelper.GetValueOnKey("myApiV3Url");

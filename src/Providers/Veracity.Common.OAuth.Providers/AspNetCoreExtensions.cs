@@ -122,9 +122,9 @@ namespace Veracity.Common.OAuth.Providers
             builder.Services.SetAuthenticationSchemes(authenticationSchemes);
             builder.AddAsController(s => s.CreateRestClient<IMy>(baseUrl))
                 .AddAsController(s => s.CreateRestClient<IThis>(baseUrl))
-                .AddAsController(s => s.CreateRestClient<ICompaniesDirectory>(baseUrl))
-                .AddAsController(s => s.CreateRestClient<IServicesDirectory>(baseUrl))
-                .AddAsController(s => s.CreateRestClient<IUsersDirectory>(baseUrl))
+                //.AddAsController(s => s.CreateRestClient<ICompaniesDirectory>(baseUrl))
+                //.AddAsController(s => s.CreateRestClient<IServicesDirectory>(baseUrl))
+                //.AddAsController(s => s.CreateRestClient<IUsersDirectory>(baseUrl))
                 .UseInterstellar();
             return builder;
         }

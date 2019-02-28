@@ -10,6 +10,8 @@ using Stardust.Interstellar.Rest.Common;
 using System;
 using System.Security.Claims;
 using System.Web;
+using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.Services.AppAuthentication;
 using Veracity.Common.OAuth;
 using Veracity.Common.OAuth.Providers;
 
@@ -21,10 +23,21 @@ namespace HelloWorldVanilla
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseCookieAuthentication(new CookieAuthenticationOptions { CookieName = "a.c" }); //set auth cookie
+	        var azureServiceTokenProvider = new AzureServiceTokenProvider();
+	        var keyVaultClient = new KeyVaultClient(async (authority, resource, scope) =>
+		        await azureServiceTokenProvider.GetAccessTokenAsync(resource));
+	        var secret = keyVaultClient.GetSecretAsync("https://veracitydevdaydemo.vault.azure.net/",
+		        "Veracity1--ClientSecret").Result;
+	        var subscriptionKey = keyVaultClient
+		        .GetSecretAsync("https://veracitydevdaydemo.vault.azure.net/", "Veracity--SubscriptionKey").Result;
+			app.UseCookieAuthentication(new CookieAuthenticationOptions { CookieName = "a.c" }); //set auth cookie
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType); //set default auth type 
             //configure veracity auth
-            app.UseVeracityAuthentication(new TokenProviderConfiguration()) //Add Azure Ad B2C authentication and access token cache
+            app.UseVeracityAuthentication(new TokenProviderConfiguration
+	            {
+		            ClientSecret = secret.Value,
+		            SubscriptionKey = subscriptionKey.Value
+	            }) //Add Azure Ad B2C authentication and access token cache
                 .UseTokenCache(CacheFactoryFunc); //add access token cache and set cache strategy
         }
 

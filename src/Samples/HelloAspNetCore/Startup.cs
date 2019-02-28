@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Stardust.Particles;
 using System;
+using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.Services.AppAuthentication;
+using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Veracity.Common.OAuth;
 using Veracity.Common.OAuth.Providers;
 using Veracity.Services.Api.Extensions;
@@ -21,12 +24,19 @@ namespace HelloAspNetCore
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+		public Startup(IHostingEnvironment env)
+		{
+			var azureServiceTokenProvider = new AzureServiceTokenProvider();
+			var builder = new ConfigurationBuilder()
+				.SetBasePath(env.ContentRootPath)
+				.AddJsonFile("appsettings.json", true, true)
+				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
+				.AddAzureKeyVault("https://veracitydevdaydemo.vault.azure.net/", new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback)), new DefaultKeyVaultSecretManager())
+				.AddEnvironmentVariables();
+			Configuration = builder.Build();
+		}
 
-        public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)

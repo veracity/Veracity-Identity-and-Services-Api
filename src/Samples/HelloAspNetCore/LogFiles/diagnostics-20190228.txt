@@ -1,0 +1,111 @@
+2019-02-28 09:44:56.626 +01:00 [Debug] HelloAspNetCore.Startup: Generating webapi controller for Veracity.Services.Api.IMy
+2019-02-28 09:44:56.761 +01:00 [Debug] HelloAspNetCore.Startup: Generating webapi controller for Veracity.Services.Api.IThis
+2019-02-28 09:44:57.160 +01:00 [Information] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager: User profile is available. Using 'C:\Users\jonsyr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-02-28 09:44:57.718 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 DEBUG http://localhost:44326/  0
+2019-02-28 09:44:57.723 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/  
+2019-02-28 09:44:57.758 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 39.3326ms 200 
+2019-02-28 09:44:57.786 +01:00 [Debug] Veracity.Common.OAuth.Providers.AzureAdB2CAuthenticationBuilderExtensions.ConfigureAzureOptions: Binding events
+2019-02-28 09:44:57.926 +01:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: Cookies was not authenticated. Failure message: Unprotect ticket failed
+2019-02-28 09:44:58.400 +01:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/Index", action = "", controller = ""}. Executing action /Index
+2019-02-28 09:44:58.455 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client IMy
+2019-02-28 09:44:58.462 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IMy.Info
+2019-02-28 09:44:58.484 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IMy.GetMessageCount
+2019-02-28 09:44:58.486 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IMy.GetMessagesAsync
+2019-02-28 09:44:58.490 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IMy.GetMessageAsync
+2019-02-28 09:44:58.493 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IMy.MarkMessageAsRead
+2019-02-28 09:44:58.510 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IMy.GetMyCompanies
+2019-02-28 09:44:58.512 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IMy.ValidatePolicy
+2019-02-28 09:44:58.516 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IMy.ValidatePolicies
+2019-02-28 09:44:58.519 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IMy.MyServices
+2019-02-28 09:44:58.552 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client IThis
+2019-02-28 09:44:58.555 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.GetServices
+2019-02-28 09:44:58.558 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.GetUsers
+2019-02-28 09:44:58.563 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.GetServiceUser
+2019-02-28 09:44:58.567 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.GetUserForService
+2019-02-28 09:44:58.569 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.GetServiceUsers
+2019-02-28 09:44:58.574 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.AddUserAsync
+2019-02-28 09:44:58.578 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.AddServiceUser
+2019-02-28 09:44:58.584 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.RemoveServiceUser
+2019-02-28 09:44:58.587 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.RemoveUser
+2019-02-28 09:44:58.590 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.ResolveUser
+2019-02-28 09:44:58.593 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.CreateUser
+2019-02-28 09:44:58.595 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.CreateUsers
+2019-02-28 09:44:58.597 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.GetAdmins
+2019-02-28 09:44:58.601 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.GetAdmin
+2019-02-28 09:44:58.603 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.GetServiceAdmin
+2019-02-28 09:44:58.606 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.GetServiceAdmins
+2019-02-28 09:44:58.614 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IThis.NotifyUsers
+2019-02-28 09:44:58.630 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client IUsersDirectory
+2019-02-28 09:44:58.633 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IUsersDirectory.GetUsersByEmail
+2019-02-28 09:44:58.636 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IUsersDirectory.GetUser
+2019-02-28 09:44:58.640 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IUsersDirectory.GetUsersIn
+2019-02-28 09:44:58.642 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IUsersDirectory.GetUserCompanies
+2019-02-28 09:44:58.644 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IUsersDirectory.GetUserServices
+2019-02-28 09:44:58.646 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IUsersDirectory.GetUserSubscriptionDetails
+2019-02-28 09:44:58.663 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client ICompaniesDirectory
+2019-02-28 09:44:58.667 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action ICompaniesDirectory.CompanyById
+2019-02-28 09:44:58.670 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action ICompaniesDirectory.GetUsersByCompany
+2019-02-28 09:44:58.687 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client IServicesDirectory
+2019-02-28 09:44:58.689 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IServicesDirectory.GetServiceById
+2019-02-28 09:44:58.692 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IServicesDirectory.GetUsers
+2019-02-28 09:44:58.696 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IServicesDirectory.IsAdmin
+2019-02-28 09:44:58.728 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client IDataContainerService
+2019-02-28 09:44:58.738 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IDataContainerService.GetDataContainers
+2019-02-28 09:44:58.742 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IDataContainerService.CreateDataContainer
+2019-02-28 09:44:58.749 +01:00 [Debug] HelloAspNetCore.Startup: Initializing client action IDataContainerService.DeleteDataContainer
+2019-02-28 09:44:58.765 +01:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet with arguments ((null)) - ModelState is Valid
+2019-02-28 09:44:59.024 +01:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Index in 617.9603ms
+2019-02-28 09:44:59.080 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 1316.595ms 200 text/html; charset=utf-8
+2019-02-28 09:44:59.092 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/lib/bootstrap/dist/css/bootstrap.css  
+2019-02-28 09:44:59.096 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/images/banner2.svg  
+2019-02-28 09:44:59.102 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/css/site.css  
+2019-02-28 09:44:59.129 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/images/banner1.svg  
+2019-02-28 09:44:59.193 +01:00 [Information] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: Sending file. Request path: '/images/banner1.svg'. Physical path: 'C:\source\repos\Veracity\ApiV3Client\src\Samples\HelloAspNetCore\wwwroot\images\banner1.svg'
+2019-02-28 09:44:59.217 +01:00 [Information] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: Sending file. Request path: '/images/banner2.svg'. Physical path: 'C:\source\repos\Veracity\ApiV3Client\src\Samples\HelloAspNetCore\wwwroot\images\banner2.svg'
+2019-02-28 09:44:59.238 +01:00 [Information] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: Sending file. Request path: '/css/site.css'. Physical path: 'C:\source\repos\Veracity\ApiV3Client\src\Samples\HelloAspNetCore\wwwroot\css\site.css'
+2019-02-28 09:44:59.243 +01:00 [Information] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.css'. Physical path: 'C:\source\repos\Veracity\ApiV3Client\src\Samples\HelloAspNetCore\wwwroot\lib\bootstrap\dist\css\bootstrap.css'
+2019-02-28 09:44:59.256 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 154.3891ms 200 image/svg+xml
+2019-02-28 09:44:59.270 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 146.2107ms 200 text/css
+2019-02-28 09:44:59.272 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 159.7383ms 200 text/css
+2019-02-28 09:44:59.277 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 116.4245ms 200 image/svg+xml
+2019-02-28 09:44:59.311 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/js/site.js?v=EWaMeWsJBYWmL2g_KkgXZQ5nPe-a3Ichp0LEgzXczKo  
+2019-02-28 09:44:59.320 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/images/banner4.svg  
+2019-02-28 09:44:59.325 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/lib/jquery/dist/jquery.js  
+2019-02-28 09:44:59.335 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/lib/bootstrap/dist/js/bootstrap.js  
+2019-02-28 09:44:59.364 +01:00 [Information] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: Sending file. Request path: '/js/site.js'. Physical path: 'C:\source\repos\Veracity\ApiV3Client\src\Samples\HelloAspNetCore\wwwroot\js\site.js'
+2019-02-28 09:44:59.376 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 58.8056ms 200 application/javascript
+2019-02-28 09:44:59.421 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2  
+2019-02-28 09:44:59.423 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/images/banner3.svg  
+2019-02-28 09:44:59.441 +01:00 [Information] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.js'. Physical path: 'C:\source\repos\Veracity\ApiV3Client\src\Samples\HelloAspNetCore\wwwroot\lib\bootstrap\dist\js\bootstrap.js'
+2019-02-28 09:44:59.452 +01:00 [Information] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: Sending file. Request path: '/images/banner4.svg'. Physical path: 'C:\source\repos\Veracity\ApiV3Client\src\Samples\HelloAspNetCore\wwwroot\images\banner4.svg'
+2019-02-28 09:44:59.460 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 133.2246ms 200 application/javascript
+2019-02-28 09:44:59.475 +01:00 [Information] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: Sending file. Request path: '/images/banner3.svg'. Physical path: 'C:\source\repos\Veracity\ApiV3Client\src\Samples\HelloAspNetCore\wwwroot\images\banner3.svg'
+2019-02-28 09:44:59.491 +01:00 [Information] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: Sending file. Request path: '/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2'. Physical path: 'C:\source\repos\Veracity\ApiV3Client\src\Samples\HelloAspNetCore\wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2'
+2019-02-28 09:44:59.499 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 114.8953ms 200 image/svg+xml
+2019-02-28 09:44:59.502 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 115.4945ms 200 font/woff2
+2019-02-28 09:44:59.513 +01:00 [Information] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: Sending file. Request path: '/lib/jquery/dist/jquery.js'. Physical path: 'C:\source\repos\Veracity\ApiV3Client\src\Samples\HelloAspNetCore\wwwroot\lib\jquery\dist\jquery.js'
+2019-02-28 09:44:59.517 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 147.0059ms 200 image/svg+xml
+2019-02-28 09:44:59.565 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 207.0062ms 200 application/javascript
+2019-02-28 09:44:59.643 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/favicon.ico  
+2019-02-28 09:44:59.652 +01:00 [Information] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: Sending file. Request path: '/favicon.ico'. Physical path: 'C:\source\repos\Veracity\ApiV3Client\src\Samples\HelloAspNetCore\wwwroot\favicon.ico'
+2019-02-28 09:44:59.659 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 13.2508ms 200 image/x-icon
+2019-02-28 09:45:01.809 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/Account/SignIn  
+2019-02-28 09:45:01.814 +01:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: Cookies was not authenticated. Failure message: Unprotect ticket failed
+2019-02-28 09:45:01.844 +01:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Route matched with {action = "SignIn", controller = "Account", page = ""}. Executing action HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore)
+2019-02-28 09:45:01.942 +01:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executing action method HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore) - Validation state: Valid
+2019-02-28 09:45:01.948 +01:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action method HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore), returned result Microsoft.AspNetCore.Mvc.ChallengeResult in 1.3649ms.
+2019-02-28 09:45:01.953 +01:00 [Information] Microsoft.AspNetCore.Mvc.ChallengeResult: Executing ChallengeResult with authentication schemes (OpenIdConnect).
+2019-02-28 09:45:12.751 +01:00 [Debug] Veracity.Common.OAuth.Providers.AzureAdB2CAuthenticationBuilderExtensions.ConfigureAzureOptions: Redirecting
+2019-02-28 09:45:12.761 +01:00 [Information] Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler: AuthenticationScheme: OpenIdConnect was challenged.
+2019-02-28 09:45:12.778 +01:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore) in 10929.7993ms
+2019-02-28 09:45:12.786 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 10976.3007ms 200 text/html;charset=UTF-8
+2019-02-28 09:45:25.434 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 POST http://localhost:44326/signin-oidc application/x-www-form-urlencoded 3379
+2019-02-28 09:45:25.618 +01:00 [Debug] Veracity.Common.OAuth.Providers.AzureAdB2CAuthenticationBuilderExtensions.ConfigureAzureOptions: Auth code received...
+2019-02-28 09:45:38.162 +01:00 [Debug] Veracity.Common.OAuth.Providers.AzureAdB2CAuthenticationBuilderExtensions.ConfigureAzureOptions: Policies validated!
+2019-02-28 09:45:43.567 +01:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: AuthenticationScheme: Cookies signed in.
+2019-02-28 09:45:43.570 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 18136.9675ms 302 
+2019-02-28 09:45:43.586 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/  
+2019-02-28 09:45:43.591 +01:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/Index", action = "", controller = ""}. Executing action /Index
+2019-02-28 09:45:43.596 +01:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet with arguments ((null)) - ModelState is Valid
+2019-02-28 09:45:44.099 +01:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Index in 505.2179ms
+2019-02-28 09:45:44.102 +01:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 515.7098ms 200 text/html; charset=utf-8

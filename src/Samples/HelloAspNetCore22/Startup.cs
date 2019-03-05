@@ -63,7 +63,7 @@ namespace HelloAspNetCore22
 				.AddDistributedRedisCache(opt =>
 				{
 					opt.Configuration = Configuration.GetSection("Veracity").GetValue<string>("RedisConnectionString");
-					opt.InstanceName = "master2";
+					opt.InstanceName = "master23";
 				})
 				.AddScoped<TokenCacheBase, DistributedTokenCache>()
 				.AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"))

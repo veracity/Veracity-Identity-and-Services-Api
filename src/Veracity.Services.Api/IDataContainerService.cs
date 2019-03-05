@@ -7,7 +7,7 @@ using Veracity.Services.Api.Models;
 
 namespace Veracity.Services.Api
 {
-    [IRoutePrefix("directory")]
+    [Api("directory")]
     [Oauth]
     [CircuitBreaker(100, 5)]
     [SupportCode]
@@ -17,22 +17,16 @@ namespace Veracity.Services.Api
     public interface IDataContainerService
     {
 
-        [Get]
-        [IRoute("services/{serviceId}/datacontainers")]
+        [Get("services/{serviceId}/datacontainers", "Get associated data containers for the service")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
-        [ServiceDescription("Get associated data containers for the service")]
         Task<IEnumerable<ItemReference>> GetDataContainers([InPath] string serviceId);
 
-        [Put]
-        [IRoute("services/{serviceId}/datacontainers/{containerId}")]
+        [Put("services/{serviceId}/datacontainers/{containerId}", "Create a data container reference")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
-        [ServiceDescription("Create a data container reference")]
         Task CreateDataContainer([InPath] string serviceId, [InPath] string containerId, [InQuery]string name);
 
-        [Delete]
-        [IRoute("services/{serviceId}/datacontainers/{containerId}")]
+        [Delete("services/{serviceId}/datacontainers/{containerId}", "Delete a data container reference")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
-        [ServiceDescription("Delete a data container reference")]
         Task DeleteDataContainer([InPath] string serviceId, [InPath] string containerId);
     }
 }

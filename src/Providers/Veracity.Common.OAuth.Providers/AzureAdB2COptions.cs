@@ -4,7 +4,7 @@
     {
         public const string PolicyAuthenticationProperty = "Policy";
 
-        public string ClientId { get; set; }
+        
 
         public string Instance { get; set; }
 

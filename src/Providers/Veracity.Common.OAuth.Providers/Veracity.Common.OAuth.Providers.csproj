@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <!--<TargetFramework>netcoreapp2.1</TargetFramework>-->
+    <TargetFrameworks>netcoreapp2.1;netcoreapp2.2</TargetFrameworks>
     <Version>1.1.0</Version>
     <Company>DNVGL</Company>
     <Authors>Veracity by DNVGL</Authors>

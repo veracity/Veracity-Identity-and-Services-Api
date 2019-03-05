@@ -12,7 +12,7 @@ namespace Veracity.Services.Api
     
     //Define the service as an interface almost as you would with a normal webapi controller. 
     //the IRoutePrefix translates into RoutePrefix attribute in webapi
-    [IRoutePrefix("my")]
+    [Api("my")]
     [Oauth]
     [CircuitBreaker(100, 5)]
     [SupportCode]
@@ -22,77 +22,47 @@ namespace Veracity.Services.Api
     [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
     public interface IMy : IVeracityService
     {
-        [Get]
-        [IRoute("profile")]
+        [Get("profile", "Retreives the profile of the current loged in user.", Summary = "Note that we will remove the company node from the result in the future")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
         
-        [ServiceDescription("Retreives the profile of the current loged in user.", Summary = "Note that we will remove the company node from the result in the future")]
         Task<MyUserInfo> Info();
 
-
-        [Get]
-        [IRoute("messages/count")]
+        [Get("messages/count", "Get the current loged in users unread messages count")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
-        [ServiceDescription("Get the current loged in users unread messages count")]
         Task<int> GetMessageCount();
 
-        [Get]
-        [IRoute("messages")]
+        [Get("messages", "Read the users messages. All: include read messages")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
-        [ServiceDescription("Read the users messages. All: include read messages")]
-        Task<IEnumerable<MessageReference>> GetMessagesAsync([In(InclutionTypes.Path)] bool all);
+       Task<IEnumerable<MessageReference>> GetMessagesAsync([In(InclutionTypes.Path)] bool all);
 
         //Notice the In attribute for the parameters, it is equivalent with FromBody and FromUri and is required (it currently defaults to FromBody :(  )
-        [Get]
-        [IRoute("messages/{messageId}")]
+        [Get("messages/{messageId}")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
         [Obsolete]
         Task<Message> GetMessageAsync([In(InclutionTypes.Path)] string messageId);
 
-        [Patch]
-        [IRoute("messages/{messageId}")]
+        [Patch("messages/{messageId}")]
         [Obsolete]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
         Task MarkMessageAsRead();
 
-        [Get]
-        [IRoute("companies")]
+        [Get("companies", "Get all companies related to the current user")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
-        [ServiceDescription("Get all companies related to the current user")]
         Task<List<CompanyReference>> GetMyCompanies();
 
-        [Get]
-        [IRoute("policies/{serviceId}/validate()")]
+        [Get("policies/{serviceId}/validate()", "Validates all myDnvgl policies and returns a list of the policies that needs attention")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
-        [ServiceDescription("Validates all myDnvgl policies and returns a list of the policies that needs attention")]
         [AuthorizeWrapper]
         Task ValidatePolicy([In(InclutionTypes.Path)] string serviceId, [In(InclutionTypes.Header)]string returnUrl);
 
-        [Get]
-        [IRoute("policies/validate()")]
+        [Get("policies/validate()", "Validates all myDnvgl policies and returns a list of the policies that needs attention")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
-        [ServiceDescription("Validates all myDnvgl policies and returns a list of the policies that needs attention")]
         [AuthorizeWrapper]
         Task ValidatePolicies([In(InclutionTypes.Header)]string returnUrl);
 
-        [Get]
-        [IRoute("services")]
+        [Get("services", "Returns all services for the user")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
-        [ServiceDescription("Returns all services for the user")]
         [AuthorizeWrapper]
         Task<IEnumerable<MyServiceReference>> MyServices();
-
-        //[Put]
-        //[IRoute("services/{serviceId}")]
-        //[ServiceDescription("Add/apply for a service subscription")]
-        //[AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
-        //[AuthorizeWrapper]
-        //Task<ServiceInfo> SubscribeToService([In(InclutionTypes.Path)] string serviceId, [In(InclutionTypes.Body)] SubscriptionOptions options);
-
-        //[Delete]
-        //[IRoute("services/{serviceId}")]
-        //[ServiceDescription("Remove the service form the users subscriptions")]
-        //[AuthorizeWrapper]
-        //Task RemoveService([In(InclutionTypes.Path)] string serviceId);
     }
 }

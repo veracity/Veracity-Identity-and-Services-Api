@@ -7,7 +7,7 @@ using Veracity.Services.Api.Models;
 
 namespace Veracity.Services.Api
 {
-    [IRoutePrefix("directory/users")]
+    [Api("directory/users")]
     [Oauth]
     [CircuitBreaker(100, 5)]
     [SupportCode]
@@ -17,40 +17,29 @@ namespace Veracity.Services.Api
 
     public interface IUsersDirectory : IVeracityService
     {
-        [Get]
-        [IRoute("email/")]
+        [Get("email/", "Gets a list of users with a given email address")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
-        [ServiceDescription("Gets a list of users with a given email address")]
         Task<IEnumerable<UserReference>> GetUsersByEmail([In(InclutionTypes.Path)] string email);
 
-        [Get]
-        [IRoute("{id}")]
+        [Get("{id}", "Returns the full profile for the user with the provided id")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
-        [ServiceDescription("Returns the full profile for the user with the provided id")]
         Task<UserInfo> GetUser([In(InclutionTypes.Path)] string id);
 
-        [Post]
-        [IRoute("")]
+        [Post("", "Get full user profiles for a list of userid's", Summary = "Read multiple users profile")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
-        [ServiceDescription("Get full user profiles for a list of userid's", Summary = "Read multiple users profile")]
         Task<UserInfo[]> GetUsersIn([In(InclutionTypes.Body)] string[] ids);
 
 
 
-        [Get]
-        [IRoute("{userid}/companies")]
+        [Get("{userid}/companies", "Returns a list of companies tied to a spescified user.")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
-        [ServiceDescription("Returns a list of companies tied to a spescified user.")]
         Task<IEnumerable<CompanyReference>> GetUserCompanies([In(InclutionTypes.Path)] string userid);
 
-        [Get]
-        [IRoute("{userid}/services")]
+        [Get("{userid}/services", "Get a list of the users servcies. Paged query: uses 0 based page index")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
-        [ServiceDescription("Get a list of the users servcies. Paged query: uses 0 based page index")]
         Task<IEnumerable<ServiceReference>> GetUserServices([In(InclutionTypes.Path)] string userid, [In(InclutionTypes.Path)] int page, [In(InclutionTypes.Path)] int pageSize);
 
-        [Get]
-        [IRoute("{userid}/services/{serviceId}")]
+        [Get("{userid}/services/{serviceId}","Get the detailed subscription information")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
         Task<SubscriptionDetails> GetUserSubscriptionDetails([In(InclutionTypes.Path)] string userid, [In(InclutionTypes.Path)] string serviceId);
 

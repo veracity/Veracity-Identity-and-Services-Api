@@ -45,5 +45,18 @@ namespace Veracity.Services.Api.Models
         /// </summary>
         [JsonProperty("returnUrl")]
         public string returnUrl { get; set; }
-    }
+
+	    /// <summary>
+	    /// The email address of the user or service that creates the new user account
+	    /// </summary>
+	    [JsonProperty("contactEmail")]
+	    public string ContactEmail { get; set; }
+
+
+	    /// <summary>
+	    /// The Name of the user or service that creates the new user account
+	    /// </summary>
+	    [JsonProperty("contactName")]
+	    public string ContactName { get; set; }
+	}
 }

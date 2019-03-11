@@ -4,7 +4,7 @@
     <!--*-->
     <id>Veracity.Common.OAuth</id>
     <!--*-->
-    <version>1.2.0</version>
+    <version>1.2.1</version>
     <title>Veracity.Common.OAuth</title>
     <!--*-->
     <authors>Veracity by DNVGL</authors>
@@ -48,7 +48,6 @@
         <dependency id="System.IdentityModel.Tokens.Jwt" version="5.2.1" exclude="Build,Analyzers"/>
       </group>
        <group targetFramework=".NETCoreApp2.1">
-        <dependency id="Veracity.Common.OAuth" version="1.1.0" exclude="Build,Analyzers" />
         <dependency id="Microsoft.AspNetCore.Authentication" version="2.1.1" exclude="Build,Analyzers" />
         <dependency id="Microsoft.AspNetCore.Authentication.Abstractions" version="2.1.1" exclude="Build,Analyzers" />
         <dependency id="Microsoft.AspNetCore.Authentication.OpenIdConnect" version="2.1.1" exclude="Build,Analyzers" />
@@ -66,7 +65,6 @@
         <dependency id="Stardust.Particles" version="5.0.2" exclude="Build,Analyzers" />
       </group>
       <group targetFramework=".NETCoreApp2.2">
-        <dependency id="Veracity.Common.OAuth" version="1.1.0" exclude="Build,Analyzers" />
         <dependency id="Microsoft.AspNetCore.Authentication" version="2.2.0" exclude="Build,Analyzers" />
         <dependency id="Microsoft.AspNetCore.Authentication.Abstractions" version="2.2.0" exclude="Build,Analyzers" />
         <dependency id="Microsoft.AspNetCore.Authentication.OpenIdConnect" version="2.2.0" exclude="Build,Analyzers" />

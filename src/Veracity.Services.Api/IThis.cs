@@ -81,7 +81,7 @@ namespace Veracity.Services.Api
         Task<IEnumerable<AdminReference>> GetServiceAdmins([In(InclutionTypes.Path)] string serviceId, [In(InclutionTypes.Path)] int page, [In(InclutionTypes.Path)] int pageSize);
 
         [Post("services/{serviceId}/notification", "Send notification to your users through the Veracity notification service")]
-        [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ReadAccess, ParameterIndex = 0)]
+        [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadAccess, ParameterIndex = 0)]
         Task NotifyUsers([InPath] string serviceId, [In(InclutionTypes.Body)] NotificationMessage message, [InHeader] string channelId);
 
 

@@ -237,9 +237,7 @@ namespace Veracity.Common.OAuth.Providers
 			catch (Exception ex)
 			{
 				HttpContext.Current = c;
-				if (_exceptionLogger == null) throw;
-				_exceptionLogger.Invoke(ex);
-				notification.Response.Redirect(notification.RedirectUri);
+				_exceptionLogger?.Invoke(ex);
 				notification.HandleResponse();
 			}
 		}
@@ -291,7 +289,6 @@ namespace Veracity.Common.OAuth.Providers
 				_debugLogger?.Invoke(ex.ErrorData);
 				_debugLogger?.Invoke(ex.Message);
 				_exceptionLogger?.Invoke(ex);
-				notification.Response.Redirect(notification.RedirectUri);
 				notification.HandleResponse();
 			}
 		}

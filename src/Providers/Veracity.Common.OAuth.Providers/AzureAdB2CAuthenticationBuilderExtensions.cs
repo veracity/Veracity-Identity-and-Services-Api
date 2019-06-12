@@ -119,7 +119,7 @@ namespace Veracity.Common.OAuth.Providers
                 catch (Exception ex)
                 {
                     ex.Log();
-                    throw;
+                    arg.HandleCodeRedemption();
                 }
             }
 

@@ -9,10 +9,12 @@ using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Stardust.Particles;
+using Veracity.Common.Authentication;
 using Veracity.Common.OAuth;
 using Veracity.Services.Api;
 using Veracity.Services.Api.Models;
 using ClientCredential = Microsoft.Identity.Client.ClientCredential;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Microsoft.AspNetCore.Authentication
 {

@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="navbar-collapse collapse">
+                        <div class="navbar-right navbar-text">@Html.ActionLink(" ", "Logout", "Home", new { area = "", redirectUrl = Request.Url.PathAndQuery }, new { @class = "navbar-link glyphicon glyphicon-log-out", Title = "Signout", Style = "padding-top: 4px;" })</div>
+
+                        <div class="navbar-right navbar-text"><a class="navbar-link" target="_blank" href="https://gravatar.com">@ViewBag.Email <i style="font-size: 8px; vertical-align: text-top" class="glyphicon glyphicon-new-window"></i></a></div>
+                    </div>
+                }
+                else
+                {
+                    <div class="navbar-collapse collapse">
+                        <div class="navbar-right navbar-text">@Html.ActionLink(" Log in", "Login", "Home", new { area = "", redirectUrl = Request.Url.PathAndQuery }, new { @class = "navbar-link glyphicon glyphicon-log-in" })</div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

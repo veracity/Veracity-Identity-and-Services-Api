@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Security.Claims;
+using Veracity.Common.Authentication;
 
 namespace Veracity.Services.Api.Extensions
 {
@@ -86,12 +86,5 @@ namespace Veracity.Services.Api.Extensions
         }
     }
 
-    public interface IUserNameResolver
-    {
-        string GetCurrentUserName();
-
-        string GetActorId();
-        ClaimsPrincipal User { get; }
-        string UserId { get; }
-    }
+    
 }

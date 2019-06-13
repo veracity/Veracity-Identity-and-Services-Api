@@ -4,6 +4,7 @@ namespace Veracity.Common.OAuth
 {
     public class TokenProviderConfiguration
     {
+        
 
         public string RedirectUrl
         {
@@ -78,6 +79,10 @@ namespace Veracity.Common.OAuth
             get => ConfigurationManagerHelper.GetValueOnKey("subscriptionKey");
             set => ConfigurationManagerHelper.SetValueOnKey("subscriptionKey", value, true);
         }
- 
+
+        public string ServiceId {
+            get => ConfigurationManagerHelper.GetValueOnKey("veracityServiceId");
+            set => ConfigurationManagerHelper.SetValueOnKey("veracityServiceId", value, true);
+        }
     }
 }

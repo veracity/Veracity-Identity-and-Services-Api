@@ -18,11 +18,11 @@ using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Microsoft.Extensions.DependencyInjection;
 using Stardust.Particles;
 using Swashbuckle.AspNetCore.Swagger;
+using Veracity.Common.Authentication;
+using Veracity.Common.Authentication.AspNetCore;
 using Veracity.Common.OAuth;
 using Veracity.Common.OAuth.Providers;
-using Veracity.Services.Api.Extensions;
-using IDataProtector = Veracity.Common.OAuth.IDataProtector;
-using ILogger = Stardust.Interstellar.Rest.Common.ILogger;
+using IDataProtector = Veracity.Common.Authentication.IDataProtector;
 
 namespace HelloAspNetCore22
 {
@@ -52,7 +52,7 @@ namespace HelloAspNetCore22
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 			 services.AddVeracity(Configuration)
-				.AddScoped<IOAuthTokenProvider, TokenProvider>()
+				.AddScoped<ITokenHandler, TokenProvider>()
 				.AddSingleton<TokenProviderConfiguration, TokenProviderConfiguration>()
 				.AddHttpContextAccessor()
 				.AddSingleton<ILogger, LogWrapper>()

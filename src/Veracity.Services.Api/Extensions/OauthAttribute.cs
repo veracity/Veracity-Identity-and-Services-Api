@@ -4,19 +4,20 @@ using Stardust.Particles;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Veracity.Common.Authentication;
 
 namespace Veracity.Services.Api.Extensions
 {
     public class OauthAttribute : AuthenticationInspectorAttributeBase, IAuthenticationHandler
     {
-        private IOAuthTokenProvider _provider;
+        private ITokenHandler _provider;
 
         public OauthAttribute()
         {
 
         }
 
-        private OauthAttribute(IOAuthTokenProvider iOAuthTokenProvider)
+        private OauthAttribute(ITokenHandler iOAuthTokenProvider)
         {
             _provider = iOAuthTokenProvider;
         }
@@ -27,13 +28,12 @@ namespace Veracity.Services.Api.Extensions
         //}
         public override IAuthenticationHandler GetHandler(IServiceProvider provider)
         {
-            return new OauthAttribute(provider.GetService<IOAuthTokenProvider>());
+            return new OauthAttribute(provider.GetService<ITokenHandler>());
         }
 
         public void Apply(HttpWebRequest req)
         {
-            req.Headers.Add("Authorization", _provider.GetBearerToken());
-            req.Headers.Add("Ocp-Apim-Subscription-Key", ConfigurationManagerHelper.GetValueOnKey("subscriptionKey"));
+            Task.Run(async () =>await  ApplyAsync(req)).GetAwaiter().GetResult();
         }
 
         public async Task ApplyAsync(HttpWebRequest req)

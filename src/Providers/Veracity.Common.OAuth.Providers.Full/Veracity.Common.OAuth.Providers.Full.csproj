@@ -96,15 +96,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigManager.cs" />
-    <Compile Include="ConfigurationWrapper.cs" />
     <Compile Include="OwinExtensions.cs" />
     <Compile Include="ServicesConfig.cs" />
     <Compile Include="SignoutHelper.cs" />
-    <Compile Include="TokenProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Veracity.Common.Authentication.Abstractions\Veracity.Common.Authentication.Abstractions.csproj">
+      <Project>{76ED7BE3-A8E0-43EA-90A1-1A058BF991ED}</Project>
+      <Name>Veracity.Common.Authentication.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Veracity.Common.Authentication.AspNet\Veracity.Common.Authentication.AspNet.csproj">
+      <Project>{05CACF14-4BF5-4DCA-8060-D27DEBCDD8A3}</Project>
+      <Name>Veracity.Common.Authentication.AspNet</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Veracity.Services.Api\Veracity.Services.Api.csproj">
       <Project>{63feb620-6e8f-4d4e-86cb-3db68c8047c7}</Project>
       <Name>Veracity.Services.Api</Name>

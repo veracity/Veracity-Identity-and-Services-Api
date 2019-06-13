@@ -9,7 +9,7 @@ namespace HelloAspNetCore
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public ServiceLocator(IServiceProvider serviceProvider)
+        public ServiceLocator(IServiceProvider serviceProvider) 
         {
             _serviceProvider = serviceProvider;
         }

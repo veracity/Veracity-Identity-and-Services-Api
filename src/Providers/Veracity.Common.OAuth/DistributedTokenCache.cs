@@ -3,8 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Identity.Client;
-using Stardust.Interstellar.Rest.Common;
-using Stardust.Particles.Collection;
+using Veracity.Common.Authentication;
 
 namespace Veracity.Common.OAuth
 {
@@ -60,7 +59,7 @@ namespace Veracity.Common.OAuth
             string state = string.Empty;
 
             var binaryState = _distributedCache.Get(_cacheKey + "_state");
-            if (binaryState.ContainsElements())
+            if (binaryState != null && binaryState.Length > 0)
                 state = Encoding.UTF8.GetString(binaryState);
             return state;
         }

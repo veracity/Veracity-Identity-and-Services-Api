@@ -1,12 +1,9 @@
-﻿using Stardust.Interstellar.Rest.Common;
+﻿
+using Veracity.Common.Authentication;
 
 namespace Veracity.Common.OAuth
 {
-    public interface IDataProtector
-    {
-        byte[] Protect(byte[] data);
-        byte[] Unprotect(byte[] data);
-    }
+    
 
     public abstract class DataProtector : IDataProtector
     {

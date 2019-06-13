@@ -1,88 +1,54 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Stardust.Interstellar.Rest.Annotations;
 using Stardust.Interstellar.Rest.Client;
-using Stardust.Interstellar.Rest.Common;
 using Stardust.Interstellar.Rest.Extensions;
 using Stardust.Interstellar.Rest.Service;
 using Stardust.Particles;
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Net;
 using System.Net.Http;
-using System.Reflection;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Veracity.Common.Authentication;
+using Veracity.Common.Authentication.AspNetCore;
 using Veracity.Services.Api;
-using Veracity.Services.Api.Extensions;
+using ILogger = Veracity.Common.Authentication.ILogger;
+
 #pragma warning disable 618
 
 namespace Veracity.Common.OAuth.Providers
 {
+
+
+    public class ErrorHandler : IErrorHandler
+    {
+        private readonly ILogger _logger;
+
+        public ErrorHandler(ILogger logger)
+        {
+            _logger = logger;
+        }
+        private readonly bool _overrideDefaults = true;
+
+        public HttpResponseMessage ConvertToErrorResponse(Exception exception, HttpRequestMessage request)
+        {
+            if (exception != null) _logger?.Error(exception);
+            return null;
+        }
+
+        public Exception ProduceClientException(string statusMessage, HttpStatusCode status, Exception error, string value)
+        {
+            if (error != null) _logger?.Error(error);
+            return null;
+        }
+
+        public bool OverrideDefaults => _overrideDefaults;
+    }
     public static class AspNetCoreExtensions
     {
 
-        /// <summary>
-        /// Binds the veracity related configuration settings to aspnetcore
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddVeracity(this IServiceCollection services)
-        {
-            ConfigurationManagerHelper.SetManager(new ConfigWrapper());
-            services.AddInterstellar().AddSingleton<IWebMethodConverter, VerbResolver>();
-            return services;
-        }
-
-        public static IServiceCollection AddVeracity(this IServiceCollection services, IConfiguration configuration, string key, TokenProviderConfiguration tokenProviderConfiguration)
-        {
-            ConfigurationManagerHelper.SetManager(new NullConfig());
-            services.AddInterstellar().AddSingleton<IWebMethodConverter, VerbResolver>();
-            configuration.Bind(key, tokenProviderConfiguration);
-            return services;
-        }
-
-        public static IServiceCollection AddVeracity(this IServiceCollection services, IConfiguration configuration)
-        {
-            return services.AddVeracity(configuration, "Veracity", new TokenProviderConfiguration());
-        }
-
-        public static IServiceCollection AddVeracity(this IServiceCollection services, IConfiguration configuration, string key)
-        {
-            return services.AddVeracity(configuration, key, new TokenProviderConfiguration());
-        }
-
-        public static IServiceCollection AddVeracity(this IServiceCollection services, IConfiguration configuration, string key, out TokenProviderConfiguration tokenProviderConfiguration)
-        {
-            ConfigurationManagerHelper.SetManager(new NullConfig());
-            services.AddInterstellar().AddSingleton<IWebMethodConverter, VerbResolver>();
-            var t = new TokenProviderConfiguration();
-            configuration.Bind(key, t);
-            tokenProviderConfiguration = t;
-            return services;
-        }
-
-        /// <summary>
-        /// Binds the veracity related configuration settings to aspnetcore
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddVeracity<T>(this IServiceCollection services) where T : IConfigurationReader, new()
-        {
-            ConfigurationManagerHelper.SetManager(new T());
-            services.AddInterstellar().AddSingleton<IWebMethodConverter, VerbResolver>();
-            return services;
-        }
-        /// <summary>
-        /// Binds the veracity related configuration settings to aspnetcore
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns></returns>
-
-        public static IServiceCollection AddVeracity(this IServiceCollection services, Func<IConfigurationReader> func)
-        {
-            ConfigurationManagerHelper.SetManager(func.Invoke());
-            services.AddSingleton<IWebMethodConverter, VerbResolver>();
-            return services;
-        }
         /// <summary>
         /// Adds the veracity api services to the IOC container.
         /// </summary>
@@ -91,6 +57,7 @@ namespace Veracity.Common.OAuth.Providers
         /// <returns></returns>
         public static IServiceCollection AddVeracityServices(this IServiceCollection services, string myServicesApiBaseUrl)
         {
+            services.AddInterstellar();
             services.AddScoped(s => s.CreateRestClient<IMy>(myServicesApiBaseUrl));
             services.AddScoped(s => s.CreateRestClient<IUsersDirectory>(myServicesApiBaseUrl));
             services.AddScoped(s => s.CreateRestClient<IThis>(myServicesApiBaseUrl));
@@ -99,6 +66,7 @@ namespace Veracity.Common.OAuth.Providers
             services.AddScoped(s => s.CreateRestClient<IServicesDirectory>(myServicesApiBaseUrl));
             services.AddScoped(s => s.CreateRestClient<IDataContainerService>(myServicesApiBaseUrl));
             services.AddScoped(s => new ApiClientConfiguration(myServicesApiBaseUrl));
+            services.AddScoped<IPolicyValidation, PolicyValidation>();
             services.AddSingleton<IDataProtector, DataProtectorNetCore>();
             //Or add a common api accessor for the veracity MyServices api.
             services.AddScoped<IApiClient, ApiClient>();
@@ -122,10 +90,10 @@ namespace Veracity.Common.OAuth.Providers
             builder.Services.SetAuthenticationSchemes(authenticationSchemes);
             builder.AddAsController(s => s.CreateRestClient<IMy>(baseUrl))
                 .AddAsController(s => s.CreateRestClient<IThis>(baseUrl))
-				//.AddAsController(s => s.CreateRestClient<ICompaniesDirectory>(baseUrl))
-				//.AddAsController(s => s.CreateRestClient<IServicesDirectory>(baseUrl))
-				//.AddAsController(s => s.CreateRestClient<IUsersDirectory>(baseUrl))
-				.UseInterstellar();
+                //.AddAsController(s => s.CreateRestClient<ICompaniesDirectory>(baseUrl))
+                //.AddAsController(s => s.CreateRestClient<IServicesDirectory>(baseUrl))
+                //.AddAsController(s => s.CreateRestClient<IUsersDirectory>(baseUrl))
+                .UseInterstellar();
             return builder;
         }
 
@@ -151,18 +119,98 @@ namespace Veracity.Common.OAuth.Providers
         }
     }
 
-    public class VerbResolver : IWebMethodConverter
+    public class PolicyValidation : IPolicyValidation
     {
+        private readonly IMy _myService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILogger _logger;
 
-        public List<HttpMethod> GetHttpMethods(MethodInfo method)
+        public PolicyValidation(IMy myService, IHttpContextAccessor httpContextAccessor, ILogger logger)
         {
-            var verb = method.GetCustomAttribute<VerbAttribute>();
-            return new List<HttpMethod> { new HttpMethod(verb?.Verb ?? "GET") };
+            _myService = myService;
+            _httpContextAccessor = httpContextAccessor;
+            _logger = logger;
+        }
+        public async Task<ValidationResult> ValidatePolicy()
+        {
+            try
+            {
+                await _myService.ValidatePolicies(_httpContextAccessor.HttpContext.Request.Path);
+                return new ValidationResult
+                {
+                    AllPoliciesValid = true
+                };
+            }
+            catch (ServerException e)
+            {
+                return HandleValidationResponse(e);
+            }
+            catch (AggregateException ex)
+            {
+                if (ex.InnerException is ServerException e)
+                    return HandleValidationResponse(e);
+                _logger.Error(ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+            return new ValidationResult
+            {
+                AllPoliciesValid = true
+            };
+        }
+
+        private ValidationResult HandleValidationResponse(ServerException e)
+        {
+            _logger.Error(e);
+            if (e.Status == HttpStatusCode.NotAcceptable)
+            {
+
+                var url = e.GetErrorData<ValidationError>().Url; //Getting the redirect url from the error message.
+                return new ValidationResult
+                {
+                    RedirectUrl = url,
+                    AllPoliciesValid = false
+                };
+            }
+            return new ValidationResult
+            {
+                AllPoliciesValid = true
+            };
+        }
+
+        public async Task<ValidationResult> ValidatePolicyWithServiceSpesificTerms(string serviceId)
+        {
+            try
+            {
+                await _myService.ValidatePolicy(serviceId, _httpContextAccessor.HttpContext.Request.Path);
+                return new ValidationResult
+                {
+                    AllPoliciesValid = true
+                };
+            }
+            catch (ServerException e)
+            {
+                return HandleValidationResponse(e);
+            }
+            catch (AggregateException ex)
+            {
+                if (ex.InnerException is ServerException e)
+                    return HandleValidationResponse(e);
+                _logger.Error(ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+            return new ValidationResult
+            {
+                AllPoliciesValid = true
+            };
         }
     }
 
-    internal class NullConfig : IConfigurationReader
-    {
-        public NameValueCollection AppSettings { get; } = new NameValueCollection();
-    }
+
+
 }

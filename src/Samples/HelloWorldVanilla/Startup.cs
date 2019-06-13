@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.Web;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
+using Veracity.Common.Authentication.AspNet;
 using Veracity.Common.OAuth;
 using Veracity.Common.OAuth.Providers;
 

@@ -107,3 +107,111 @@
 2019-06-12 07:54:34.875 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet - ModelState is Valid
 2019-06-12 07:54:35.282 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Index in 407.9288ms
 2019-06-12 07:54:35.285 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 417.4159ms 200 text/html; charset=utf-8
+2019-06-12 14:30:29.033 +02:00 [Debug] HelloAspNetCore.Startup: Generating webapi controller for Veracity.Services.Api.IMy
+2019-06-12 14:30:29.177 +02:00 [Debug] HelloAspNetCore.Startup: Generating webapi controller for Veracity.Services.Api.IThis
+2019-06-12 14:30:29.553 +02:00 [Information] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager: User profile is available. Using 'C:\Users\jonsyr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-06-12 14:30:30.070 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 DEBUG http://localhost:44326/  0
+2019-06-12 14:30:30.084 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/  
+2019-06-12 14:30:30.114 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 42.8524ms 200 
+2019-06-12 14:30:30.215 +02:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware: An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'Veracity.Common.Authentication.ILogger' while attempting to activate 'Veracity.Common.Authentication.AspNetCore.AzureAdB2CAuthenticationBuilderExtensions+ConfigureAzureOptions'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateEnumerable(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateOpenGeneric(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateOpenGeneric(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateOpenGeneric(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateOpenGeneric(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-06-12 14:30:30.295 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 210.8097ms 500 text/html; charset=utf-8
+2019-06-12 14:33:48.561 +02:00 [Information] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager: User profile is available. Using 'C:\Users\jonsyr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-06-12 14:33:49.080 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 DEBUG http://localhost:44326/  0
+2019-06-12 14:33:49.092 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/  
+2019-06-12 14:33:49.125 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 42.092ms 200 
+2019-06-12 14:33:49.142 +02:00 [Debug] HelloAspNetCore.Startup: Binding events
+2019-06-12 14:33:49.279 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: Cookies was not authenticated. Failure message: Ticket expired
+2019-06-12 14:33:49.845 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/Index", action = "", controller = ""}. Executing action /Index
+2019-06-12 14:33:50.004 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet - ModelState is Valid
+2019-06-12 14:33:50.138 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Index in 288.0134ms
+2019-06-12 14:33:50.149 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 1056.1388ms 200 text/html; charset=utf-8
+2019-06-12 14:33:55.170 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/Account/SignIn  
+2019-06-12 14:33:55.173 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: Cookies was not authenticated. Failure message: Ticket expired
+2019-06-12 14:33:55.205 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Route matched with {action = "SignIn", controller = "Account", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SignIn() on controller HelloAspNetCore.Controllers.AccountController (HelloAspNetCore).
+2019-06-12 14:33:55.287 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executing action method HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore) - Validation state: Valid
+2019-06-12 14:33:55.293 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action method HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore), returned result Microsoft.AspNetCore.Mvc.ChallengeResult in 0.9382ms.
+2019-06-12 14:33:55.298 +02:00 [Information] Microsoft.AspNetCore.Mvc.ChallengeResult: Executing ChallengeResult with authentication schemes (OpenIdConnect).
+2019-06-12 14:34:06.073 +02:00 [Debug] HelloAspNetCore.Startup: Redirecting
+2019-06-12 14:34:06.079 +02:00 [Information] Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler: AuthenticationScheme: OpenIdConnect was challenged.
+2019-06-12 14:34:06.096 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore) in 10888.32ms
+2019-06-12 14:34:06.106 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 10935.9274ms 200 text/html;charset=UTF-8
+2019-06-12 14:34:19.225 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 POST http://localhost:44326/signin-oidc application/x-www-form-urlencoded 3381
+2019-06-12 14:34:19.406 +02:00 [Debug] HelloAspNetCore.Startup: Auth code received...
+2019-06-12 14:34:30.677 +02:00 [Debug] HelloAspNetCore.Startup: Policies validated!
+2019-06-12 14:34:36.034 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: AuthenticationScheme: Cookies signed in.
+2019-06-12 14:34:36.037 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 16812.3223ms 302 
+2019-06-12 14:34:36.053 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/  
+2019-06-12 14:34:36.058 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/Index", action = "", controller = ""}. Executing action /Index
+2019-06-12 14:34:36.062 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet - ModelState is Valid
+2019-06-12 14:34:36.826 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Index in 765.2213ms
+2019-06-12 14:34:36.828 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 775.7196ms 200 text/html; charset=utf-8
+2019-06-12 14:42:21.494 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/Account/SignOut  
+2019-06-12 14:42:21.499 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Route matched with {action = "SignOut", controller = "Account", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SignOut() on controller HelloAspNetCore.Controllers.AccountController (HelloAspNetCore).
+2019-06-12 14:42:21.528 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executing action method HelloAspNetCore.Controllers.AccountController.SignOut (HelloAspNetCore) - Validation state: Valid
+2019-06-12 14:42:21.530 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action method HelloAspNetCore.Controllers.AccountController.SignOut (HelloAspNetCore), returned result Microsoft.AspNetCore.Mvc.SignOutResult in 0.9031ms.
+2019-06-12 14:42:21.534 +02:00 [Information] Microsoft.AspNetCore.Mvc.SignOutResult: Executing SignOutResult with authentication schemes (Cookies, OpenIdConnect).
+2019-06-12 14:42:21.540 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: AuthenticationScheme: Cookies signed out.
+2019-06-12 14:42:21.545 +02:00 [Information] Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler: AuthenticationScheme: OpenIdConnect signed out.
+2019-06-12 14:42:21.547 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action HelloAspNetCore.Controllers.AccountController.SignOut (HelloAspNetCore) in 46.925ms
+2019-06-12 14:42:21.549 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 55.2892ms 200 text/html;charset=UTF-8
+2019-06-12 14:42:27.255 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/signout-callback-oidc?state=CfDJ8LlZW4ohbjNLnLBWt2UF6R7asOf8P4cRsVVPWMFOWWaUKjT8EeEMatBQ8xhftBXwqfq6b1Z7mI6bJYasaGkLAISgbLO5NNNZ50v2-Y4uuWeAn7RkmS7b1hXAP5xtRDGPS_oRn-zSItw-q8D6DFFX5fn310YH6NsD3H04z8x1fuo73fQe2h7oQNnUxJkBiBL2Yg  
+2019-06-12 14:42:27.259 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 18.6933ms 302 
+2019-06-12 14:42:27.336 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/Account/SignedOut  
+2019-06-12 14:42:27.378 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/Account/SignedOut", action = "", controller = ""}. Executing action /Account/SignedOut
+2019-06-12 14:42:27.381 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet - ModelState is Valid
+2019-06-12 14:42:27.390 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Account/SignedOut in 8.8467ms
+2019-06-12 14:42:27.392 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 56.7652ms 200 text/html; charset=utf-8
+2019-06-12 15:36:24.066 +02:00 [Information] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager: User profile is available. Using 'C:\Users\jonsyr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-06-12 15:36:24.383 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/  
+2019-06-12 15:36:24.408 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Binding events
+2019-06-12 15:36:24.638 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/Index", action = "", controller = ""}. Executing action /Index
+2019-06-12 15:36:24.699 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet - ModelState is Valid
+2019-06-12 15:36:24.800 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Index in 159.4292ms
+2019-06-12 15:36:24.808 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 425.1246ms 200 text/html; charset=utf-8
+2019-06-12 15:36:30.004 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/Account/SignIn  
+2019-06-12 15:36:30.014 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Route matched with {action = "SignIn", controller = "Account", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SignIn() on controller HelloAspNetCore.Controllers.AccountController (HelloAspNetCore).
+2019-06-12 15:36:30.020 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executing action method HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore) - Validation state: Valid
+2019-06-12 15:36:30.023 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action method HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore), returned result Microsoft.AspNetCore.Mvc.ChallengeResult in 0.5203ms.
+2019-06-12 15:36:30.025 +02:00 [Information] Microsoft.AspNetCore.Mvc.ChallengeResult: Executing ChallengeResult with authentication schemes (OpenIdConnect).
+2019-06-12 15:36:40.873 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Redirecting
+2019-06-12 15:36:40.877 +02:00 [Information] Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler: AuthenticationScheme: OpenIdConnect was challenged.
+2019-06-12 15:36:40.890 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore) in 10875.6711ms
+2019-06-12 15:36:40.898 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 10893.5171ms 200 text/html;charset=UTF-8
+2019-06-12 15:36:53.885 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 POST http://localhost:44326/signin-oidc application/x-www-form-urlencoded 3382
+2019-06-12 15:36:54.021 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Auth code received...
+2019-06-12 15:37:10.338 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: AuthenticationScheme: Cookies signed in.
+2019-06-12 15:37:10.339 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 16453.5493ms 302 
+2019-06-12 15:37:10.439 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/  
+2019-06-12 15:37:10.440 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/Index", action = "", controller = ""}. Executing action /Index
+2019-06-12 15:37:10.441 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet - ModelState is Valid
+2019-06-12 15:37:11.220 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Index in 779.9009ms
+2019-06-12 15:37:11.220 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 781.418ms 200 text/html; charset=utf-8

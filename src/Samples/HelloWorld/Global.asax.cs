@@ -5,8 +5,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Stardust.Particles;
-using Veracity.Common.OAuth.Providers;
-using Veracity.Services.Api;
+using Veracity.Common.Authentication;
+using Veracity.Common.Authentication.AspNet;
 
 namespace HelloWorld
 {

@@ -1,7 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Veracity.Common.Authentication</RootNamespace>
+    <Authors>Veracity</Authors>
+    <Description>Abstractions used by Veracity Identity</Description>
+    <Copyright>Copyright © Veracity by DNVGL 2019</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://developer.veracity.com/docs</PackageProjectUrl>
+    <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632</PackageIconUrl>
+    <RepositoryUrl>https://github.com/veracity/veracity.services.api</RepositoryUrl>
+    <RepositoryType>Github</RepositoryType>
+    <PackageTags>Veracity Authentication OIDC B2C</PackageTags>
+    <Version>2.0.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+  </ItemGroup>
 
 </Project>

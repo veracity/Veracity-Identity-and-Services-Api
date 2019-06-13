@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Veracity.Common.Authentication.AspNet;
 using Veracity.Common.OAuth.Providers;
 using Veracity.Services.Api;
 using Veracity.Services.Api.Models;
@@ -55,7 +56,7 @@ namespace HelloWorld.Controllers
                     BaseAddress = new Uri(ConfigurationManager.AppSettings["myApiV3Url"]),
                     DefaultRequestHeaders =
                     {
-                        Authorization = AuthenticationHeaderValue.Parse(new TokenProvider().GetBearerToken())
+                        Authorization = AuthenticationHeaderValue.Parse(await (new TokenProvider().GetBearerTokenAsync()))
 
                     }
                 };

@@ -5,8 +5,11 @@ using System;
 using System.Configuration;
 using Unity;
 using Unity.Injection;
+using Veracity.Common.Authentication;
+using Veracity.Common.Authentication.AspNet;
 using Veracity.Common.OAuth.Providers;
 using Veracity.Services.Api.Extensions;
+using ILogger = Stardust.Interstellar.Rest.Common.ILogger;
 
 namespace Veracity.Services.Api.UnityAdapter
 {
@@ -17,7 +20,7 @@ namespace Veracity.Services.Api.UnityAdapter
             container.RegisterType<IProxyFactory>(new InjectionFactory(s =>
                 new ProxyFactoryImplementation(new Locator(new UnityServiceLocator(s)))))
                 .RegisterType<IServiceLocator>(new InjectionFactory(s => new Locator(s as IServiceProvider)))
-                .RegisterType<IOAuthTokenProvider,TokenProvider>()
+                .RegisterType<ITokenHandler,TokenProvider>()
             .RegisterType<IServiceProvider>(new InjectionFactory(s => new UnityServiceLocator(s)))
                 .RegisterType<IApiClientConfiguration, ApiClientConfigurationHelper>()
                 .RegisterType<IMy>(new InjectionFactory(s =>

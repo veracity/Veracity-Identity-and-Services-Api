@@ -15,10 +15,10 @@ namespace Veracity.Services.Api
         {
             _factory = factoryMethod;
         }
-
-        private static string _baseUrl;
         private static Func<IServiceProvider> _factory;
 
+        private static string _baseUrl;
+        
         public static IApiClient CreateClient(string baseUrl, IServiceProvider serviceProvider)
         {
             _baseUrl = baseUrl;

@@ -14,11 +14,12 @@ using System;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
+using Veracity.Common.Authentication;
+using Veracity.Common.Authentication.AspNetCore;
 using Veracity.Common.OAuth;
 using Veracity.Common.OAuth.Providers;
-using Veracity.Services.Api.Extensions;
-using IDataProtector = Veracity.Common.OAuth.IDataProtector;
-using ILogger = Stardust.Interstellar.Rest.Common.ILogger;
+using IDataProtector = Veracity.Common.Authentication.IDataProtector;
+using ILogger = Veracity.Common.Authentication.ILogger;
 
 namespace HelloAspNetCore
 {
@@ -42,15 +43,9 @@ namespace HelloAspNetCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddVeracity(Configuration)
-                .AddScoped<IOAuthTokenProvider, TokenProvider>()
-                .AddSingleton<TokenProviderConfiguration, TokenProviderConfiguration>()
-                .AddHttpContextAccessor()
-                .AddSingleton<ILogger, LogWrapper>()
-                .AddSingleton<ILogging, LogWrapper>()
-                .AddScoped(s => s.GetService<IHttpContextAccessor>().HttpContext.User)
+                
                 .AddSingleton(ConstructDataProtector)
                 .AddSingleton(ConstructDistributedCache)
-                .AddScoped<TokenCacheBase, DistributedTokenCache>()
                 .AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"))
                 .AddAuthentication(sharedOptions =>
                 {

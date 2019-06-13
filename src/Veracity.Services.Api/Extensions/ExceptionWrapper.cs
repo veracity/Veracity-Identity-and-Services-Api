@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using Stardust.Interstellar.Rest.Common;
 using Stardust.Interstellar.Rest.Extensions;
 using Stardust.Interstellar.Rest.Service;
 using Stardust.Particles;
+using Veracity.Common.Authentication;
 using Veracity.Services.Api.Models;
+using ILogger = Stardust.Interstellar.Rest.Common.ILogger;
 
 namespace Veracity.Services.Api.Extensions
 {

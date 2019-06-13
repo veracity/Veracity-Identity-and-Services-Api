@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 using Stardust.Particles;
-using ILogger = Stardust.Interstellar.Rest.Common.ILogger;
+using ILogger = Veracity.Common.Authentication.ILogger;
 
 namespace HelloAspNetCore
 {

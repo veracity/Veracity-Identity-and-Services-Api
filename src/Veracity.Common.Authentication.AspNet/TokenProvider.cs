@@ -13,10 +13,10 @@ namespace Veracity.Common.Authentication.AspNet
 {
     public class TokenProvider : ITokenHandler
     {
-        static TokenProvider()
-        {
-            ConfigurationManagerHelper.SetManager(new ConfigManager());
-        }
+        //static TokenProvider()
+        //{
+        //    ConfigurationManagerHelper.SetManager(new ConfigManager());
+        //}
         public TokenProvider() : this(new TokenProviderConfiguration())
         {
 

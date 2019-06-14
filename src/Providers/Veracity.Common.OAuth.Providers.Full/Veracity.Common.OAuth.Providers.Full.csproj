@@ -62,13 +62,13 @@
     <PackageReference Include="Microsoft.Owin.Security.OpenIdConnect" Version="4.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Owin" Version="1.0" />
-    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.4.8" />
-    <PackageReference Include="Stardust.Interstellar.Rest.Annotations" Version="3.4.6" />
+    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.4.9" />
+    <PackageReference Include="Stardust.Interstellar.Rest.Annotations" Version="3.4.8" />
     <PackageReference Include="Stardust.Interstellar.Rest.DependencyInjection">
       <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Stardust.Interstellar.Rest.Service">
-      <Version>3.4.3</Version>
+      <Version>3.4.8</Version>
     </PackageReference>
     <PackageReference Include="Stardust.Particles" Version="5.0.2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.2.1" />

@@ -235,11 +235,10 @@ namespace Veracity.Common.Authentication.AspNetCore
                     {
                         if(policyValidator!=null)
                         {
-                            var policy = await ValidatePolicies(configuration, policyValidator);
+                            var policy = await ValidatePolicies(configuration, policyValidator,arg.ProtocolMessage.RedirectUri);
                             if (policy.AllPoliciesValid)
                             {
                                 _logger.Message("Policies validated!");
-                                arg.HandleCodeRedemption();
                             }
                             else
                             {
@@ -267,15 +266,15 @@ namespace Veracity.Common.Authentication.AspNetCore
                 catch (Exception ex)
                 {
                     ex.Log();
-                    arg.HandleCodeRedemption();
                 }
             }
 
-            private static async Task<ValidationResult> ValidatePolicies(TokenProviderConfiguration configuration, IPolicyValidation policyValidator)
+            private static async Task<ValidationResult> ValidatePolicies(TokenProviderConfiguration configuration,
+                IPolicyValidation policyValidator, string protocolMessageRedirectUri)
             {
                 var policy = configuration.ServiceId != null
-                    ? await policyValidator.ValidatePolicyWithServiceSpesificTerms(configuration.ServiceId)
-                    : await policyValidator.ValidatePolicy();
+                    ? await policyValidator.ValidatePolicyWithServiceSpesificTerms(configuration.ServiceId,protocolMessageRedirectUri)
+                    : await policyValidator.ValidatePolicy(protocolMessageRedirectUri);
                 return policy;
             }
 
@@ -286,11 +285,6 @@ namespace Veracity.Common.Authentication.AspNetCore
                 {
                     arg.Response.Redirect(e.GetErrorData<ValidationError>().Url); //Getting the redirect url from the error message.
 
-                    arg.HandleResponse(); //Mark the notification as handled to allow the redirect to happen.
-                }
-                else
-                {
-                    arg.HandleCodeRedemption();
                 }
             }
 

@@ -26,6 +26,7 @@ We have moved this from prerelease event if</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.9.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.1.6" />
     <PackageReference Include="Stardust.Interstellar.Rest" Version="3.4.9" />

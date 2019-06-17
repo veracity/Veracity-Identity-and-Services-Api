@@ -32,6 +32,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0BD49E5F-F25C-4574-9570-6B2C0E1F7148}"
 	ProjectSection(SolutionItems) = preProject
 		LICENCE = LICENCE
+		ReadMe.md = ReadMe.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{B424EE34-34F9-458B-90CE-E1C2484892BD}"
@@ -44,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veracity.Common.Authenticat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veracity.Common.Authentication.AspNet", "Veracity.Common.Authentication.AspNet\Veracity.Common.Authentication.AspNet.csproj", "{05CACF14-4BF5-4DCA-8060-D27DEBCDD8A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeracityIdentity", "Samples\VeracityIdentity\VeracityIdentity.csproj", "{CD547976-8F6A-4D1C-9BE0-16AEEB5D446F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeracityIdentity", "Samples\VeracityIdentity\VeracityIdentity.csproj", "{CD547976-8F6A-4D1C-9BE0-16AEEB5D446F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFrameworkIdentity", "Samples\NetFrameworkIdentity\NetFrameworkIdentity.csproj", "{019DDB7C-6949-459F-ACBA-6162F694F205}"
 EndProject

@@ -32,12 +32,12 @@ namespace Veracity.Common.Authentication.AspNetCore
         }
         public void Error(Exception error)
         {
-            _logger.LogError(error, error.Message);
+            _logger?.LogError(error, error.Message);
         }
 
         public void Message(string message)
         {
-            _logger.LogDebug(message);
+            _logger?.LogDebug(message);
         }
 
         public void Message(string format, params object[] args)
@@ -65,7 +65,7 @@ namespace Veracity.Common.Authentication.AspNetCore
         }
     }
 
-    public abstract  class VeracityService
+    public abstract class VeracityService
     {
     }
     public static class VeracityIdExtensions
@@ -126,8 +126,9 @@ namespace Veracity.Common.Authentication.AspNetCore
             return builder;
         }
 
-        public static AuthenticationBuilder AddVeracityAuthentication(this AuthenticationBuilder builder, IConfiguration configuration)
+        public static AuthenticationBuilder AddVeracityAuthentication(this AuthenticationBuilder builder, IConfiguration configuration, Func<AuthorizationCodeReceivedContext, Task> additionalAuthCodeHandling = null)
         {
+            AzureAdB2CAuthenticationBuilderExtensions.AdditionalAuthCodeHandling = additionalAuthCodeHandling;
             builder.AddVeracityAuthentication(options =>
             {
                 configuration.Bind("AzureAdB2C", options);
@@ -143,10 +144,10 @@ namespace Veracity.Common.Authentication.AspNetCore
         }
 
     }
-    internal  static class AzureAdB2CAuthenticationBuilderExtensions
+    internal static class AzureAdB2CAuthenticationBuilderExtensions
     {
 
-        
+
         public static AuthenticationBuilder AddAzureAdB2C(this AuthenticationBuilder builder)
             => builder.AddAzureAdB2C(_ => { }, new TokenProviderConfiguration());
 
@@ -190,7 +191,7 @@ namespace Veracity.Common.Authentication.AspNetCore
             public ConfigureAzureOptions(IOptions<AzureAdB2COptions> azureOptions, ILogger logger)
             {
                 _logger = logger;
-                _logger.Message("Binding events");
+                _logger?.Message("Binding events");
                 _azureOptions = azureOptions.Value;
             }
 
@@ -222,10 +223,9 @@ namespace Veracity.Common.Authentication.AspNetCore
 
             private async Task OneAuthorizationCodeReceived(AuthorizationCodeReceivedContext arg, TokenProviderConfiguration configuration)
             {
-                _logger.Message("Auth code received...");
+                _logger?.Message("Auth code received...");
                 try
                 {
-
                     arg.HttpContext.User = arg.Principal;
                     var cache = arg.HttpContext.RequestServices.GetService<TokenCacheBase>();
                     var context = new ConfidentialClientApplication(ClientId(configuration), Authority(configuration), configuration.RedirectUrl, new ClientCredential(configuration.ClientSecret), cache, null);
@@ -233,21 +233,24 @@ namespace Veracity.Common.Authentication.AspNetCore
                     var policyValidator = arg.HttpContext.RequestServices.GetService<IPolicyValidation>();
                     try
                     {
-                        if(policyValidator!=null)
+                        if (policyValidator != null)
                         {
-                            var policy = await ValidatePolicies(configuration, policyValidator);
+                            var policy = await ValidatePolicies(configuration, policyValidator, arg.ProtocolMessage.RedirectUri);
                             if (policy.AllPoliciesValid)
                             {
-                                _logger.Message("Policies validated!");
-                                arg.HandleCodeRedemption();
+                                _logger?.Message("Policies validated!");
+                                AdditionalAuthCodeHandling?.Invoke(arg);
                             }
                             else
                             {
-                                _logger.Message("Not all policies is valid, redirecting to Veracity");
+                                _logger?.Message("Not all policies is valid, redirecting to Veracity");
                                 arg.Response.Redirect(policy.RedirectUrl); //Getting the redirect url from the error message.
-
                                 arg.HandleResponse();
                             }
+                        }
+                        else
+                        {
+                            AdditionalAuthCodeHandling?.Invoke(arg);
                         }
                     }
                     catch (AggregateException aex)
@@ -267,43 +270,38 @@ namespace Veracity.Common.Authentication.AspNetCore
                 catch (Exception ex)
                 {
                     ex.Log();
-                    arg.HandleCodeRedemption();
                 }
             }
 
-            private static async Task<ValidationResult> ValidatePolicies(TokenProviderConfiguration configuration, IPolicyValidation policyValidator)
+            private static async Task<ValidationResult> ValidatePolicies(TokenProviderConfiguration configuration,
+                IPolicyValidation policyValidator, string protocolMessageRedirectUri)
             {
                 var policy = configuration.ServiceId != null
-                    ? await policyValidator.ValidatePolicyWithServiceSpesificTerms(configuration.ServiceId)
-                    : await policyValidator.ValidatePolicy();
+                    ? await policyValidator.ValidatePolicyWithServiceSpesificTerms(configuration.ServiceId, protocolMessageRedirectUri)
+                    : await policyValidator.ValidatePolicy(protocolMessageRedirectUri);
                 return policy;
             }
 
             private void HandleServerException(AuthorizationCodeReceivedContext arg, ServerException e)
             {
-                _logger.Error(e);
+                _logger?.Error(e);
                 if (e.Status == HttpStatusCode.NotAcceptable)
                 {
                     arg.Response.Redirect(e.GetErrorData<ValidationError>().Url); //Getting the redirect url from the error message.
 
-                    arg.HandleResponse(); //Mark the notification as handled to allow the redirect to happen.
-                }
-                else
-                {
-                    arg.HandleCodeRedemption();
                 }
             }
 
 
             internal void Configure(OpenIdConnectOptions options, TokenProviderConfiguration configuration)
             {
-                _logger.Message("Configuring");
+                _logger?.Message("Configuring");
                 Configure(Options.DefaultName, options, configuration);
             }
 
             public Task OnRedirectToIdentityProvider(RedirectContext context)
             {
-                _logger.Message("Redirecting");
+                _logger?.Message("Redirecting");
                 var defaultPolicy = _azureOptions.DefaultPolicy;
                 if (context.Properties.Items.TryGetValue(AzureAdB2COptions.PolicyAuthenticationProperty, out var policy) &&
                     !policy.Equals(defaultPolicy))
@@ -319,7 +317,7 @@ namespace Veracity.Common.Authentication.AspNetCore
 
             public Task OnRemoteFailure(RemoteFailureContext context)
             {
-                _logger.Message("Failure");
+                _logger?.Message("Failure");
                 context.HandleResponse();
                 // Handle the error code that Azure AD B2C throws when trying to reset a password from the login page 
                 // because password reset is not supported by a "sign-up or sign-in policy"
@@ -349,5 +347,7 @@ namespace Veracity.Common.Authentication.AspNetCore
                 Configure(name, options, new TokenProviderConfiguration());
             }
         }
+
+        public static Func<AuthorizationCodeReceivedContext, Task> AdditionalAuthCodeHandling { get; internal set; }
     }
 }

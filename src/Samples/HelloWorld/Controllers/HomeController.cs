@@ -8,6 +8,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Stardust.Particles;
+using Veracity.Common.Authentication;
 using Veracity.Common.Authentication.AspNet;
 using Veracity.Common.OAuth.Providers;
 using Veracity.Services.Api;
@@ -19,9 +21,12 @@ namespace HelloWorld.Controllers
     public class HomeController : Controller
     {
         private readonly IApiClient _myServicesClient;
-        public HomeController(IApiClient myServicesClient)
+        private readonly ITokenHandler _tokenProvider;
+
+        public HomeController(IApiClient myServicesClient,ITokenHandler tokenProvider)
         {
             _myServicesClient = myServicesClient;
+            _tokenProvider = tokenProvider;
         }
         /// <summary>
         /// retreives the users profile using the SDK
@@ -56,11 +61,13 @@ namespace HelloWorld.Controllers
                     BaseAddress = new Uri(ConfigurationManager.AppSettings["myApiV3Url"]),
                     DefaultRequestHeaders =
                     {
-                        Authorization = AuthenticationHeaderValue.Parse(await (new TokenProvider().GetBearerTokenAsync()))
+                        Authorization = AuthenticationHeaderValue.Parse(await _tokenProvider.GetBearerTokenAsync()),
+                        
 
                     }
                 };
-                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", ConfigurationManager.AppSettings["subscriptionKey"]);
+
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", ConfigurationManagerHelper.GetValueOnKey("subscriptionKey"));
                 var companies = await client.GetAsync("my/companies");
 
                 ViewBag.CompaniesRawData = await companies.Content.ReadAsStringAsync();
@@ -93,7 +100,7 @@ namespace HelloWorld.Controllers
                 HttpContext.GetOwinContext().Authentication.Challenge();
                 return;
             }
-            if (redirectUrl.IsNullOrWhiteSpace()) redirectUrl = "/";
+            if (AjaxMinExtensions.IsNullOrWhiteSpace(redirectUrl)) redirectUrl = "/";
 
             Response.Redirect(redirectUrl);
         }

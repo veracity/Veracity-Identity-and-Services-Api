@@ -223,8 +223,8 @@ namespace Veracity.Common.Authentication.AspNet
             if (validator != null)
             {
                 var policy = ConfigurationManagerHelper.GetValueOnKey("serviceId").ContainsCharacters()
-                    ? await validator.ValidatePolicyWithServiceSpesificTerms(ConfigurationManagerHelper.GetValueOnKey("serviceId"))
-                    : await validator.ValidatePolicy();
+                    ? await validator.ValidatePolicyWithServiceSpesificTerms(ConfigurationManagerHelper.GetValueOnKey("serviceId"),notification.RedirectUri)
+                    : await validator.ValidatePolicy(notification.RedirectUri);
                 if (!policy.AllPoliciesValid)
                 {
                     _debugLogger?.Invoke($"policies validated, redirecting to {policy.RedirectUrl} for approval");
@@ -267,11 +267,11 @@ namespace Veracity.Common.Authentication.AspNet
             _myService = myService;
             _logger = logger;
         }
-        public async Task<ValidationResult> ValidatePolicy()
+        public async Task<ValidationResult> ValidatePolicy(string protocolMessageRedirectUri)
         {
             try
             {
-                await _myService.ValidatePolicies(HttpContext.Current.Request.Path);
+                await _myService.ValidatePolicies(protocolMessageRedirectUri);
                 return new ValidationResult
                 {
                     AllPoliciesValid = true
@@ -316,11 +316,11 @@ namespace Veracity.Common.Authentication.AspNet
             };
         }
 
-        public async Task<ValidationResult> ValidatePolicyWithServiceSpesificTerms(string serviceId)
+        public async Task<ValidationResult> ValidatePolicyWithServiceSpesificTerms(string serviceId, string protocolMessageRedirectUri)
         {
             try
             {
-                await _myService.ValidatePolicy(serviceId, HttpContext.Current.Request.Path);
+                await _myService.ValidatePolicy(serviceId, protocolMessageRedirectUri);
                 return new ValidationResult
                 {
                     AllPoliciesValid = true

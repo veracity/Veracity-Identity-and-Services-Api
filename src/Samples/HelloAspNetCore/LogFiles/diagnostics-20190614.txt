@@ -1,0 +1,119 @@
+2019-06-14 09:30:03.535 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Generating webapi controller for Veracity.Services.Api.IMy
+2019-06-14 09:30:03.604 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Generating webapi controller for Veracity.Services.Api.IThis
+2019-06-14 09:30:03.848 +02:00 [Information] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager: User profile is available. Using 'C:\Users\jonsyr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-06-14 09:30:04.449 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/  
+2019-06-14 09:30:04.483 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Binding events
+2019-06-14 09:30:04.545 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: Cookies was not authenticated. Failure message: Unprotect ticket failed
+2019-06-14 09:30:04.808 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/Index", action = "", controller = ""}. Executing action /Index
+2019-06-14 09:30:04.837 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client IMy
+2019-06-14 09:30:04.839 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IMy.Info
+2019-06-14 09:30:04.852 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IMy.GetMessageCount
+2019-06-14 09:30:04.852 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IMy.GetMessagesAsync
+2019-06-14 09:30:04.852 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IMy.GetMessageAsync
+2019-06-14 09:30:04.853 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IMy.MarkMessageAsRead
+2019-06-14 09:30:04.853 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IMy.GetMyCompanies
+2019-06-14 09:30:04.853 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IMy.ValidatePolicy
+2019-06-14 09:30:04.853 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IMy.ValidatePolicies
+2019-06-14 09:30:04.854 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IMy.MyServices
+2019-06-14 09:30:04.858 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client IThis
+2019-06-14 09:30:04.859 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.GetServices
+2019-06-14 09:30:04.859 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.GetUsers
+2019-06-14 09:30:04.859 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.GetServiceUser
+2019-06-14 09:30:04.859 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.GetUserForService
+2019-06-14 09:30:04.860 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.GetServiceUsers
+2019-06-14 09:30:04.860 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.AddUserAsync
+2019-06-14 09:30:04.860 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.AddServiceUser
+2019-06-14 09:30:04.860 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.RemoveServiceUser
+2019-06-14 09:30:04.861 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.RemoveUser
+2019-06-14 09:30:04.861 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.ResolveUser
+2019-06-14 09:30:04.861 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.CreateUser
+2019-06-14 09:30:04.861 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.CreateUsers
+2019-06-14 09:30:04.861 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.GetAdmins
+2019-06-14 09:30:04.862 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.GetAdmin
+2019-06-14 09:30:04.862 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.GetServiceAdmin
+2019-06-14 09:30:04.862 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.GetServiceAdmins
+2019-06-14 09:30:04.862 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IThis.NotifyUsers
+2019-06-14 09:30:04.865 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client IUsersDirectory
+2019-06-14 09:30:04.865 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IUsersDirectory.GetUsersByEmail
+2019-06-14 09:30:04.865 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IUsersDirectory.GetUser
+2019-06-14 09:30:04.865 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IUsersDirectory.GetUsersIn
+2019-06-14 09:30:04.867 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IUsersDirectory.GetUserCompanies
+2019-06-14 09:30:04.867 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IUsersDirectory.GetUserServices
+2019-06-14 09:30:04.868 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IUsersDirectory.GetUserSubscriptionDetails
+2019-06-14 09:30:04.870 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client ICompaniesDirectory
+2019-06-14 09:30:04.870 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action ICompaniesDirectory.CompanyById
+2019-06-14 09:30:04.870 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action ICompaniesDirectory.GetUsersByCompany
+2019-06-14 09:30:04.872 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client IServicesDirectory
+2019-06-14 09:30:04.872 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IServicesDirectory.GetServiceById
+2019-06-14 09:30:04.873 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IServicesDirectory.GetUsers
+2019-06-14 09:30:04.873 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IServicesDirectory.IsAdmin
+2019-06-14 09:30:04.875 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client IDataContainerService
+2019-06-14 09:30:04.875 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IDataContainerService.GetDataContainers
+2019-06-14 09:30:04.875 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IDataContainerService.CreateDataContainer
+2019-06-14 09:30:04.875 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Initializing client action IDataContainerService.DeleteDataContainer
+2019-06-14 09:30:04.885 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet - ModelState is Valid
+2019-06-14 09:30:05.016 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Index in 206.5793ms
+2019-06-14 09:30:05.025 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 576.5404ms 200 text/html; charset=utf-8
+2019-06-14 09:30:09.642 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/Account/SignIn  
+2019-06-14 09:30:09.646 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: Cookies was not authenticated. Failure message: Unprotect ticket failed
+2019-06-14 09:30:09.661 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Route matched with {action = "SignIn", controller = "Account", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SignIn() on controller HelloAspNetCore.Controllers.AccountController (HelloAspNetCore).
+2019-06-14 09:30:09.671 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executing action method HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore) - Validation state: Valid
+2019-06-14 09:30:09.676 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action method HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore), returned result Microsoft.AspNetCore.Mvc.ChallengeResult in 0.6679ms.
+2019-06-14 09:30:09.679 +02:00 [Information] Microsoft.AspNetCore.Mvc.ChallengeResult: Executing ChallengeResult with authentication schemes (OpenIdConnect).
+2019-06-14 09:30:20.424 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Redirecting
+2019-06-14 09:30:20.429 +02:00 [Information] Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler: AuthenticationScheme: OpenIdConnect was challenged.
+2019-06-14 09:30:20.439 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action HelloAspNetCore.Controllers.AccountController.SignIn (HelloAspNetCore) in 10778.1735ms
+2019-06-14 09:30:20.448 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 10805.45ms 200 text/html;charset=UTF-8
+2019-06-14 09:30:32.734 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 POST http://localhost:44326/signin-oidc application/x-www-form-urlencoded 3382
+2019-06-14 09:30:32.884 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Auth code received...
+2019-06-14 09:30:46.152 +02:00 [Debug] Veracity.Common.Authentication.AspNetCore.VeracityService: Policies validated!
+2019-06-14 09:30:51.455 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: AuthenticationScheme: Cookies signed in.
+2019-06-14 09:30:51.457 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 18723.3792ms 302 
+2019-06-14 09:30:51.500 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/  
+2019-06-14 09:30:51.502 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/Index", action = "", controller = ""}. Executing action /Index
+2019-06-14 09:30:51.503 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet - ModelState is Valid
+2019-06-14 09:30:51.844 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Index in 342.3821ms
+2019-06-14 09:30:51.844 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 343.9635ms 200 text/html; charset=utf-8
+2019-06-14 09:31:05.173 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/About  
+2019-06-14 09:31:05.182 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/About", action = "", controller = ""}. Executing action /About
+2019-06-14 09:31:05.191 +02:00 [Information] Microsoft.AspNetCore.Authorization.DefaultAuthorizationService: Authorization was successful.
+2019-06-14 09:31:05.192 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet - ModelState is Valid
+2019-06-14 09:31:05.195 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /About in 12.9155ms
+2019-06-14 09:31:05.195 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 22.9509ms 200 text/html; charset=utf-8
+2019-06-14 09:31:07.196 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/Contact  
+2019-06-14 09:31:07.202 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/Contact", action = "", controller = ""}. Executing action /Contact
+2019-06-14 09:31:07.202 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet - ModelState is Valid
+2019-06-14 09:31:07.206 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Contact in 4.054ms
+2019-06-14 09:31:07.206 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 9.9319ms 200 text/html; charset=utf-8
+2019-06-14 09:31:08.174 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/About  
+2019-06-14 09:31:08.174 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/About", action = "", controller = ""}. Executing action /About
+2019-06-14 09:31:08.175 +02:00 [Information] Microsoft.AspNetCore.Authorization.DefaultAuthorizationService: Authorization was successful.
+2019-06-14 09:31:08.175 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet - ModelState is Valid
+2019-06-14 09:31:08.176 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /About in 1.7923ms
+2019-06-14 09:31:08.176 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 2.5822ms 200 text/html; charset=utf-8
+2019-06-14 09:31:08.853 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/  
+2019-06-14 09:31:08.854 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Route matched with {page = "/Index", action = "", controller = ""}. Executing action /Index
+2019-06-14 09:31:08.855 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executing handler method OnGet - ModelState is Valid
+2019-06-14 09:31:09.200 +02:00 [Information] Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker: Executed action /Index in 345.3216ms
+2019-06-14 09:31:09.200 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 346.8448ms 200 text/html; charset=utf-8
+2019-06-14 09:31:17.268 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/my/profile  
+2019-06-14 09:31:17.276 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Route matched with {action = "Info", controller = "My", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Info() on controller TempModule.Controllers.MyController (9a4ff1d0f5204966a6d0f9d55196d92c_ServiceWrapper).
+2019-06-14 09:31:17.277 +02:00 [Information] Microsoft.AspNetCore.Authorization.DefaultAuthorizationService: Authorization was successful.
+2019-06-14 09:31:17.285 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executing action method TempModule.Controllers.MyController.Info (9a4ff1d0f5204966a6d0f9d55196d92c_ServiceWrapper) - Validation state: Valid
+2019-06-14 09:31:17.737 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action method TempModule.Controllers.MyController.Info (9a4ff1d0f5204966a6d0f9d55196d92c_ServiceWrapper), returned result Microsoft.AspNetCore.Mvc.JsonResult in 451.8864ms.
+2019-06-14 09:31:17.746 +02:00 [Information] Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor: Executing JsonResult, writing value of type 'Veracity.Services.Api.Models.MyUserInfo'.
+2019-06-14 09:31:17.754 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action TempModule.Controllers.MyController.Info (9a4ff1d0f5204966a6d0f9d55196d92c_ServiceWrapper) in 477.5363ms
+2019-06-14 09:31:17.754 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 486.2354ms 200 application/json; charset=utf-8
+2019-06-14 10:40:26.245 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/my/profile  
+2019-06-14 10:40:26.254 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: Cookies was not authenticated. Failure message: Ticket expired
+2019-06-14 10:40:26.264 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Route matched with {action = "Info", controller = "My", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Info() on controller TempModule.Controllers.MyController (9a4ff1d0f5204966a6d0f9d55196d92c_ServiceWrapper).
+2019-06-14 10:40:26.265 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: Cookies was not authenticated. Failure message: Ticket expired
+2019-06-14 10:40:26.266 +02:00 [Information] Microsoft.AspNetCore.Authorization.DefaultAuthorizationService: Authorization failed.
+2019-06-14 10:40:26.268 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'.
+2019-06-14 10:40:26.276 +02:00 [Information] Microsoft.AspNetCore.Mvc.ChallengeResult: Executing ChallengeResult with authentication schemes (Cookies).
+2019-06-14 10:40:26.280 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: AuthenticationScheme: Cookies was challenged.
+2019-06-14 10:40:26.280 +02:00 [Information] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker: Executed action TempModule.Controllers.MyController.Info (9a4ff1d0f5204966a6d0f9d55196d92c_ServiceWrapper) in 16.0895ms
+2019-06-14 10:40:26.281 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 37.6184ms 302 
+2019-06-14 10:40:26.295 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/Account/Login?ReturnUrl=%2Fmy%2Fprofile  
+2019-06-14 10:40:26.296 +02:00 [Information] Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler: Cookies was not authenticated. Failure message: Ticket expired
+2019-06-14 10:40:26.297 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 1.4752ms 404 

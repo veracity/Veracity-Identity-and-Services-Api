@@ -4,7 +4,7 @@ namespace Veracity.Common.Authentication
 {
     public interface IPolicyValidation
     {
-        Task<ValidationResult> ValidatePolicy();
-        Task<ValidationResult> ValidatePolicyWithServiceSpesificTerms(string serviceId);
+        Task<ValidationResult> ValidatePolicy(string protocolMessageRedirectUri);
+        Task<ValidationResult> ValidatePolicyWithServiceSpesificTerms( string serviceId, string protocolMessageRedirectUri);
     }
 }

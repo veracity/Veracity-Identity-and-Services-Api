@@ -109,8 +109,8 @@
     <PackageReference Include="Owin" Version="1.0" />
     <PackageReference Include="Respond" Version="1.2.0" />
     <PackageReference Include="Stardust.Continuum.Client" Version="2.2.2" />
-    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.4.8" />
-    <PackageReference Include="Stardust.Interstellar.Rest.Annotations" Version="3.4.6" />
+    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.4.9" />
+    <PackageReference Include="Stardust.Interstellar.Rest.Annotations" Version="3.4.8" />
     <PackageReference Include="Stardust.Particles" Version="5.0.2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.2.1" />
     <PackageReference Include="System.Linq" Version="4.3.0" />

@@ -82,10 +82,11 @@ namespace Veracity.Common.OAuth.Providers
         /// <returns></returns>
         public static IMvcBuilder AddVeracityApiProxies<TErrorHandler, TUserNameResolver>(this IMvcBuilder builder, string baseUrl, string authenticationSchemes) where TUserNameResolver : class, IUserNameResolver where TErrorHandler : class, IErrorHandler
         {
-
+            builder.Services.AddScoped<Stardust.Interstellar.Rest.Common.ILogger,InternalLogger>();
             builder.Services
                 .AddSingleton<IUserNameResolver, TUserNameResolver>()
                 .AddSingleton<IErrorHandler, TErrorHandler>();
+            
             ClientFactory.SetServiceProviderFactory(() => builder.Services.BuildServiceProvider());
             builder.Services.SetAuthenticationSchemes(authenticationSchemes);
             builder.AddAsController(s => s.CreateRestClient<IMy>(baseUrl))
@@ -119,23 +120,46 @@ namespace Veracity.Common.OAuth.Providers
         }
     }
 
+    public class InternalLogger : Stardust.Interstellar.Rest.Common.ILogger
+    {
+        private readonly ILogger _logger;
+
+        public InternalLogger(ILogger logger)
+        {
+            _logger = logger;
+        }
+
+        public void Error(Exception error)
+        {
+            _logger?.Error(error);
+        }
+
+        public void Message(string message)
+        {
+            _logger?.Message(message);
+        }
+
+        public void Message(string format, params object[] args)
+        {
+            _logger?.Message(format,args);
+        }
+    }
+
     public class PolicyValidation : IPolicyValidation
     {
         private readonly IMy _myService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
-        public PolicyValidation(IMy myService, IHttpContextAccessor httpContextAccessor, ILogger logger)
+        public PolicyValidation(IMy myService, ILogger logger)
         {
             _myService = myService;
-            _httpContextAccessor = httpContextAccessor;
             _logger = logger;
         }
-        public async Task<ValidationResult> ValidatePolicy()
+        public async Task<ValidationResult> ValidatePolicy(string protocolMessageRedirectUri)
         {
             try
             {
-                await _myService.ValidatePolicies(_httpContextAccessor.HttpContext.Request.Path);
+                await _myService.ValidatePolicies(protocolMessageRedirectUri);
                 return new ValidationResult
                 {
                     AllPoliciesValid = true
@@ -180,11 +204,11 @@ namespace Veracity.Common.OAuth.Providers
             };
         }
 
-        public async Task<ValidationResult> ValidatePolicyWithServiceSpesificTerms(string serviceId)
+        public async Task<ValidationResult> ValidatePolicyWithServiceSpesificTerms(string serviceId, string protocolMessageRedirectUri)
         {
             try
             {
-                await _myService.ValidatePolicy(serviceId, _httpContextAccessor.HttpContext.Request.Path);
+                await _myService.ValidatePolicy(serviceId,protocolMessageRedirectUri);
                 return new ValidationResult
                 {
                     AllPoliciesValid = true

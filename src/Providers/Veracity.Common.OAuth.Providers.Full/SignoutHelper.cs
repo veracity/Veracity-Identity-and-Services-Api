@@ -11,10 +11,7 @@ namespace Veracity.Common.OAuth.Providers
         {
             HttpContext.Current.GetOwinContext().Authentication.SignOut(configuration.Policy);
             HttpContext.Current.GetOwinContext().Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
-            if (redirectUrl.IsNullOrWhiteSpace()) redirectUrl = "/";
-            var logoutUrl = configuration.LogoutUrl ?? $"https://login.microsoftonline.com/{configuration.TenantId}/oauth2/v2.0/logout?p={configuration.Policy}&post_logout_redirect_uri={configuration.RedirectUrl}{redirectUrl}";
-            if (TokenProviderConfiguration.DoLogging)
-                response.Redirect(logoutUrl);
+            response.Redirect("https://www.veracity.com/auth/logout");
         }
 
         public static void Logout(this HttpResponseBase response, string redirectUrl, bool isRelative = true)

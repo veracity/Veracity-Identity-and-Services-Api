@@ -4,8 +4,8 @@
     <!--*-->
     <id>Veracity.Common.OAuth</id>
     <!--*-->
-    <version>2.0.0</version>
-    <title>Veracity.Common.OAuth</title>
+    <version>2.0.1</version>
+    <title>Veracity.Common.Authentication.AspNet</title>
     <!--*-->
     <authors>Veracity by DNVGL</authors>
     <owners>DNVGL Veracity</owners>
@@ -13,7 +13,7 @@
     <projectUrl>https://developer.veracity.com/docs</projectUrl>
     <iconUrl>https://avatars3.githubusercontent.com/u/28704632</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Authentication library for the veracity services sdk</description>
+    <description>Log in with Veracity Identity in asp.net applications.</description>
     <releaseNotes>
       This is the General Avaiability release of our new open industry data platform
       Learn more at https://www.veracity.com

@@ -4,7 +4,7 @@
     <!--*-->
     <id>Veracity.Common.OAuth</id>
     <!--*-->
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <title>Veracity.Common.OAuth</title>
     <!--*-->
     <authors>Veracity by DNVGL</authors>
@@ -46,7 +46,7 @@
         <dependency id="Microsoft.Owin.Security.OpenIdConnect" version="4.0.0" exclude="Build,Analyzers"/>
         <dependency id="System.IdentityModel.Tokens.Jwt" version="5.2.1" exclude="Build,Analyzers"/>
         <dependency id="Veracity.Common.Authentication.Abstractions" version="2.0.0" exclude="Build,Analyzers"/>
-        <dependency id="Veracity.Common.Authentication.AspNet" version="2.0.0" exclude="Build,Analyzers"/>
+        <dependency id="Veracity.Common.Authentication.AspNet" version="2.0.1" exclude="Build,Analyzers"/>
         <dependency id="Veracity.Services.Api" version="2.0.0" exclude="Build,Analyzers"/>
       </group>
        <group targetFramework=".NETCoreApp2.1">
@@ -98,11 +98,5 @@
     <file src="..\Veracity.Common.OAuth.Providers\bin\Release\netcoreapp2.1\Veracity.Common.OAuth.Providers.pdb" target="lib\netcoreapp2.1" />
     <file src="..\Veracity.Common.OAuth.Providers\bin\Release\netcoreapp2.2\Veracity.Common.OAuth.Providers.dll" target="lib\netcoreapp2.2" />
     <file src="..\Veracity.Common.OAuth.Providers\bin\Release\netcoreapp2.2\Veracity.Common.OAuth.Providers.pdb" target="lib\netcoreapp2.2" />
-    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.dll" target="lib\net471" />
-    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.pdb" target="lib\net471" />
-    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.dll" target="lib\netcoreapp2.1" />
-    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.pdb" target="lib\netcoreapp2.1" />
-    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.dll" target="lib\netcoreapp2.2" />
-    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.pdb" target="lib\netcoreapp2.2" />
   </files>
 </package>

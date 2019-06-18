@@ -1,6 +1,6 @@
 ﻿using Stardust.Particles;
 
-namespace Veracity.Common.OAuth
+namespace Veracity.Common.Authentication
 {
     public class TokenProviderConfiguration
     {

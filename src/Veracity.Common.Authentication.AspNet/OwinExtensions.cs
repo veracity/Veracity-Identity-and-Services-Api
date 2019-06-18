@@ -13,11 +13,10 @@ using Microsoft.Owin.Security.OpenIdConnect;
 using Newtonsoft.Json;
 using Owin;
 using Stardust.Particles;
-using Veracity.Common.OAuth;
 using Veracity.Services.Api;
 using OpenIdConnectMessage = Microsoft.IdentityModel.Protocols.OpenIdConnect.OpenIdConnectMessage;
 
-namespace Veracity.Common.Authentication.AspNet
+namespace Veracity.Common.Authentication
 {
     public static class OwinExtensions
     {

@@ -1,8 +1,18 @@
 ﻿using System;
 using Stardust.Particles.Collection.Arrays;
-
-namespace Veracity.Common.OAuth
+namespace Veracity.Common.Authentication
 {
+    public abstract class DataProtector : IDataProtector
+    {
+        internal void SetLogger(ILogger logger)
+        {
+            Logger = logger;
+        }
+
+        public ILogger Logger { get; private set; }
+        public abstract byte[] Protect(byte[] data);
+        public abstract byte[] Unprotect(byte[] data);
+    }
     public sealed class DataProtector<T> : DataProtector
     {
 

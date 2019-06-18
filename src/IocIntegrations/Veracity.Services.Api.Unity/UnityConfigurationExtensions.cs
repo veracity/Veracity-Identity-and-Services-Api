@@ -6,7 +6,6 @@ using System.Configuration;
 using Unity;
 using Unity.Injection;
 using Veracity.Common.Authentication;
-using Veracity.Common.Authentication.AspNet;
 using Veracity.Common.OAuth.Providers;
 using Veracity.Services.Api.Extensions;
 using ILogger = Stardust.Interstellar.Rest.Common.ILogger;

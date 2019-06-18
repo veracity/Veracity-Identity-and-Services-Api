@@ -3,9 +3,8 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Identity.Client;
-using Veracity.Common.Authentication;
 
-namespace Veracity.Common.OAuth
+namespace Veracity.Common.Authentication
 {
     public class DistributedTokenCache : TokenCacheBase
     {

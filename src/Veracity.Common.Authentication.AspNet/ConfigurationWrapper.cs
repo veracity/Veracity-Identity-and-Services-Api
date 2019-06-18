@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Owin;
-using Veracity.Common.OAuth;
 
-namespace Veracity.Common.Authentication.AspNet
+namespace Veracity.Common.Authentication
 {
     public class ConfigurationWrapper
     {

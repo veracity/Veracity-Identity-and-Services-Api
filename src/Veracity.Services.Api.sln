@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veracity.Services.Api", "Veracity.Services.Api\Veracity.Services.Api.csproj", "{63FEB620-6E8F-4D4E-86CB-3DB68C8047C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veracity.Common.OAuth", "Providers\Veracity.Common.OAuth\Veracity.Common.OAuth.csproj", "{8485B920-BAC4-42CB-8727-9C8B80557137}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veracity.Common.OAuth.Providers", "Providers\Veracity.Common.OAuth.Providers\Veracity.Common.OAuth.Providers.csproj", "{D5D733A5-0095-4A82-9B0D-7EEAFAA7C6E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veracity.Common.OAuth.Providers.Full", "Providers\Veracity.Common.OAuth.Providers.Full\Veracity.Common.OAuth.Providers.Full.csproj", "{0D5C1D5E-8312-46EE-80FC-086CD806F161}"
@@ -32,7 +30,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0BD49E5F-F25C-4574-9570-6B2C0E1F7148}"
 	ProjectSection(SolutionItems) = preProject
 		LICENCE = LICENCE
-		ReadMe.md = ReadMe.md
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{B424EE34-34F9-458B-90CE-E1C2484892BD}"
@@ -65,14 +63,6 @@ Global
 		{63FEB620-6E8F-4D4E-86CB-3DB68C8047C7}.Stag|Any CPU.Build.0 = Debug|Any CPU
 		{63FEB620-6E8F-4D4E-86CB-3DB68C8047C7}.Test|Any CPU.ActiveCfg = Debug|Any CPU
 		{63FEB620-6E8F-4D4E-86CB-3DB68C8047C7}.Test|Any CPU.Build.0 = Debug|Any CPU
-		{8485B920-BAC4-42CB-8727-9C8B80557137}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8485B920-BAC4-42CB-8727-9C8B80557137}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8485B920-BAC4-42CB-8727-9C8B80557137}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8485B920-BAC4-42CB-8727-9C8B80557137}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8485B920-BAC4-42CB-8727-9C8B80557137}.Stag|Any CPU.ActiveCfg = Debug|Any CPU
-		{8485B920-BAC4-42CB-8727-9C8B80557137}.Stag|Any CPU.Build.0 = Debug|Any CPU
-		{8485B920-BAC4-42CB-8727-9C8B80557137}.Test|Any CPU.ActiveCfg = Debug|Any CPU
-		{8485B920-BAC4-42CB-8727-9C8B80557137}.Test|Any CPU.Build.0 = Debug|Any CPU
 		{D5D733A5-0095-4A82-9B0D-7EEAFAA7C6E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D5D733A5-0095-4A82-9B0D-7EEAFAA7C6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5D733A5-0095-4A82-9B0D-7EEAFAA7C6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -182,7 +172,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8485B920-BAC4-42CB-8727-9C8B80557137} = {95BC36AA-FE46-440D-82D0-863221298492}
 		{D5D733A5-0095-4A82-9B0D-7EEAFAA7C6E5} = {95BC36AA-FE46-440D-82D0-863221298492}
 		{0D5C1D5E-8312-46EE-80FC-086CD806F161} = {95BC36AA-FE46-440D-82D0-863221298492}
 		{26F480D6-68D3-4A7A-B8EB-0AC6D448818F} = {AAC8E77D-7E4B-4ECA-A282-B4F799D6A079}

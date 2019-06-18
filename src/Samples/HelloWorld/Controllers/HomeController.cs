@@ -10,7 +10,6 @@ using System.Web;
 using System.Web.Mvc;
 using Stardust.Particles;
 using Veracity.Common.Authentication;
-using Veracity.Common.Authentication.AspNet;
 using Veracity.Common.OAuth.Providers;
 using Veracity.Services.Api;
 using Veracity.Services.Api.Models;

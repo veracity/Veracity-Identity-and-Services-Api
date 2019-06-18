@@ -394,7 +394,7 @@ Properties
 #### aspnetcore
 
 ```NUGET
-PM> Install-Package Veracity.Common.OAuth -version 2.0.1
+PM> Install-Package Veracity.Common.OAuth -version 2.0.2
 PM> Install-Package Veracity.Services.Api -version 2.0.0
 ```
 Setting up the services
@@ -483,6 +483,11 @@ Response:
 #### asp.net
 
 For asp.net applications we have also tried to make the differences as little as possible from the first example
+
+```NUGET
+PM> Install-Package Veracity.Common.OAuth -version 2.0.2
+PM> Install-Package Veracity.Services.Api -version 2.0.0
+```
 
 global.asax.cs
 

@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Veracity.Common.Authentication;
-using Veracity.Common.Authentication.AspNetCore;
 using Veracity.Services.Api;
 using ILogger = Veracity.Common.Authentication.ILogger;
 

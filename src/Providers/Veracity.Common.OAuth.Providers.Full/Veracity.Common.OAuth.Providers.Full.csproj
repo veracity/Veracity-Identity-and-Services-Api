@@ -48,7 +48,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.1.6" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="2.7.1" />
     <PackageReference Include="Microsoft.IdentityModel.Logging" Version="5.2.1" />
     <PackageReference Include="Microsoft.IdentityModel.Protocol.Extensions" Version="1.0.3.308261200" />
     <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="5.2.1" />
@@ -113,10 +112,6 @@
     <ProjectReference Include="..\..\Veracity.Services.Api\Veracity.Services.Api.csproj">
       <Project>{63feb620-6e8f-4d4e-86cb-3db68c8047c7}</Project>
       <Name>Veracity.Services.Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Veracity.Common.OAuth\Veracity.Common.OAuth.csproj">
-      <Project>{D305C6F3-CA37-4B4A-904D-0EBFA513C305}</Project>
-      <Name>Veracity.Common.OAuth</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

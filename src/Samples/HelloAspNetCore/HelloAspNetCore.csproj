@@ -10,7 +10,6 @@
     <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.0.3" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.9.3" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="2.8.0" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="2.7.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" PrivateAssets="All" />
     <PackageReference Include="NetEscapades.Extensions.Logging.RollingFile" Version="1.0.0" />
     <PackageReference Include="Stardust.Aadb2c.AuthenticationFilter.Core" Version="2.1.0" />
@@ -25,7 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth.Providers\Veracity.Common.OAuth.Providers.csproj" />
-    <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth\Veracity.Common.OAuth.csproj" />
     <ProjectReference Include="..\..\Veracity.Common.Authentication.AspNetCore\Veracity.Common.Authentication.AspNetCore.csproj" />
     <ProjectReference Include="..\..\Veracity.Services.Api\Veracity.Services.Api.csproj" />
   </ItemGroup>

@@ -1,20 +1,15 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 using System.Web;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using Veracity.Common.Authentication;
-using Veracity.Common.Authentication.AspNet;
-using Veracity.Common.OAuth;
 
 [assembly: OwinStartup(typeof(NetFrameworkIdentity.Startup))]
 

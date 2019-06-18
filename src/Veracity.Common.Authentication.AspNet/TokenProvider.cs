@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 using System.Web;
 using Microsoft.Identity.Client;
 using Microsoft.Owin.Security.Cookies;
-using Stardust.Particles;
-using Veracity.Common.OAuth;
 
-namespace Veracity.Common.Authentication.AspNet
+namespace Veracity.Common.Authentication
 {
     public class TokenProvider : ITokenHandler
     {

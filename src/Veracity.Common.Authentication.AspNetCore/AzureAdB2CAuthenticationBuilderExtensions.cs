@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Specialized;
-using System.Threading.Tasks;
 using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,10 +14,8 @@ using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Stardust.Particles;
-using Veracity.Common.OAuth;
-using Microsoft.AspNetCore.Builder;
 
-namespace Veracity.Common.Authentication.AspNetCore
+namespace Veracity.Common.Authentication
 {
     internal class NullConfig : IConfigurationReader
     {
@@ -131,7 +130,7 @@ namespace Veracity.Common.Authentication.AspNetCore
             AzureAdB2CAuthenticationBuilderExtensions.AdditionalAuthCodeHandling = additionalAuthCodeHandling;
             builder.AddVeracityAuthentication(options =>
             {
-                configuration.Bind("AzureAdB2C", options);
+                configuration.Bind("Veracity", options);
 
             });
             return builder;
@@ -228,7 +227,7 @@ namespace Veracity.Common.Authentication.AspNetCore
                 {
                     arg.HttpContext.User = arg.Principal;
                     var cache = arg.HttpContext.RequestServices.GetService<TokenCacheBase>();
-                    var context = new ConfidentialClientApplication(ClientId(configuration), Authority(configuration), configuration.RedirectUrl, new ClientCredential(configuration.ClientSecret), cache, null);
+                   var context = new ConfidentialClientApplication(ClientId(configuration), Authority(configuration), configuration.RedirectUrl, new ClientCredential(configuration.ClientSecret), cache, null);
                     var user = await context.AcquireTokenByAuthorizationCodeAsync(arg.ProtocolMessage.Code, new[] { configuration.Scope });
                     var policyValidator = arg.HttpContext.RequestServices.GetService<IPolicyValidation>();
                     try

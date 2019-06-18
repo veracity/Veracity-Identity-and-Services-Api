@@ -1,6 +1,6 @@
 ﻿using Microsoft.Identity.Client;
 
-namespace Veracity.Common.OAuth
+namespace Veracity.Common.Authentication
 {
     public abstract class TokenCacheBase
     {

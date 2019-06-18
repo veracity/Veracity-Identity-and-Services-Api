@@ -18,8 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Veracity.Common.Authentication.AspNetCore;
-using Veracity.Common.OAuth;
+using Veracity.Common.Authentication;
 using IDataProtector = Veracity.Common.Authentication.IDataProtector;
 
 namespace VeracityIdentity
@@ -90,7 +89,7 @@ namespace VeracityIdentity
             app.UseCookiePolicy();
 
             app.UseVeracity()
-                .UseAuthentication()
+                .UseAuthentication() 
                 .UseMvc();
         }
     }

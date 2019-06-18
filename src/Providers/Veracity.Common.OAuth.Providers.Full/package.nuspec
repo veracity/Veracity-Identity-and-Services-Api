@@ -98,11 +98,5 @@
     <file src="..\Veracity.Common.OAuth.Providers\bin\Release\netcoreapp2.1\Veracity.Common.OAuth.Providers.pdb" target="lib\netcoreapp2.1" />
     <file src="..\Veracity.Common.OAuth.Providers\bin\Release\netcoreapp2.2\Veracity.Common.OAuth.Providers.dll" target="lib\netcoreapp2.2" />
     <file src="..\Veracity.Common.OAuth.Providers\bin\Release\netcoreapp2.2\Veracity.Common.OAuth.Providers.pdb" target="lib\netcoreapp2.2" />
-    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.dll" target="lib\net471" />
-    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.pdb" target="lib\net471" />
-    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.dll" target="lib\netcoreapp2.1" />
-    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.pdb" target="lib\netcoreapp2.1" />
-    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.dll" target="lib\netcoreapp2.2" />
-    <file src="..\Veracity.Common.OAuth\bin\Release\netstandard2.0\Veracity.Common.OAuth.pdb" target="lib\netcoreapp2.2" />
   </files>
 </package>

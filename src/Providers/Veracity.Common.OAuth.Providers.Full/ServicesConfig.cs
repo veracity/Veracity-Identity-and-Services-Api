@@ -2,7 +2,6 @@
 using Stardust.Interstellar.Rest.Dependencyinjection;
 using System.Configuration;
 using Veracity.Common.Authentication;
-using Veracity.Common.Authentication.AspNet;
 using Veracity.Services.Api.Extensions;
 
 namespace Veracity.Common.OAuth.Providers

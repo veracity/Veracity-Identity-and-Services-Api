@@ -10,7 +10,6 @@ using System.IO;
 using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
-using Veracity.Common.Authentication.AspNet;
 using Veracity.Services.Api;
 
 namespace Veracity.Common.OAuth.Providers

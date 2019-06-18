@@ -19,7 +19,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Stardust.Particles;
 using Swashbuckle.AspNetCore.Swagger;
 using Veracity.Common.Authentication;
-using Veracity.Common.Authentication.AspNetCore;
 using Veracity.Common.OAuth;
 using Veracity.Common.OAuth.Providers;
 using IDataProtector = Veracity.Common.Authentication.IDataProtector;

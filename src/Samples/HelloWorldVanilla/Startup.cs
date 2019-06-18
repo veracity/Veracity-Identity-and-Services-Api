@@ -6,15 +6,15 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using Stardust.Interstellar.Rest.Common;
 using System;
 using System.Security.Claims;
 using System.Web;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
-using Veracity.Common.Authentication.AspNet;
+using Veracity.Common.Authentication;
 using Veracity.Common.OAuth;
 using Veracity.Common.OAuth.Providers;
+using ILogger = Stardust.Interstellar.Rest.Common.ILogger;
 
 [assembly: OwinStartup(typeof(HelloWorldVanilla.Startup))]
 

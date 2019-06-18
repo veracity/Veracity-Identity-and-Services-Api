@@ -8,7 +8,6 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Veracity.Common.Authentication;
-using Veracity.Common.Authentication.AspNet;
 using Veracity.Common.OAuth.Providers;
 using Veracity.Services.Api;
 

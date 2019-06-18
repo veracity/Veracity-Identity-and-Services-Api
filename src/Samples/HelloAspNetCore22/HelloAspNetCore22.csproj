@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth.Providers\Veracity.Common.OAuth.Providers.csproj" />
-    <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth\Veracity.Common.OAuth.csproj" />
     <ProjectReference Include="..\..\Veracity.Services.Api\Veracity.Services.Api.csproj" />
   </ItemGroup>
 

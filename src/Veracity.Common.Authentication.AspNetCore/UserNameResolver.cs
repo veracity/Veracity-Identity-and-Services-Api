@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Veracity.Common.Authentication.AspNetCore
+namespace Veracity.Common.Authentication
 {
     
     public class UserNameResolver : IUserNameResolver

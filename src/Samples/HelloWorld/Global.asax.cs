@@ -6,7 +6,6 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Stardust.Particles;
 using Veracity.Common.Authentication;
-using Veracity.Common.Authentication.AspNet;
 
 namespace HelloWorld
 {

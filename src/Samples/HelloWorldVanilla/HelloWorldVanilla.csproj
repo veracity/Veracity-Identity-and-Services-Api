@@ -122,10 +122,6 @@
       <Project>{0d5c1d5e-8312-46ee-80fc-086cd806f161}</Project>
       <Name>Veracity.Common.OAuth.Providers.Full</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth\Veracity.Common.OAuth.csproj">
-      <Project>{8485b920-bac4-42cb-8727-9c8b80557137}</Project>
-      <Name>Veracity.Common.OAuth</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Veracity.Common.Authentication.Abstractions\Veracity.Common.Authentication.Abstractions.csproj">
       <Project>{76ED7BE3-A8E0-43EA-90A1-1A058BF991ED}</Project>
       <Name>Veracity.Common.Authentication.Abstractions</Name>

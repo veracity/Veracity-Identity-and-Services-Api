@@ -1,0 +1,21 @@
+2019-06-18 09:29:31.674 +02:00 [Debug] Veracity.Common.Authentication.VeracityService: Generating webapi controller for Veracity.Services.Api.IMy
+2019-06-18 09:29:31.752 +02:00 [Debug] Veracity.Common.Authentication.VeracityService: Generating webapi controller for Veracity.Services.Api.IThis
+2019-06-18 09:29:32.004 +02:00 [Information] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager: User profile is available. Using 'C:\Users\jonsyr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-06-18 09:29:32.471 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request starting HTTP/1.1 GET http://localhost:44326/signin-oidc  
+2019-06-18 09:29:32.508 +02:00 [Debug] Veracity.Common.Authentication.VeracityService: Binding events
+2019-06-18 09:29:32.625 +02:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware: An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The MetadataAddress or Authority must use HTTPS unless disabled for development by setting RequireHttpsMetadata=false.
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectPostConfigureOptions.PostConfigure(String name, OpenIdConnectOptions options)
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.<>c__DisplayClass10_0.<Get>b__0()
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+   at System.Lazy`1.ExecutionAndPublication(LazyHelper executionAndPublication, Boolean useDefaultConstructor)
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd(String name, Func`1 createOptions)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-06-18 09:29:32.672 +02:00 [Information] Microsoft.AspNetCore.Hosting.Internal.WebHost: Request finished in 201.1942ms 500 text/html; charset=utf-8

@@ -7,7 +7,6 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Stardust.Particles;
-using Veracity.Common.Authentication.AspNet;
 using Stardust.Interstellar.Rest.Dependencyinjection;
 using Veracity.Common.Authentication;
 

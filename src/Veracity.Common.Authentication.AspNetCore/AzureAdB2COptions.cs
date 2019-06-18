@@ -1,6 +1,4 @@
-﻿using Veracity.Common.OAuth;
-
-namespace Veracity.Common.Authentication.AspNetCore
+﻿namespace Veracity.Common.Authentication
 {
     public class AzureAdB2COptions:TokenProviderConfiguration
     {

@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Client;
-using Veracity.Common.OAuth;
 
-namespace Veracity.Common.Authentication.AspNetCore
+namespace Veracity.Common.Authentication
 {
     public class TokenProvider : ITokenHandler
     {

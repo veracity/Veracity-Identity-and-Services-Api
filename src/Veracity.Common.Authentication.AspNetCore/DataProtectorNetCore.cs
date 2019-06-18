@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.DataProtection;
-using Veracity.Common.OAuth;
 
-namespace Veracity.Common.Authentication.AspNetCore
+namespace Veracity.Common.Authentication
 {
     public class DataProtectorNetCore : DataProtector
     {

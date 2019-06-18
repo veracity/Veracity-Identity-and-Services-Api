@@ -15,7 +15,6 @@ using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Veracity.Common.Authentication;
-using Veracity.Common.Authentication.AspNetCore;
 using Veracity.Common.OAuth;
 using Veracity.Common.OAuth.Providers;
 using IDataProtector = Veracity.Common.Authentication.IDataProtector;

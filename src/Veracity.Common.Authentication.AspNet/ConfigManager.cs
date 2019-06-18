@@ -2,7 +2,7 @@
 using System.Configuration;
 using Stardust.Particles;
 
-namespace Veracity.Common.Authentication.AspNet
+namespace Veracity.Common.Authentication
 {
     public class ConfigManager : IConfigurationReader
     {

@@ -52,9 +52,9 @@ namespace HelloAspNetCore.Controllers
         [HttpGet]
         public IActionResult SignOut()
         {
-            var callbackUrl = Url.Page("/Account/SignedOut", pageHandler: null, values: null, protocol: Request.Scheme);
+            
             return SignOut(
-                new AuthenticationProperties { RedirectUri = callbackUrl },
+                new AuthenticationProperties { RedirectUri = "https://www.veracity.com/auth/logout" },
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 OpenIdConnectDefaults.AuthenticationScheme
             );

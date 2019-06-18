@@ -43,10 +43,10 @@ namespace HelloWorldVanilla.Controllers
             Response.Redirect(redirectUrl);
         }
 
-
+        [HttpGet]
         public void Logout(string redirectUrl)
         {
-            Response.Logout(redirectUrl);
+            Response.Logout("https://www.veracity.com/auth/logout",false);
         }
     }
 }

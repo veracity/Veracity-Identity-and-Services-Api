@@ -143,7 +143,7 @@ namespace Veracity.Common.Authentication
             }
             else
             {
-                notification.Response.Redirect(string.Format(configuration.ErrorPage, notification.Exception?.Message));
+                notification.Response.Redirect(string.Format(configuration.ErrorPage ?? "/error?message={0}", notification.Exception?.Message));
             }
 
             return Task.FromResult(0);
@@ -165,7 +165,10 @@ namespace Veracity.Common.Authentication
                 {
                     await ValidatePolicies(notification);
                     notification.OwinContext.Authentication.SignIn(notification.AuthenticationTicket.Identity);
+                    notification.Response.Redirect(notification.RedirectUri);
+                    notification.HandleResponse();
                     HttpContext.Current = c;
+                    
                 }
                 catch (AggregateException aex)
                 {
@@ -190,7 +193,7 @@ namespace Veracity.Common.Authentication
             {
                 HttpContext.Current = c;
                 _exceptionLogger?.Invoke(ex);
-                notification.HandleResponse();
+                throw;
             }
         }
 
@@ -202,12 +205,11 @@ namespace Veracity.Common.Authentication
             return builder;
         }
 
-        private static async Task ExchangeAuthCodeWithToken(AuthorizationCodeReceivedNotification notification,
-            TokenProviderConfiguration configuration)
+        private static async Task ExchangeAuthCodeWithToken(AuthorizationCodeReceivedNotification notification,TokenProviderConfiguration configuration)
         {
-            var c = HttpContext.Current;
             HttpContext.Current.User = new ClaimsPrincipal(notification.AuthenticationTicket.Identity);
-            var cache = CacheFactoryFunc().Invoke();
+             var c = HttpContext.Current;
+             var cache = CacheFactoryFunc().Invoke();
             var context = new ConfidentialClientApplication(ClientId(configuration), Authority(configuration),
                 configuration.RedirectUrl, new ClientCredential(configuration.ClientSecret), cache, null);
             var user = await context.AcquireTokenByAuthorizationCodeAsync(notification.Code,
@@ -232,9 +234,6 @@ namespace Veracity.Common.Authentication
                     return;
                 }
             }
-            notification.OwinContext.Authentication.SignIn(notification.AuthenticationTicket.Identity);
-            notification.Response.Redirect(notification.RedirectUri);
-            notification.HandleResponse();
             _debugLogger?.Invoke($"policies validated");
         }
 

@@ -9,6 +9,44 @@
 In this part we will go through the steps you need in order to connect your asp.net or aspnetcore application to Veracity Identity. The Veracity Identity libraries contain helper methods and tools to build 
 applications that authenticate with Veracity and the necessary infrastructure to obtain an access token and protect these. 
 
+### Logout
+
+Currently we do not provide any prebuilt code to handle logout.
+
+logout process:
+1. redirect the user to /logout
+2. clear all cookies you have created (at least the auth cookie)
+3. redirect the user to https://www.veracity.com/auth/logout for signing out of Veracity.
+
+Samples
+
+
+AspNetCore
+```CS
+
+[HttpGet]
+public IActionResult SignOut()
+{
+    return SignOut(
+        new AuthenticationProperties { RedirectUri = "https://www.veracity.com/auth/logout" },
+        CookieAuthenticationDefaults.AuthenticationScheme,
+        OpenIdConnectDefaults.AuthenticationScheme
+    );
+}
+
+```
+
+AspNet
+```CS
+
+[HttpGet]
+public void Logout(string redirectUrl)
+{
+    Response.Logout("https://www.veracity.com/auth/logout",false);
+}
+
+```
+
 ### aspnetcore
 
 Install the Veracity Identity Libraries (VIL)
@@ -594,7 +632,7 @@ See [https://developer.veracity.com/doc/service-api](https://developer.veracity.
 
 ### Vocabulary
 
-With the myDNVGL api V3 we are trying to make a unified and consistent vocabulary for interacting with myDNVGL. At the heart of the API lies a set of view-points that represents the data seen from an 
+With the Veracity Services api V3 we are trying to make a unified and consistent vocabulary for interacting with Veracity. At the heart of the API lies a set of view-points that represents the data seen from an 
 actors point of view. 
 
 The api follows a normal usage of http verbs and nouns in the URI's. With the exception of some RPC type actions that uses '()' at the end of the action. example:
@@ -606,7 +644,7 @@ Collection responses will return a list of simplified representations with the u
 [
    {
     "identity": "/directory/companies/1314941d-e574-46d3-9089-ef7639428d69",
-    "name": "MyDNVGL Ltd",
+    "name": "Veracity Ltd",
     "id": "1314941d-e574-46d3-9089-ef7639428d69"
   },
   {
@@ -635,7 +673,7 @@ In order to do this, after receiving the authorization code using OIDC, you call
 the "This" view-point is the service/application's point ov view. The application has users (persons and or organizations), a set of capabillities and are able to send notifications etc.
 
 ##### Directory (formerly Discover)
-This is a common viewpoint allowing your app to look up different masterdata and resources with in myDNVGL. The main categories are: Services, Users and companies.
+This is a common viewpoint allowing your app to look up different masterdata and resources with in Veracity. The main categories are: Services, Users and companies.
 
 ##### Options
 
@@ -648,8 +686,8 @@ This api supports A OAuth2 bearer tokens. With *User* we understand authorizatio
 
 |View-point |Authorization type required|Comments                                   |Authorization rule                     |
 |-----------|---------------------------|-------------------------------------------|---------------------------------------|
-|My         |User                       |Only accessable when action on behalf of a user|User must exist in Mydnvgl|
-|Our        |User                       |Only accessable when action on behalf of a user|User must exist in Mydnvgl|
+|My         |User                       |Only accessable when action on behalf of a user|User must exist in Veracity|
+|Our        |User                       |Only accessable when action on behalf of a user|User must exist in Veracity|
 |This       |User or ClientCredetial    |The client id must have basic access rights when used with a principal. Or 'deamon' rights and access to the feature for the service|User + clientId.read or clientId+clientId.read|
 |Directory  |User or ClientCredetial    |The client id must have basic access rights when used with a principal. Or 'deamon' rights and access to the feature for the service|User + clientId.read or clientId+clientId.read|
 

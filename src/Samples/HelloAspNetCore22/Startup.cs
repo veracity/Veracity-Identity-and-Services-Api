@@ -52,11 +52,6 @@ namespace HelloAspNetCore22
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 			 services.AddVeracity(Configuration)
-				.AddScoped<ITokenHandler, TokenProvider>()
-				.AddSingleton<TokenProviderConfiguration, TokenProviderConfiguration>()
-				.AddHttpContextAccessor()
-				.AddSingleton<ILogger, LogWrapper>()
-				.AddSingleton<ILogging, LogWrapper>()
 				.AddScoped(s => s.GetService<IHttpContextAccessor>().HttpContext.User)
 				.AddSingleton(ConstructDataProtector)
 				.AddSingleton(ConstructDistributedCache)
@@ -65,7 +60,6 @@ namespace HelloAspNetCore22
 					opt.Configuration = Configuration.GetSection("Veracity").GetValue<string>("RedisConnectionString");
 					opt.InstanceName = "master23";
 				})
-				.AddScoped<TokenCacheBase, DistributedTokenCache>()
 				.AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"))
 				.AddAuthentication(sharedOptions =>
 				{

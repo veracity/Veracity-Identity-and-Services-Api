@@ -40,25 +40,25 @@ see [https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.dataprotec
 Add the Veracity infrastructure to the service collection
 ```CS
 public void ConfigureServices(IServiceCollection services)
+{
+    services.AddVeracity(Configuration)
+        .AddSingleton(ConstructDataProtector)
+        .AddSingleton(ConstructDistributedCache).Configure<CookiePolicyOptions>(options =>
+    {
+        // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+        options.CheckConsentNeeded = context => true;
+        options.MinimumSameSitePolicy = SameSiteMode.None;
+    }).AddAuthentication(sharedOptions =>
         {
-            services.AddVeracity(Configuration)
-                .AddSingleton(ConstructDataProtector)
-                .AddSingleton(ConstructDistributedCache).Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            }).AddAuthentication(sharedOptions =>
-                {
-                    sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                })
-                .AddVeracityAuthentication(Configuration)
-                .AddCookie();
+            sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+        })
+        .AddVeracityAuthentication(Configuration)
+        .AddCookie();
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-        }
+    services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+}
 ```
 1. add the Veracity Core Infrastructure (*AddVeracity(Configuration)*)
 2. add the data protector (*AddSingleton(ConstructDataProtector)*)
@@ -284,7 +284,303 @@ public class HomeController : Controller
 }
 ```
 
+### Calling Veracity API's manually
+
+Since we are using a IoC container we can easily get the token from our code.
+
+```CS
+[Authorize]
+public class IndexModel : PageModel,IDisposable
+{
+    private readonly ITokenHandler _tokenHandler;
+    private readonly TokenProviderConfiguration _config;
+    private HttpClient _client;
+
+    public IndexModel(ITokenHandler tokenHandler,TokenProviderConfiguration config)
+    {
+        _tokenHandler = tokenHandler;
+        _config = config;
+        _client = new HttpClient(new CustomHttpHandler(config,tokenHandler));
+    }
+    public async Task OnGet()
+    {
+        var userdata = await _client.GetStringAsync($"{_config.MyServicesApi}/my/profile");
+        ViewData.Add("user",userdata);
+    }
+
+    public void Dispose()
+    {
+        _client?.Dispose();
+    }
+}
+
+public class CustomHttpHandler : HttpClientHandler
+{
+    private readonly TokenProviderConfiguration _config;
+    private readonly ITokenHandler _handler;
+
+    public CustomHttpHandler(TokenProviderConfiguration config,ITokenHandler handler)
+    {
+        _config = config;
+        _handler = handler;
+    }
+
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,CancellationToken cancellationToken)
+    {
+        request.Headers.Authorization=AuthenticationHeaderValue.Parse(await _handler.GetBearerTokenAsync());
+        request.Headers.Add("Ocp-Apim-Subscription-Key", _config.SubscriptionKey);
+        return await base.SendAsync(request, cancellationToken);
+    }
+}
+```
+
 ### Veracity Identity with Services api
+
+We ship a pre built client for the Services api. This client relies on runtime code generation and allows us to expose a proxy for the api in our own project. This is really 
+usefull when calling the Services api from both javascript on the client and from the backend .net code.
+
+The api client builds on top of the Veracity Identity Library. only minor changes are needed to the code in order to use the api client.
+
+See [#Veracity.Services.Api](#Veracity.Services.Api) for details on the rest api.
+
+#### The client api
+
+IApiClient
+
+Properties
+
+- My (represents the logged in user)
+- This (represents your application and its capabillities)
+- Directory (restricted, do not use this in normal cases)
+
+#### aspnetcore
+
+```NUGET
+PM> Install-Package Veracity.Common.OAuth -version 2.0.1
+PM> Install-Package Veracity.Services.Api -version 2.0.0
+```
+Setting up the services
+
+```CS
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddVeracity(Configuration)
+        .AddSingleton(ConstructDataProtector)
+        .AddSingleton(ConstructDistributedCache).Configure<CookiePolicyOptions>(options =>
+    {
+        // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+        options.CheckConsentNeeded = context => true;
+        options.MinimumSameSitePolicy = SameSiteMode.None;
+    })
+	.AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"))
+	.AddAuthentication(sharedOptions =>
+        {
+            sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+        })
+        .AddVeracityAuthentication(Configuration)
+        .AddCookie();
+
+
+    services.AddMvc()
+		.AddVeracityApiProxies(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"), CookieAuthenticationDefaults.AuthenticationScheme)
+		.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+```
+Difference from the first aspnetcore example
+
+1. add the Veracity Services api client (AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url")))
+2. include the proxies, optional (.AddVeracityApiProxies(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"), CookieAuthenticationDefaults.AuthenticationScheme))
+
+##### Use the api client in your controllers
+
+The method *AddVeracityServices* includes the Services api client components in the IoC container, and can be used as constructor parameters
+
+
+```CS
+[Authorize]
+public class IndexModel : PageModel
+{
+    private readonly IApiClient _apiClient;
+
+    public IndexModel(IApiClient apiClient)
+    {
+        _apiClient = apiClient;
+    }
+	public async Task OnGet()
+    {
+        var userProfile = await _apiClient.My.Info();
+        ViewData.Add("userProfile",userProfile);
+    }
+}
+```
+
+Including the proxies (*AddVeracityApiProxies*) allows you to access the api like this:
+https://localhost:44303/my/profile
+
+Response:
+```JSON
+{
+   "profilePageUrl":"https://localhost:52400/EditProfile",
+   "messagesUrl":"/my/messages",
+   "identity":"/my/profile",
+   "servicesUrl":"/my/services?page=0&pageSize=10",
+   "companiesUrl":"/my/companies",
+   "name":"DisplayName",
+   "email":"my@email.com",
+   "id":"c683d4fb-f12c-21d2-2161-3122352324333",
+   "company":{
+      "identity":"/directory/companies/1334-12",
+      "name":"MyCompany",
+      "id":"1334-12",
+      "description":null
+   },
+   "#companies":1,
+   "verifiedEmail":true,
+   "language":null,
+   "firstName":"FirstName",
+   "lastName":"LastName"
+}
+```
+
+#### asp.net
+
+For asp.net applications we have also tried to make the differences as little as possible from the first example
+
+global.asax.cs
+
+```CS
+public class WebApiApplication : System.Web.HttpApplication
+{
+    protected void Application_Start()
+    {
+        ConfigurationManagerHelper.SetManager(new ConfigManager());
+        this.AddDependencyInjection<AppServiceConfig>();//Uses Microsoft.Extensions.DependencyInjection as the IoC container and configures the veracity sdk bindings
+        AreaRegistration.RegisterAllAreas();
+        GlobalConfiguration.Configure(WebApiConfig.Register);
+        FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+        RouteConfig.RegisterRoutes(RouteTable.Routes);
+        BundleConfig.RegisterBundles(BundleTable.Bundles);
+        //ClientFactory.RegisterTokenProvider(new TokenProvider());
+
+    }
+}
+
+public class AppServiceConfig : ServicesConfig //notice the base class here is different, this includes all the needed components for the Veracity Services api client
+{
+    public override bool IncludeProxies => true;
+
+    protected override IServiceCollection Configure(IServiceCollection services)
+    {
+        //Configure your own services here
+        return base.Configure(services);
+    }
+}
+
+```
+Add Owin and owin startup.cs 
+
+
+Add cache constructor function
+```CS
+private static DistributedTokenCache CacheFactoryFunc()
+        {
+            return new DistributedTokenCache(HttpContext.Current.User as ClaimsPrincipal, DistributedCache, null, null);
+        }
+
+        private static MemoryDistributedCache DistributedCache { get; } =
+            new MemoryDistributedCache(
+                new OptionsWrapper<MemoryDistributedCacheOptions>(new MemoryDistributedCacheOptions()));
+```
+You can inject a dataprotector into DistributedTokenCache as the last parameter, see aspnetcore for details
+
+Add the configuration code
+```CS
+public void Configuration(IAppBuilder app)
+{
+	//Get secrets from Azure Key Vault using managed service identity (MSI)
+    var azureServiceTokenProvider = new AzureServiceTokenProvider();
+    var keyVaultClient = new KeyVaultClient(async (authority, resource, scope) =>
+        await azureServiceTokenProvider.GetAccessTokenAsync(resource));
+    var secret = keyVaultClient.GetSecretAsync("https://veracitydevdaydemo.vault.azure.net/",
+        "Veracity1--ClientSecret").Result;
+    var subscriptionKey = keyVaultClient
+        .GetSecretAsync("https://veracitydevdaydemo.vault.azure.net/", "Veracity--SubscriptionKey").Result;
+	//Add cookie authentication
+    app.UseCookieAuthentication(new CookieAuthenticationOptions { CookieName = "a.c" }); //set auth cookie
+    app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType); //set default auth type 
+    //configure veracity auth
+    app.UseVeracityAuthentication(new TokenProviderConfiguration
+    {
+        ClientSecret = secret.Value,
+        SubscriptionKey = subscriptionKey.Value
+    }) //Add Azure Ad B2C authentication 
+        .UseTokenCache(CacheFactoryFunc); //add access token cache 
+}
+```
+
+Configuration
+
+```XML
+<appSettings>
+    <add key="webpages:Version" value="3.0.0.0" />
+    <add key="webpages:Enabled" value="false" />
+    <add key="ClientValidationEnabled" value="true" />
+    <add key="UnobtrusiveJavaScriptEnabled" value="true" />
+    <add key="apiGW:clientId" value="yourAppId" />
+    <add key="apiGW:policy" value="B2C_1A_SignInWithADFSIdp" />
+    <add key="apiGW:scope" value="	https://dnvglb2cprod.onmicrosoft.com/83054ebf-1d7b-43f5-82ad-b2bde84d7b75/user_impersonation" />
+    <add key="apiGW:redirectUrl" value="yourAppUrl" />
+    <add key="apiGW:idp" value="a68572e3-63ce-4bc1-acdc-b64943502e9d" />
+    <add key="myApiV3Url" value="https://api.veracity.com/Veracity/Services/V3" />
+    <add key="apiGW:clientSecret" value="yourSecret" />
+    <add key ="subscriptionKey" value="yourSubscriptionKey"/>
+  </appSettings>
+```
+
+To use the api client from your controllers simply add it as a constructor parameter 
+
+```CS
+public class HomeController : Controller
+{
+    private readonly IApiClient _veracityClient;
+
+    public HomeController(IApiClient veracityClient)
+    {
+        _veracityClient = veracityClient;
+    }
+
+    public async Task<ActionResult> Index()
+    {
+        var user = new UserInfo();
+        ViewBag.Title = "Home Page";
+        if (Request.IsAuthenticated)
+        {
+            ViewBag.Email = (User.Identity as ClaimsIdentity)?.Claims
+                .FirstOrDefault(c => c.Type == ClaimTypes.Upn)?.Value;
+            user = await _veracityClient.My.Info();
+        }
+        return View(user);
+    }
+
+    public void Login(string redirectUrl)
+    {
+        if (!Request.IsAuthenticated)
+        {
+            HttpContext.GetOwinContext().Authentication.Challenge();
+            return;
+        }
+        if (redirectUrl.IsNullOrWhiteSpace()) redirectUrl = "/";
+
+        Response.Redirect(redirectUrl);
+    }
+
+
+    public void Logout(string redirectUrl)
+    {
+        Response.Logout(redirectUrl);
+    }
+}
+```
 
 
 

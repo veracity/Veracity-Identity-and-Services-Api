@@ -15,7 +15,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Log in with Veracity Identity in asp.net applications.</description>
     <releaseNotes>
-      This is the General Avaiability release of our new open industry data platform
+      This is the General Availability release of our new open industry data platform
       Learn more at https://www.veracity.com
       See https://github.com/veracity/veracity.services.api for sample code.
     </releaseNotes>

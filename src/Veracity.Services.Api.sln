@@ -31,6 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		LICENCE = LICENCE
 		..\README.md = ..\README.md
+		..\WireProtocols.md = ..\WireProtocols.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{B424EE34-34F9-458B-90CE-E1C2484892BD}"

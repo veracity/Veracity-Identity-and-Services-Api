@@ -1,8 +1,17 @@
 # Veracity Identity and Services Api
 
+> Common config settings
+> - Scope: https://dnvglb2cprod.onmicrosoft.com/83054ebf-1d7b-43f5-82ad-b2bde84d7b75/user_impersonation
+> - TenantId: a68572e3-63ce-4bc1-acdc-b64943502e9d
+> - TenantName: dnvglb2cprod.onmicrosoft.com
+> - Services Api base url: https://api.veracity.com/Veracity/Services/V3
+
 ## Veracity Identity
 
 > Veracity Identity can be used standalone or as the foundation for calling the Veracity API's.
+
+> Veracity.Common.Authentication.* replaces Veracity.Authentication.OpenIDConnect.*
+>Veracity.Authentication.OpenIDConnect.* will be deprecated in the future as these doesn't fully support distributed cahcing and data protection.
 
 ### Veracity Identity (Standalone)
 
@@ -46,6 +55,46 @@ public void Logout(string redirectUrl)
 }
 
 ```
+
+### Token caching
+
+For applications that are intended to scale token caching cannot be done in memory since there are app instances running on multiple machines that pop in and out of "existence". 
+If a user request hits another machine than the one she logged in on she is required to log in again. To overcome this issue we apply a distributed cache that stores the tokens, like SQL or Redis.
+
+Redis sample
+```CS
+public void ConfigureServices(IServiceCollection services)
+{
+	//Other initialization
+	services.AddDistributedRedisCache(options =>
+		{
+			options.Configuration = configuration.RedisConnectionString;
+			options.InstanceName = configuration.HostingEnvironment + configuration.Environment;
+		});
+	//Other initialization
+}
+
+```
+
+#### Data protection
+
+Access and refresh tokens are to regarded as confidential information and must be protected in rest. Veracity.Common.Authentication does support protection of access/refresh tokens through the IDataProtector interface.
+If you do token chaching through SQL or Redis tokens needs to be encrupted in a way that all servers in the application cluster can read/write to the cache, and to acheive this you need to shave the key securely between the instances.
+
+Key Vault sample:
+```CS
+ public static IServiceCollection AddDataProtection(this IServiceCollection services, TConfig config, CloudStorageAccount storageAccount, AzureServiceTokenProvider azureServiceTokenProvider)
+{
+    services
+		.AddDataProtection(options => { options.ApplicationDiscriminator = config.ApplicationName; })
+        .SetApplicationName(config.ApplicationName)
+        .PersistKeysToAzureBlobStorage(storageAccount, $"veracitytokenprotectionkeys/{config.ServiceName ?? config.ApplicationName}{config.AppEnvironment}/keys.xml")
+        .ProtectKeysWithAzureKeyVault(new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback)), $"{config.KeyVaultUrl}keys/dataProtectionKey");
+    return services;
+}
+```
+
+
 
 ### aspnetcore
 
@@ -268,7 +317,7 @@ Configuration
     <add key="UnobtrusiveJavaScriptEnabled" value="true" />
     <add key="apiGW:clientId" value="yourAppId" />
     <add key="apiGW:policy" value="B2C_1A_SignInWithADFSIdp" />
-    <add key="apiGW:scope" value="	https://dnvglb2cprod.onmicrosoft.com/83054ebf-1d7b-43f5-82ad-b2bde84d7b75/user_impersonation" />
+    <add key="apiGW:scope" value="https://dnvglb2cprod.onmicrosoft.com/83054ebf-1d7b-43f5-82ad-b2bde84d7b75/user_impersonation" />
     <add key="apiGW:redirectUrl" value="yourAppUrl" />
     <add key="apiGW:idp" value="a68572e3-63ce-4bc1-acdc-b64943502e9d" />
     <add key="myApiV3Url" value="https://api.veracity.com/Veracity/Services/V3" />
@@ -379,7 +428,7 @@ usefull when calling the Services api from both javascript on the client and fro
 
 The api client builds on top of the Veracity Identity Library. only minor changes are needed to the code in order to use the api client.
 
-See [#Veracity.Services.Api](#Veracity.Services.Api) for details on the rest api.
+See [#Veracity.Services.Api](#veracityservicesapi) for details on the rest api.
 
 #### The client api
 
@@ -659,12 +708,6 @@ Collection responses will return a list of simplified representations with the u
   }
 ]
 ```
-
-#### Model documentation
-
-In[ Swagger Ui](/swagger/ui/index) you can find descriptions of the models and the properties on them by navigating to the 'Model' view under response class and under paramers -> parameter -> data type
-
-![Model description](/content/ModelDetailsSample.PNG "Model description")
 
 #### View points
 

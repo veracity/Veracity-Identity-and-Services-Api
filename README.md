@@ -11,7 +11,9 @@
 > Veracity Identity can be used standalone or as the foundation for calling the Veracity API's.
 
 > Veracity.Common.Authentication.* replaces Veracity.Authentication.OpenIDConnect.*
->Veracity.Authentication.OpenIDConnect.* will be deprecated in the future as these doesn't fully support distributed cahcing and data protection.
+> Veracity.Authentication.OpenIDConnect.* will be deprecated in the future as these doesn't fully support distributed cahcing and data protection.
+
+> Detailed HTTP messages and flows: [Wire protocols](./WireProtocols.md)
 
 ### Veracity Identity (Standalone)
 

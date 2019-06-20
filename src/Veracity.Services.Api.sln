@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldVanilla", "Sample
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0BD49E5F-F25C-4574-9570-6B2C0E1F7148}"
 	ProjectSection(SolutionItems) = preProject
-		LICENCE = LICENCE
+		..\LICENCE = ..\LICENCE
 		..\README.md = ..\README.md
 		..\WireProtocols.md = ..\WireProtocols.md
 	EndProjectSection

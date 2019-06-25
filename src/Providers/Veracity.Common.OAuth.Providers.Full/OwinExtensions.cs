@@ -4,8 +4,6 @@ using Newtonsoft.Json.Linq;
 using Owin;
 using Stardust.Interstellar.Rest.Common;
 using Stardust.Interstellar.Rest.Service;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Web.Hosting;
 using System.Web.Http;
@@ -54,21 +52,5 @@ namespace Veracity.Common.OAuth.Providers
 		}
 
 		
-	}
-
-	public class WrapperResolver : IHttpControllerTypeResolver
-	{
-		private readonly CustomAssebliesResolver _customAssebliesResolver;
-
-		public WrapperResolver(CustomAssebliesResolver customAssebliesResolver)
-		{
-			_customAssebliesResolver = customAssebliesResolver;
-		}
-
-		public ICollection<Type> GetControllerTypes(IAssembliesResolver assembliesResolver)
-		{
-
-			return _customAssebliesResolver.GetControllerTypes(assembliesResolver);
-		}
 	}
 }

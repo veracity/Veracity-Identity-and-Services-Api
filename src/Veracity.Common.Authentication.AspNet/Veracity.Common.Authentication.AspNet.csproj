@@ -54,10 +54,6 @@
       <Project>{76ed7be3-a8e0-43ea-90a1-1a058bf991ed}</Project>
       <Name>Veracity.Common.Authentication.Abstractions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Veracity.Services.Api\Veracity.Services.Api.csproj">
-      <Project>{63FEB620-6E8F-4D4E-86CB-3DB68C8047C7}</Project>
-      <Name>Veracity.Services.Api</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Mvc">

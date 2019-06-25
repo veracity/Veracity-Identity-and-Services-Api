@@ -4,16 +4,17 @@
     <!--*-->
     <id>Veracity.Common.OAuth</id>
     <!--*-->
-    <version>2.0.2</version>
+    <version>2.0.3</version>
     <title>Veracity.Common.OAuth</title>
     <!--*-->
     <authors>Veracity by DNVGL</authors>
     <owners>DNVGL Veracity</owners>
-    <licenseUrl>https://developer.veracity.com/doc/open-source-projects</licenseUrl>
+    <licence type="expression">Apache2.0</licence>
     <projectUrl>https://developer.veracity.com/docs</projectUrl>
     <iconUrl>https://avatars3.githubusercontent.com/u/28704632</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Authentication library for the veracity services sdk</description>
+    <repository type="github" url="https://github.com/veracity/veracity.services.api" />
     <releaseNotes>
       This is the General Avaiability release of our new open industry data platform
       Learn more at https://www.veracity.com
@@ -45,9 +46,9 @@
         <dependency id="Microsoft.Owin.Security.Cookies" version="4.0.0" exclude="Build,Analyzers"/>
         <dependency id="Microsoft.Owin.Security.OpenIdConnect" version="4.0.0" exclude="Build,Analyzers"/>
         <dependency id="System.IdentityModel.Tokens.Jwt" version="5.2.1" exclude="Build,Analyzers"/>
-        <dependency id="Veracity.Common.Authentication.Abstractions" version="2.0.0" exclude="Build,Analyzers"/>
-        <dependency id="Veracity.Common.Authentication.AspNet" version="2.0.1" exclude="Build,Analyzers"/>
-        <dependency id="Veracity.Services.Api" version="2.0.0" exclude="Build,Analyzers"/>
+        <dependency id="Veracity.Common.Authentication.Abstractions" version="2.0.1" exclude="Build,Analyzers"/>
+        <dependency id="Veracity.Common.Authentication.AspNet" version="2.0.2" exclude="Build,Analyzers"/>
+        <dependency id="Veracity.Services.Api" version="2.0.1" exclude="Build,Analyzers"/>
       </group>
        <group targetFramework=".NETCoreApp2.1">
         <dependency id="Microsoft.AspNetCore.Authentication" version="2.1.1" exclude="Build,Analyzers" />
@@ -65,9 +66,9 @@
         <dependency id="Microsoft.IdentityModel.Protocols.OpenIdConnect" version="5.2.1" exclude="Build,Analyzers" />
         <dependency id="Stardust.Interstellar.Rest.Service" version="3.4.3" exclude="Build,Analyzers" />
         <dependency id="Stardust.Particles" version="5.0.2" exclude="Build,Analyzers" />
-        <dependency id="Veracity.Common.Authentication.Abstractions" version="2.0.0" exclude="Build,Analyzers"/>
+        <dependency id="Veracity.Common.Authentication.Abstractions" version="2.0.1" exclude="Build,Analyzers"/>
         <dependency id="Veracity.Common.Authentication.AspNetCore" version="2.0.0" exclude="Build,Analyzers"/>
-        <dependency id="Veracity.Services.Api" version="2.0.0" exclude="Build,Analyzers"/>
+        <dependency id="Veracity.Services.Api" version="2.0.1" exclude="Build,Analyzers"/>
       </group>
       <group targetFramework=".NETCoreApp2.2">
         <dependency id="Microsoft.AspNetCore.Authentication" version="2.2.0" exclude="Build,Analyzers" />
@@ -85,9 +86,9 @@
         <dependency id="Microsoft.IdentityModel.Protocols.OpenIdConnect" version="5.3.0" exclude="Build,Analyzers" />
         <dependency id="Stardust.Interstellar.Rest.Service" version="3.4.3" exclude="Build,Analyzers" />
         <dependency id="Stardust.Particles" version="5.0.2" exclude="Build,Analyzers" />
-        <dependency id="Veracity.Common.Authentication.Abstractions" version="2.0.0" exclude="Build,Analyzers"/>
-        <dependency id="Veracity.Common.Authentication.AspNetCore" version="2.0.0" exclude="Build,Analyzers"/>
-        <dependency id="Veracity.Services.Api" version="2.0.0" exclude="Build,Analyzers"/>
+        <dependency id="Veracity.Common.Authentication.Abstractions" version="2.0.1" exclude="Build,Analyzers"/>
+        <dependency id="Veracity.Common.Authentication.AspNetCore" version="2.0.1" exclude="Build,Analyzers"/>
+        <dependency id="Veracity.Services.Api" version="2.0.1" exclude="Build,Analyzers"/>
       </group>
     </dependencies>
   </metadata>

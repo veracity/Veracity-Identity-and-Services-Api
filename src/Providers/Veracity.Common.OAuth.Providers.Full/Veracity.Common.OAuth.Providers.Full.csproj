@@ -99,6 +99,7 @@
     <Compile Include="ServicesConfig.cs" />
     <Compile Include="SignoutHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WrapperResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Veracity.Common.Authentication.Abstractions\Veracity.Common.Authentication.Abstractions.csproj">

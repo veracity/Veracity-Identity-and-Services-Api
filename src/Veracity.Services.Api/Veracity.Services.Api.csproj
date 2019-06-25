@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>DNVGL</Company>
     <Authors>Veracity by DNVGL</Authors>
@@ -11,7 +11,7 @@
     <PackageTags>Veracity Services SDK</PackageTags>
     <Product>Veracity.Services.Api</Product>
     <PackageProjectUrl>https://developer.veracity.com/docs</PackageProjectUrl>
-    <PackageLicenseUrl>https://developer.veracity.com/doc/open-source-projects</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <Description>SDK for accessing Veracity MyServices and Profile api. 
 
 Veracity MyServices is your access point for engagement of digital interaction with DNV GL. You will find digital services like “Rules and Standards”, digital tools such as our OnDemand hosted service “Secure File Transfer“, our collaboration solution “Meeting Places” (SharePoint) and many other services. Some of the services are open to all users (like “Rules and Standards” and “Secure File Transfer”), while other services require an invitation from a DNV GL employee</Description>
@@ -23,6 +23,9 @@ Learn more at https://www.veracity.com
 We have moved this from prerelease event if</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>apiModelStrongNameKey.pfx</AssemblyOriginatorKeyFile>
+    <PackageLicenseExpression>Apache2.0</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/veracity/veracity.services.api</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,16 +4,17 @@
     <!--*-->
     <id>Veracity.Common.Authentication.AspNet</id>
     <!--*-->
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <title>Veracity.Common.Authentication.AspNet</title>
     <!--*-->
     <authors>Veracity by DNVGL</authors>
     <owners>DNVGL Veracity</owners>
-    <licenseUrl>https://developer.veracity.com/doc/open-source-projects</licenseUrl>
+    <licence type="expression">Apache2.0</licence>
     <projectUrl>https://developer.veracity.com/docs</projectUrl>
     <iconUrl>https://avatars3.githubusercontent.com/u/28704632</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Log in with Veracity Identity in asp.net applications.</description>
+    <repository type="github" url="https://github.com/veracity/veracity.services.api" />
     <releaseNotes>
       This is the General Availability release of our new open industry data platform
       Learn more at https://www.veracity.com
@@ -41,7 +42,7 @@
         <dependency id="Microsoft.Owin.Security.Cookies" version="4.0.0" exclude="Build,Analyzers"/>
         <dependency id="Microsoft.Owin.Security.OpenIdConnect" version="4.0.0" exclude="Build,Analyzers"/>
         <dependency id="System.IdentityModel.Tokens.Jwt" version="5.2.1" exclude="Build,Analyzers"/>
-        <dependency id="Veracity.Common.Authentication.Abstractions" version="2.0.0" exclude="Build,Analyzers"/>
+        <dependency id="Veracity.Common.Authentication.Abstractions" version="2.0.1" exclude="Build,Analyzers"/>
       </group>
     </dependencies>
   </metadata>

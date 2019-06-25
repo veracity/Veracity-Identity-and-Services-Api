@@ -8,10 +8,10 @@
     <PackageProjectUrl>https://developer.veracity.com/docs</PackageProjectUrl>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632</PackageIconUrl>
     <RepositoryUrl>https://github.com/veracity/veracity.services.api</RepositoryUrl>
-    <RepositoryType>Github</RepositoryType>
+    <RepositoryType>github</RepositoryType>
     <PackageTags>Veracity Authentication OIDC B2C</PackageTags>
     <Description>Log in with Veracity Identity in aspnetcore applications.</Description>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RootNamespace>Veracity.Common.Authentication</RootNamespace>
   </PropertyGroup>

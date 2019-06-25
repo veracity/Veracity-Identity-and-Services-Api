@@ -178,7 +178,6 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         .UseAuthentication()//add the auth middleware
         .UseMvc();
 }
-}
 ```
 
 Configuration

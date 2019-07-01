@@ -46,7 +46,7 @@ namespace HelloWorldVanilla.Controllers
         [HttpGet]
         public void Logout(string redirectUrl)
         {
-            Response.Logout("https://www.veracity.com/auth/logout",false);
+            Response.Logout("https://www.veracity.com/auth/logout");
         }
     }
 }

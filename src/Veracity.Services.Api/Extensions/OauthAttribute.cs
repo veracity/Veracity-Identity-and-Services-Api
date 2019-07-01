@@ -22,10 +22,6 @@ namespace Veracity.Services.Api.Extensions
             _provider = iOAuthTokenProvider;
         }
 
-        //public OauthAttribute(string serviceName)
-        //{
-
-        //}
         public override IAuthenticationHandler GetHandler(IServiceProvider provider)
         {
             return new OauthAttribute(provider.GetService<ITokenHandler>());

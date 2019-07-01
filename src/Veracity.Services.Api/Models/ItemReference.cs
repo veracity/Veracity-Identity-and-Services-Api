@@ -29,16 +29,4 @@ namespace Veracity.Services.Api.Models
         public abstract string Identity { get;  }
         
     }
-
-    public class DataContainerReference : ItemReference
-    {
-        [JsonIgnore]
-        public override string Identity => null;
-
-        [JsonProperty("serviceId")]
-        public string ServiceId { get; set; }
-
-        [JsonProperty("containerId")]
-        public string ContainerId { get; set; }
-    }
 }

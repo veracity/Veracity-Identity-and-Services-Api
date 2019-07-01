@@ -1,21 +1,15 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using System;
 using System.Security.Claims;
 using System.Web;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Veracity.Common.Authentication;
-using Veracity.Common.OAuth;
-using Veracity.Common.OAuth.Providers;
-using ILogger = Stardust.Interstellar.Rest.Common.ILogger;
-using OwinExtensions = Veracity.Common.Authentication.OwinExtensions;
 
 [assembly: OwinStartup(typeof(HelloWorldVanilla.Startup))]
 
@@ -62,36 +56,5 @@ namespace HelloWorldVanilla
                 {
 
                 }));
-    }
-
-    public class AppServiceConfig : ServicesConfig
-    {
-        public override bool IncludeProxies => true;
-
-        protected override IServiceCollection Configure(IServiceCollection services)
-        {
-            services.AddScoped<ILogger, TestLogger>();
-            services = base.Configure(services);
-            OwinExtensions.SetServiceProviderFactory(()=>services.BuildServiceProvider());
-            return services;
-        }
-    }
-
-    public class TestLogger : ILogger
-    {
-        public void Error(Exception error)
-        {
-
-        }
-
-        public void Message(string message)
-        {
-
-        }
-
-        public void Message(string format, params object[] args)
-        {
-
-        }
     }
 }

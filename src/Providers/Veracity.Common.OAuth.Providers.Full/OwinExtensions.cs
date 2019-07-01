@@ -1,11 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Owin;
 using Stardust.Interstellar.Rest.Common;
 using Stardust.Interstellar.Rest.Service;
-using System.IO;
-using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using Veracity.Services.Api;

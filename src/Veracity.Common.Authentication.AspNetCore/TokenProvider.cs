@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Identity.Client;
 
 namespace Veracity.Common.Authentication
 {
@@ -39,8 +38,7 @@ namespace Veracity.Common.Authentication
             {
                 var httpContext = _appApplicationServices.GetService<IHttpContextAccessor>().HttpContext;
                 var cache = httpContext.RequestServices.GetService<TokenCacheBase>();
-                var clientCred = new ClientCredential(_configuration.ClientSecret);
-                var context = new ConfidentialClientApplication(_configuration.ClientId, Authority(_configuration), _configuration.RedirectUrl, clientCred, cache, null);
+                var context = _configuration.ConfidentialClientApplication(cache, null);
                 var user = (await context.GetAccountsAsync()).FirstOrDefault();
                 if (user == null)
                 {
@@ -49,7 +47,7 @@ namespace Veracity.Common.Authentication
                         Message = "Invalid token cache"
                     }, HttpStatusCode.Unauthorized);
                 }
-                var token = await context.AcquireTokenSilentAsync(new[] { _configuration.Scope }, user, Authority(_configuration), false);
+                var token = await context.AcquireTokenSilent(new[] { _configuration.Scope }, user).ExecuteAsync();
                 return token.CreateAuthorizationHeader();
             }
             catch (Exception ex)
@@ -59,6 +57,5 @@ namespace Veracity.Common.Authentication
             }
         }
 
-        //public static TokenCache TokenCache { get; } = new TokenCache();
     }
 }

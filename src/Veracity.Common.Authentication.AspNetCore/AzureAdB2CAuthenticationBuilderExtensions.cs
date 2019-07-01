@@ -1,148 +1,17 @@
 ﻿using System;
-using System.Collections.Specialized;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Stardust.Particles;
 
 namespace Veracity.Common.Authentication
 {
-    internal class NullConfig : IConfigurationReader
-    {
-        public NameValueCollection AppSettings { get; } = new NameValueCollection();
-    }
-    internal class LogWrapper : ILogger, ILogging
-    {
-        private readonly Microsoft.Extensions.Logging.ILogger _logger;
-
-        public LogWrapper(ILogger<VeracityService> logger)
-        {
-            _logger = logger;
-        }
-        public void Error(Exception error)
-        {
-            _logger?.LogError(error, error.Message);
-        }
-
-        public void Message(string message)
-        {
-            _logger?.LogDebug(message);
-        }
-
-        public void Message(string format, params object[] args)
-        {
-            Message(string.Format(format, args));
-        }
-
-        public void Exception(Exception exceptionToLog, string additionalDebugInformation = null)
-        {
-            Error(exceptionToLog);
-        }
-
-        public void HeartBeat()
-        {
-
-        }
-
-        public void DebugMessage(string message, LogType entryType = LogType.Information, string additionalDebugInformation = null)
-        {
-            Message(message);
-        }
-
-        public void SetCommonProperties(string logName)
-        {
-        }
-    }
-
-    public abstract class VeracityService
-    {
-    }
-    public static class VeracityIdExtensions
-    {
-
-        public static IServiceCollection AddVeracity(this IServiceCollection services, IConfiguration configuration, string key, TokenProviderConfiguration tokenProviderConfiguration)
-        {
-            ConfigurationManagerHelper.SetManager(new NullConfig());
-            configuration.Bind(key, tokenProviderConfiguration);
-            return services;
-        }
-
-        public static IServiceCollection AddVeracity(this IServiceCollection services, IConfiguration configuration)
-        {
-            return services.AddVeracity(configuration, "Veracity", new TokenProviderConfiguration());
-        }
-
-        public static IServiceCollection AddVeracity(this IServiceCollection services, IConfiguration configuration, string key)
-        {
-            return services.AddVeracity(configuration, key, new TokenProviderConfiguration());
-        }
-
-        public static IServiceCollection AddVeracity(this IServiceCollection services, IConfiguration configuration, string key, out TokenProviderConfiguration tokenProviderConfiguration)
-        {
-            ConfigurationManagerHelper.SetManager(new NullConfig());
-
-            var t = new TokenProviderConfiguration();
-            configuration.Bind(key, t);
-            tokenProviderConfiguration = t;
-            return services;
-        }
-
-        /// <summary>
-        /// Binds the veracity related configuration settings to aspnetcore
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddVeracity<T>(this IServiceCollection services) where T : IConfigurationReader, new()
-        {
-            ConfigurationManagerHelper.SetManager(new T());
-            return services;
-        }
-        /// <summary>
-        /// Binds the veracity related configuration settings to aspnetcore
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns></returns>
-
-        public static IServiceCollection AddVeracity(this IServiceCollection services, Func<IConfigurationReader> func)
-        {
-            ConfigurationManagerHelper.SetManager(func.Invoke());
-            return services;
-        }
-        public static AuthenticationBuilder AddVeracityAuthentication(this AuthenticationBuilder builder, Action<AzureAdB2COptions> options)
-        {
-
-            builder.AddAzureAdB2C(options);
-            return builder;
-        }
-
-        public static AuthenticationBuilder AddVeracityAuthentication(this AuthenticationBuilder builder, IConfiguration configuration, Func<AuthorizationCodeReceivedContext, Task> additionalAuthCodeHandling = null)
-        {
-            AzureAdB2CAuthenticationBuilderExtensions.AdditionalAuthCodeHandling = additionalAuthCodeHandling;
-            builder.AddVeracityAuthentication(options =>
-            {
-                configuration.Bind("Veracity", options);
-
-            });
-            return builder;
-        }
-        public static IApplicationBuilder UseVeracity(this IApplicationBuilder app)
-        {
-
-            //OauthAttribute.SetOauthProvider(new TokenProvider(app.ApplicationServices));
-            return app;
-        }
-
-    }
     internal static class AzureAdB2CAuthenticationBuilderExtensions
     {
 
@@ -210,16 +79,7 @@ namespace Veracity.Common.Authentication
                     OnAuthorizationCodeReceived = context => OneAuthorizationCodeReceived(context, configuration)
                 };
             }
-            public static string Authority(TokenProviderConfiguration configuration) => $"https://login.microsoftonline.com/tfp/{TenantId(configuration)}/{configuration.Policy}/v2.0/.well-known/openid-configuration";
-
-            public static string ClientId(TokenProviderConfiguration configuration) => configuration.ClientId;
-
-            public static string DefaultPolicy(TokenProviderConfiguration configuration) => configuration.Policy;
-
-            public static string TenantId(TokenProviderConfiguration configuration) => configuration.TenantId;
-
-            public static string AppUrl(TokenProviderConfiguration configuration) => configuration.RedirectUrl.EndsWith("/") ? configuration.RedirectUrl.Remove(configuration.RedirectUrl.Length - 1, 1) : configuration.RedirectUrl;
-
+            
             private async Task OneAuthorizationCodeReceived(AuthorizationCodeReceivedContext arg, TokenProviderConfiguration configuration)
             {
                 _logger?.Message("Auth code received...");
@@ -227,8 +87,8 @@ namespace Veracity.Common.Authentication
                 {
                     arg.HttpContext.User = arg.Principal;
                     var cache = arg.HttpContext.RequestServices.GetService<TokenCacheBase>();
-                   var context = new ConfidentialClientApplication(ClientId(configuration), Authority(configuration), configuration.RedirectUrl, new ClientCredential(configuration.ClientSecret), cache, null);
-                    var user = await context.AcquireTokenByAuthorizationCodeAsync(arg.ProtocolMessage.Code, new[] { configuration.Scope });
+                    var context = configuration.ConfidentialClientApplication(cache, s => { _logger?.Message(s); });//new ConfidentialClientApplication(ClientId(configuration), Authority(configuration), configuration.RedirectUrl, new ClientCredential(configuration.ClientSecret), cache, null);
+                    var user = await context.AcquireTokenByAuthorizationCode(new[] { configuration.Scope }, arg.ProtocolMessage.Code).ExecuteAsync();
                     var policyValidator = arg.HttpContext.RequestServices.GetService<IPolicyValidation>();
                     try
                     {

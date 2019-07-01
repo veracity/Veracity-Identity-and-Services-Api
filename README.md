@@ -12,10 +12,13 @@
 
 > Veracity.Common.Authentication.* replaces Veracity.Authentication.OpenIDConnect.*
 > Veracity.Authentication.OpenIDConnect.* will be deprecated in the future as these doesn't fully support distributed cahcing and data protection.
+> See [ConvertFromOldPackages.md](./ConvertFromOldPackages.md) for migration guidelines
 
 > Detailed HTTP messages and flows: [Wire protocols](./WireProtocols.md)
 
 ### Veracity Identity (Standalone)
+
+> The nuget packages 
 
 In this part we will go through the steps you need in order to connect your asp.net or aspnetcore application to Veracity Identity. The Veracity Identity libraries contain helper methods and tools to build 
 applications that authenticate with Veracity and the necessary infrastructure to obtain an access token and protect these. 

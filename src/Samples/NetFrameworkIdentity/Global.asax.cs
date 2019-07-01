@@ -17,7 +17,7 @@ namespace NetFrameworkIdentity
         protected void Application_Start()
         {
             ConfigurationManagerHelper.SetManager(new ConfigManager());
-            this.AddDependencyInjection<AppServiceConfig>();
+            //this.AddDependencyInjection<AppServiceConfig>();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

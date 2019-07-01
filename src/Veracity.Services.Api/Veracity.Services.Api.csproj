@@ -23,7 +23,7 @@ Learn more at https://www.veracity.com
 We have moved this from prerelease event if</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>apiModelStrongNameKey.pfx</AssemblyOriginatorKeyFile>
-    <PackageLicenseExpression>Apache2.0</PackageLicenseExpression>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/veracity/veracity.services.api</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
   </PropertyGroup>

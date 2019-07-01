@@ -9,7 +9,7 @@
     <!--*-->
     <authors>Veracity by DNVGL</authors>
     <owners>DNVGL Veracity</owners>
-    <licence type="expression">Apache2.0</licence>
+    <license type="expression">Apache-2.0</license>
     <projectUrl>https://developer.veracity.com/docs</projectUrl>
     <iconUrl>https://avatars3.githubusercontent.com/u/28704632</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

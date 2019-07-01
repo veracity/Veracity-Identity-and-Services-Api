@@ -80,7 +80,6 @@ namespace HelloAspNetCore22
 		private IDistributedCache ConstructDistributedCache(IServiceProvider s)
 		{
 			return s.GetService<IDistributedCache>();
-			//return new MemoryDistributedCache(new OptionsWrapper<MemoryDistributedCacheOptions>(new MemoryDistributedCacheOptions()));
 		}
 
 		private IDataProtector ConstructDataProtector(IServiceProvider s)
@@ -102,7 +101,6 @@ namespace HelloAspNetCore22
 
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
-			//app.UseCookiePolicy();
 			app.UseSwagger();
 			app.UseSwaggerUI(c =>
 			{

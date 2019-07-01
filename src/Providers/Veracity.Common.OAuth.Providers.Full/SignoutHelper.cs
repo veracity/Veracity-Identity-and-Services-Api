@@ -7,16 +7,16 @@ namespace Veracity.Common.OAuth.Providers
 {
     public static class SignoutHelper
     {
-        public static void Logout(this HttpResponseBase response, TokenProviderConfiguration configuration, string redirectUrl, bool isRelative = true)
+        public static void Logout(this HttpResponseBase response, TokenProviderConfiguration configuration, string redirectUrl)
         {
             HttpContext.Current.GetOwinContext().Authentication.SignOut(configuration.Policy);
             HttpContext.Current.GetOwinContext().Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
-            response.Redirect("https://www.veracity.com/auth/logout");
+            response.Redirect(redirectUrl);
         }
 
-        public static void Logout(this HttpResponseBase response, string redirectUrl, bool isRelative = true)
+        public static void Logout(this HttpResponseBase response, string redirectUrl=null)
         {
-            response.Logout(new TokenProviderConfiguration(), redirectUrl, isRelative);
+            response.Logout(new TokenProviderConfiguration(), redirectUrl?? "https://www.veracity.com/auth/logout");
         }
     }
 }

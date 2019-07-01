@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OwinExtensions.cs" />
+    <Compile Include="PolicyValidation.cs" />
     <Compile Include="ServicesConfig.cs" />
     <Compile Include="SignoutHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

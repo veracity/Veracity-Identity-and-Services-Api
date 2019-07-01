@@ -6,11 +6,6 @@ namespace Veracity.Services.Api
 
     public static class ClientFactory
     {
-        //public static void RegisterTokenProvider(IOAuthTokenProvider provider)
-        //{
-        //    OauthAttribute.SetOauthProvider(provider);
-        //}
-
         public static void SetServiceProviderFactory(Func<IServiceProvider> factoryMethod)
         {
             _factory = factoryMethod;

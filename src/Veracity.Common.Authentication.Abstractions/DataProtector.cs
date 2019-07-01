@@ -13,6 +13,7 @@ namespace Veracity.Common.Authentication
         public abstract byte[] Protect(byte[] data);
         public abstract byte[] Unprotect(byte[] data);
     }
+
     public sealed class DataProtector<T> : DataProtector
     {
 

@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
-using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin.Security.Notifications;
@@ -19,6 +18,8 @@ namespace Veracity.Common.Authentication
 {
     public static class OwinExtensions
     {
+
+        
         public static void SetServiceProviderFactory(Func<IServiceProvider> factoryMethod)
         {
             ServiceProviderFactory = factoryMethod;
@@ -78,19 +79,6 @@ namespace Veracity.Common.Authentication
             return app;
         }
 
-        ///// <summary>
-        ///// Configure Veracity Id and use default dependency injection
-        ///// </summary>
-        ///// <typeparam name="T"></typeparam>
-        ///// <param name="app"></param>
-        ///// <param name="configuration"></param>
-        ///// <returns></returns>
-        //public static IAppBuilder UseVeracityAuthentication<T>(this IAppBuilder app, TokenProviderConfiguration configuration) where T : ServicesConfiguration, new()
-        //{
-        //    return app.AddDependencyInjection<T>().UseVeracityAuthentication(configuration);
-
-        //}
-
         private static Func<TokenCacheBase> CacheFactoryFunc()
         {
             return _tokenCacheCreator;
@@ -107,7 +95,7 @@ namespace Veracity.Common.Authentication
         public static object AppUrl(TokenProviderConfiguration configuration) => configuration.RedirectUrl.EndsWith("/") ? configuration.RedirectUrl.Remove(configuration.RedirectUrl.Length - 1, 1) : configuration.RedirectUrl;
 
         private static Task OnRedirectToIdentityProvider(
-            RedirectToIdentityProviderNotification<Microsoft.IdentityModel.Protocols.OpenIdConnect.OpenIdConnectMessage, OpenIdConnectAuthenticationOptions> notification, TokenProviderConfiguration configuration)
+            RedirectToIdentityProviderNotification<OpenIdConnectMessage, OpenIdConnectAuthenticationOptions> notification, TokenProviderConfiguration configuration)
         {
             var policy = notification.OwinContext.Get<string>("Policy");
 
@@ -209,13 +197,13 @@ namespace Veracity.Common.Authentication
             HttpContext.Current.User = new ClaimsPrincipal(notification.AuthenticationTicket.Identity);
              var c = HttpContext.Current;
              var cache = CacheFactoryFunc().Invoke();
-            var context = new ConfidentialClientApplication(ClientId(configuration), Authority(configuration),
-                configuration.RedirectUrl, new ClientCredential(configuration.ClientSecret), cache, null);
-            var user = await context.AcquireTokenByAuthorizationCodeAsync(notification.Code,
-                new[] { configuration.Scope }); //Keep the user for debugging purposes
+            var context = configuration.ConfidentialClientApplication(cache,_debugLogger);
+            var user = await context.AcquireTokenByAuthorizationCode(new[] {configuration.Scope}, notification.Code)
+                .ExecuteAsync();
             HttpContext.Current = c;
         }
 
+       
         private static async Task ValidatePolicies(AuthorizationCodeReceivedNotification notification)
         {
             _debugLogger?.Invoke($"Validating policies with api: {VeracityApiUrl}");
@@ -254,5 +242,6 @@ namespace Veracity.Common.Authentication
             }
         }
     }
+
     
 }

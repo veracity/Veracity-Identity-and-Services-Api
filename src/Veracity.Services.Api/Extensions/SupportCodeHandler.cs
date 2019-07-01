@@ -15,17 +15,12 @@ namespace Veracity.Services.Api.Extensions
         {
             _handler = handler;
         }
-        //private HttpContext _httpContext => (HttpContext)ContainerFactory.Current.Resolve(typeof(HttpContext), Scope.Context);
 
         public ClientSuportCodeHandler GetHandler()
         {
             return _handler;
         }
 
-        //public static void SetHandler(ClientSuportCodeHandler handler)
-        //{
-        //    _handler = handler;
-        //}
         protected override void DoSetHeader(IStateContainer state, HttpWebRequest req)
         {
             try

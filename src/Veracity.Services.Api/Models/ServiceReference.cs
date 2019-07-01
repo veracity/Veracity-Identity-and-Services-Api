@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using Veracity.Services.Api.Extensions;
 
 namespace Veracity.Services.Api.Models
@@ -16,14 +15,5 @@ namespace Veracity.Services.Api.Models
         /// The relative path to the resource details
         /// </value>
         public override string Identity => $"{MyExtensions.ServiceRootModifier}/services/{Id}";
-    }
-
-    public class MyServiceReference : ServiceReference
-    {
-        /// <summary>
-        /// the location of the application.
-        /// </summary>
-        [JsonProperty("serviceUrl")]
-        public  string ServiceUrl { get; set; }
     }
 }

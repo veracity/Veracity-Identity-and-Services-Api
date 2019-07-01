@@ -1,6 +1,5 @@
 using System;
 using Newtonsoft.Json;
-using Veracity.Services.Api.Extensions;
 
 namespace Veracity.Services.Api.Models
 {
@@ -17,15 +16,5 @@ namespace Veracity.Services.Api.Models
 
         [JsonProperty("subscriptionState")]
         public SubscriptionState SubscriptionState { get; set; }
-    }
-
-    public class SubscriptionState
-    {
-        [JsonProperty("state")]
-        [JsonConverter(typeof(CamelCaseStringEnumConverter))]
-        public SubscriptionStateTypes State { get; set; }
-
-        //Include when the underlying api supports it!
-        //public DateTime LastChanged { get; set; }
     }
 }

@@ -8,17 +8,11 @@ namespace Veracity.Common.Authentication
 {
     public class DistributedTokenCache : TokenCacheBase
     {
-
-
-
         private readonly ClaimsPrincipal _principal;
         private readonly IDistributedCache _distributedCache;
         private readonly ILogger _logger;
         private readonly IDataProtector _protector;
         private string _cacheKey;
-
-
-        TokenCache cache = new TokenCache();
 
         public DistributedTokenCache(ClaimsPrincipal principal, IDistributedCache distributedCache, ILogger logger, IDataProtector protector)
         {
@@ -29,6 +23,7 @@ namespace Veracity.Common.Authentication
             _logger = logger;
             _protector = protector;
         }
+
         private static string BuildCacheKey(ClaimsPrincipal claimsPrincipal)
         {
             string clientId = claimsPrincipal.FindFirst(c => c.Type == "aud")?.Value;
@@ -38,15 +33,12 @@ namespace Veracity.Common.Authentication
                 clientId);
         }
 
-
-        protected internal override TokenCache GetCacheInstance()
+        protected internal override ITokenCache GetCacheInstance()
         {
             cache.SetBeforeAccess(BeforeAccessNotification);
             cache.SetAfterAccess(AfterAccessNotification);
             return cache;
         }
-
-
 
         public void SaveUserStateValue(string state)
         {
@@ -62,20 +54,24 @@ namespace Veracity.Common.Authentication
                 state = Encoding.UTF8.GetString(binaryState);
             return state;
         }
-        public void Load()
+
+        public void Load(TokenCacheNotificationArgs args)
         {
             var binaryData = _distributedCache.Get(_cacheKey);
-            cache.Deserialize(_protector?.Unprotect(binaryData) ?? binaryData);
+            try
+            {
+                args.TokenCache.DeserializeMsalV3(_protector?.Unprotect(binaryData) ?? binaryData);
+            }
+            catch (Exception ex)
+            {
+                args.TokenCache.DeserializeMsalV2(_protector?.Unprotect(binaryData) ?? binaryData);
+                _logger?.Error(ex);
+            }
         }
 
-        public void Persist()
+        public void Persist(TokenCacheNotificationArgs args)
         {
-
-            // Optimistically set HasStateChanged to false. We need to do it early to avoid losing changes made by a concurrent thread.
-            cache.HasStateChanged = false;
-
-            // Reflect changes in the persistent store
-            var binaryData = cache.Serialize();
+            var binaryData = args.TokenCache.SerializeMsalV3();
             _distributedCache.Set(_cacheKey, _protector?.Protect(binaryData) ?? binaryData);
         }
 
@@ -83,16 +79,16 @@ namespace Veracity.Common.Authentication
         // Reload the cache from the persistent store in case it changed since the last access.
         void BeforeAccessNotification(TokenCacheNotificationArgs args)
         {
-            Load();
+            Load(args);
         }
 
         // Triggered right after MSAL accessed the cache.
         void AfterAccessNotification(TokenCacheNotificationArgs args)
         {
             // if the access operation resulted in a cache update
-            if (cache.HasStateChanged)
+            if (args.HasStateChanged)
             {
-                Persist();
+                Persist(args);
             }
         }
     }

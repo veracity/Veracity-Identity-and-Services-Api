@@ -23,7 +23,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth.Providers\Veracity.Common.OAuth.Providers.csproj" />
+    <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth\Veracity.Common.OAuth.csproj" />
     <ProjectReference Include="..\..\Veracity.Common.Authentication.AspNetCore\Veracity.Common.Authentication.AspNetCore.csproj" />
     <ProjectReference Include="..\..\Veracity.Services.Api\Veracity.Services.Api.csproj" />
   </ItemGroup>

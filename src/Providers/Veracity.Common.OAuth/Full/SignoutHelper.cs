@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿#if NET471
+using System.Web;
 using Microsoft.Owin.Security.Cookies;
 using Stardust.Particles;
 using Veracity.Common.Authentication;
@@ -20,3 +21,5 @@ namespace Veracity.Common.OAuth.Providers
         }
     }
 }
+
+#endif

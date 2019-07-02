@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if NET471
+# else
+using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Stardust.Interstellar.Rest.Extensions;
@@ -40,3 +42,4 @@ namespace Veracity.Common.OAuth.Providers
         }
     }
 }
+#endif

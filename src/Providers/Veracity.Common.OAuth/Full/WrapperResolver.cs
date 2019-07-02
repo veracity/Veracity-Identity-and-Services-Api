@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET471
+using System;
 using System.Collections.Generic;
 using System.Web.Http.Dispatcher;
 using Stardust.Interstellar.Rest.Service;
@@ -21,3 +22,5 @@ namespace Veracity.Common.OAuth.Providers
         }
     }
 }
+
+#endif

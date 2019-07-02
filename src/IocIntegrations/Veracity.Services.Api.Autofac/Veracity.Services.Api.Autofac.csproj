@@ -67,6 +67,14 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth\Veracity.Common.OAuth.csproj">
+      <Project>{fbbd2890-9f64-4c9f-9a28-856a4422a621}</Project>
+      <Name>Veracity.Common.OAuth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Veracity.Common.Authentication.AspNet\Veracity.Common.Authentication.AspNet.csproj">
+      <Project>{98b91f57-6f3e-46e3-b5b1-0fbf97d64a68}</Project>
+      <Name>Veracity.Common.Authentication.AspNet</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Veracity.Services.Api\Veracity.Services.Api.csproj">
       <Project>{63FEB620-6E8F-4D4E-86CB-3DB68C8047C7}</Project>
       <Name>Veracity.Services.Api</Name>

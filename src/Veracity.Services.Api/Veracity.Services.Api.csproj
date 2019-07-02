@@ -19,8 +19,7 @@ Veracity MyServices is your access point for engagement of digital interaction w
 Learn more at https://www.veracity.com
 
  See https://github.com/veracity/veracity.services.api for sample code.
-
-We have moved this from prerelease event if</PackageReleaseNotes>
+</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>apiModelStrongNameKey.pfx</AssemblyOriginatorKeyFile>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>

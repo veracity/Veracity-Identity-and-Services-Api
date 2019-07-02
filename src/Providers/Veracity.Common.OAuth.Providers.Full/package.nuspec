@@ -4,7 +4,7 @@
     <!--*-->
     <id>Veracity.Common.OAuth</id>
     <!--*-->
-    <version>2.0.3</version>
+    <version>2.0.4</version>
     <title>Veracity.Common.OAuth</title>
     <!--*-->
     <authors>Veracity by DNVGL</authors>
@@ -36,7 +36,7 @@
         <dependency id="Stardust.Interstellar.Rest.Service" version="3.4.3" exclude="Build,Analyzers"/>
         <dependency id="Stardust.Interstellar.Rest.DependencyInjection" version="1.0.2" exclude="Build,Analyzers"/>
         <dependency id="Stardust.Interstellar.Rest.Annotations" version="3.4.6" exclude="Build,Analyzers"/>
-        <dependency id="Microsoft.Identity.Client" version="2.7.1" exclude="Build,Analyzers"/>
+        <dependency id="Microsoft.Identity.Client" version="4.0.0" exclude="Build,Analyzers"/>
         <dependency id ="Microsoft.Extensions.DependencyInjection" version="2.1.1" exclude="Build,Analyzers"/>
         <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="2.1.1" exclude="Build,Analyzers"/>
         <dependency id="Owin" version="1.0.0" exclude="Build,Analyzers"/>
@@ -47,7 +47,7 @@
         <dependency id="Microsoft.Owin.Security.OpenIdConnect" version="4.0.0" exclude="Build,Analyzers"/>
         <dependency id="System.IdentityModel.Tokens.Jwt" version="5.2.1" exclude="Build,Analyzers"/>
         <dependency id="Veracity.Common.Authentication.Abstractions" version="2.0.1" exclude="Build,Analyzers"/>
-        <dependency id="Veracity.Common.Authentication.AspNet" version="2.0.2" exclude="Build,Analyzers"/>
+        <dependency id="Veracity.Common.Authentication.AspNet" version="2.0.3" exclude="Build,Analyzers"/>
         <dependency id="Veracity.Services.Api" version="2.0.1" exclude="Build,Analyzers"/>
       </group>
        <group targetFramework=".NETCoreApp2.1">

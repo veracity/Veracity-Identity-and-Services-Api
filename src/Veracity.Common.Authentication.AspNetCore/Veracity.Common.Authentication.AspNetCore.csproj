@@ -43,7 +43,6 @@
     
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.9.3" />
     <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="5.3.0" />
     <ProjectReference Include="..\Veracity.Common.Authentication.Abstractions\Veracity.Common.Authentication.Abstractions.csproj" />
   </ItemGroup>

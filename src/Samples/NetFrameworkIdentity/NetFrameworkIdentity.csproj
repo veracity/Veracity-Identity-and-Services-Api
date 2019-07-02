@@ -307,7 +307,7 @@
       <Name>Veracity.Common.Authentication.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Veracity.Common.Authentication.AspNet\Veracity.Common.Authentication.AspNet.csproj">
-      <Project>{05cacf14-4bf5-4dca-8060-d27debcdd8a3}</Project>
+      <Project>{98b91f57-6f3e-46e3-b5b1-0fbf97d64a68}</Project>
       <Name>Veracity.Common.Authentication.AspNet</Name>
     </ProjectReference>
   </ItemGroup>

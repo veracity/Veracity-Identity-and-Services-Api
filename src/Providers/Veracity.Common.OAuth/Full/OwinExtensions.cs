@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿#if NET471
+using Microsoft.Extensions.DependencyInjection;
 using Stardust.Interstellar.Rest.Common;
 using Stardust.Interstellar.Rest.Service;
 using System.Web.Http;
@@ -49,3 +50,4 @@ namespace Veracity.Common.OAuth.Providers
 		
 	}
 }
+#endif

@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if NET471
+# else
+using System;
 using System.Net;
 using System.Net.Http;
 using Stardust.Interstellar.Rest.Extensions;
@@ -31,3 +33,4 @@ namespace Veracity.Common.OAuth.Providers
         public bool OverrideDefaults => _overrideDefaults;
     }
 }
+#endif

@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if NET471
+#else
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using Veracity.Common.Authentication;
@@ -16,12 +18,6 @@ namespace Veracity.Common.OAuth.Providers
             _myService = myService;
             _logger = logger;
         }
-
-        public PolicyValidation(IMy myService)
-        {
-            _myService = myService;
-        }
-
         public async Task<ValidationResult> ValidatePolicy(string protocolMessageRedirectUri)
         {
             try
@@ -40,11 +36,11 @@ namespace Veracity.Common.OAuth.Providers
             {
                 if (ex.InnerException is ServerException e)
                     return HandleValidationResponse(e);
-                _logger?.Error(ex);
+                _logger.Error(ex);
             }
             catch (Exception ex)
             {
-                _logger?.Error(ex);
+                _logger.Error(ex);
             }
             return new ValidationResult
             {
@@ -54,7 +50,7 @@ namespace Veracity.Common.OAuth.Providers
 
         private ValidationResult HandleValidationResponse(ServerException e)
         {
-            _logger?.Error(e);
+            _logger.Error(e);
             if (e.Status == HttpStatusCode.NotAcceptable)
             {
 
@@ -75,7 +71,7 @@ namespace Veracity.Common.OAuth.Providers
         {
             try
             {
-                await _myService.ValidatePolicy(serviceId, protocolMessageRedirectUri);
+                await _myService.ValidatePolicy(serviceId,protocolMessageRedirectUri);
                 return new ValidationResult
                 {
                     AllPoliciesValid = true
@@ -89,11 +85,11 @@ namespace Veracity.Common.OAuth.Providers
             {
                 if (ex.InnerException is ServerException e)
                     return HandleValidationResponse(e);
-                _logger?.Error(ex);
+                _logger.Error(ex);
             }
             catch (Exception ex)
             {
-                _logger?.Error(ex);
+                _logger.Error(ex);
             }
             return new ValidationResult
             {
@@ -102,3 +98,4 @@ namespace Veracity.Common.OAuth.Providers
         }
     }
 }
+#endif

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net471</TargetFramework>
-    <Version>2.2.0</Version>
+    <Version>2.2.1</Version>
     <Authors>Veracity</Authors>
     <Description>Authentication library for the veracity services sdk for asp.net mvc5</Description>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632</PackageIconUrl>
@@ -60,7 +60,7 @@
     <ProjectReference Include="..\..\Veracity.Common.Authentication.Abstractions\Veracity.Common.Authentication.Abstractions.csproj" />
     <ProjectReference Include="..\..\Veracity.Services.Api\Veracity.Services.Api.csproj" />
   </ItemGroup>
-  <ItemGroup >
+  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />

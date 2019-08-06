@@ -40,7 +40,7 @@
     <PackageReference Include="Microsoft.Owin.Security.OpenIdConnect" Version="4.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Owin" Version="1.0" />
-    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.4.9" />
+    <PackageReference Include="Stardust.Interstellar.Rest" Version="4.0.0" />
     <PackageReference Include="Stardust.Interstellar.Rest.Annotations" Version="4.0.0" />
     <PackageReference Include="Stardust.Interstellar.Rest.DependencyInjection">
       <Version>1.0.2</Version>

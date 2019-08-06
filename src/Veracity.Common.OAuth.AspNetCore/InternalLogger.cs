@@ -1,5 +1,4 @@
-﻿#if NET471
-#else
+﻿
 using System;
 using Veracity.Common.Authentication;
 
@@ -30,4 +29,3 @@ namespace Veracity.Common.OAuth.Providers
         }
     }
 }
-#endif

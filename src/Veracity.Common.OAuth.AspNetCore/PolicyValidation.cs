@@ -1,5 +1,4 @@
-﻿#if NET471
-#else
+﻿
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -98,4 +97,3 @@ namespace Veracity.Common.OAuth.Providers
         }
     }
 }
-#endif

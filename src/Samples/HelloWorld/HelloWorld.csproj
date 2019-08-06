@@ -108,8 +108,8 @@
     <PackageReference Include="Owin" Version="1.0" />
     <PackageReference Include="Respond" Version="1.2.0" />
     <PackageReference Include="Stardust.Continuum.Client" Version="2.2.2" />
-    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.4.9" />
-    <PackageReference Include="Stardust.Interstellar.Rest.Annotations" Version="3.4.8" />
+    <PackageReference Include="Stardust.Interstellar.Rest" Version="4.0.0" />
+    <PackageReference Include="Stardust.Interstellar.Rest.Annotations" Version="4.0.0" />
     <PackageReference Include="Stardust.Particles" Version="5.0.2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.2.1" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
@@ -217,9 +217,9 @@
       <Project>{62ac6238-ddc2-4a54-b2f2-79afed13cced}</Project>
       <Name>Veracity.Services.Api.Unity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth\Veracity.Common.OAuth.csproj">
-      <Project>{fbbd2890-9f64-4c9f-9a28-856a4422a621}</Project>
-      <Name>Veracity.Common.OAuth</Name>
+    <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth.AspNet\Veracity.Common.OAuth.AspNet.csproj">
+      <Project>{4f5acdce-2ba0-4eb9-9371-5ee2071060bc}</Project>
+      <Name>Veracity.Common.OAuth.AspNet</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Veracity.Common.Authentication.Abstractions\Veracity.Common.Authentication.Abstractions.csproj">
       <Project>{76ED7BE3-A8E0-43EA-90A1-1A058BF991ED}</Project>

@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.2;netcoreapp2.1;net471</TargetFrameworks>
-    <Version>2.1.1</Version>
+    <Version>2.2.0</Version>
     <Authors>Veracity</Authors>
-    <Description>Authentication library for the veracity services sdk</Description>
+    <Description>Deprecated, use Veracity.Common.OAuth.AspNet for Asp.Net mvc 5 and Veracity.Common.OAuth.AspNetCore for aspnetcore apps. Authentication library for the veracity services sdk</Description>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632</PackageIconUrl>
     <PackageProjectUrl>https://developer.veracity.com/docs</PackageProjectUrl>
     <RepositoryUrl>https://github.com/veracity/veracity.services.api</RepositoryUrl>
@@ -12,74 +12,25 @@
     <PackageTags>Veracity Services SDK Authentication OAuth B2C</PackageTags>
     <Copyright>Copyright © Veracity by DNVGL 2019</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSource>True</IncludeSource>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
-    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.1" />
+    
     <ProjectReference Include="..\..\Veracity.Common.Authentication.AspNetCore\Veracity.Common.Authentication.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\Veracity.Common.OAuth.AspNetCore\Veracity.Common.OAuth.AspNetCore.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.2' ">
-    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
+    
     <ProjectReference Include="..\..\Veracity.Common.Authentication.AspNetCore\Veracity.Common.Authentication.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\Veracity.Common.OAuth.AspNetCore\Veracity.Common.OAuth.AspNetCore.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net471' ">
-    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.1.2" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.1.6" />
-    <PackageReference Include="Microsoft.IdentityModel.Logging" Version="5.3.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Protocol.Extensions" Version="1.0.3.308261200" />
-    <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="5.3.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="5.3.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.3.0" />
-    <PackageReference Include="Microsoft.NETCore.Platforms" Version="2.1.2" />
-    <PackageReference Include="Microsoft.Owin" Version="4.0.0" />
-    <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.0.0" />
-    <PackageReference Include="Microsoft.Owin.Security" Version="4.0.0" />
-    <PackageReference Include="Microsoft.Owin.Security.Cookies" Version="4.0.0" />
-    <PackageReference Include="Microsoft.Owin.Security.OpenIdConnect" Version="4.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="Owin" Version="1.0" />
-    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.4.9" />
-    <PackageReference Include="Stardust.Interstellar.Rest.Annotations" Version="3.4.8" />
-    <PackageReference Include="Stardust.Interstellar.Rest.DependencyInjection">
-      <Version>1.0.2</Version>
-    </PackageReference>
-    <PackageReference Include="Stardust.Interstellar.Rest.Service">
-      <Version>3.4.8</Version>
-    </PackageReference>
-    <PackageReference Include="Stardust.Particles" Version="5.0.2" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.3.0" />
-    <PackageReference Include="System.Linq" Version="4.3.0" />
-    <PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.2" />
+     <ProjectReference Include="..\Veracity.Common.OAuth.AspNet\Veracity.Common.OAuth.AspNet.csproj" />
     <ProjectReference Include="..\..\Veracity.Common.Authentication.AspNet\Veracity.Common.Authentication.AspNet.csproj" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net471' ">
@@ -100,10 +51,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Stardust.Interstellar.Rest.Service" Version="3.4.8" />
+    <PackageReference Include="Stardust.Interstellar.Rest" Version="4.0.0" />
     <PackageReference Include="Stardust.Particles" Version="5.0.2" />
     <ProjectReference Include="..\..\Veracity.Common.Authentication.Abstractions\Veracity.Common.Authentication.Abstractions.csproj" />
     
+    
     <ProjectReference Include="..\..\Veracity.Services.Api\Veracity.Services.Api.csproj" />
+    
+    
+   
   </ItemGroup>
 </Project>

@@ -60,16 +60,16 @@
       <Version>2.1.1</Version>
     </PackageReference>
     <PackageReference Include="Stardust.Interstellar.Rest">
-      <Version>3.4.9</Version>
+      <Version>4.0.0</Version>
     </PackageReference>
     <PackageReference Include="Stardust.Interstellar.Rest.Annotations">
-      <Version>3.4.8</Version>
+      <Version>4.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth\Veracity.Common.OAuth.csproj">
-      <Project>{fbbd2890-9f64-4c9f-9a28-856a4422a621}</Project>
-      <Name>Veracity.Common.OAuth</Name>
+    <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth.AspNet\Veracity.Common.OAuth.AspNet.csproj">
+      <Project>{4f5acdce-2ba0-4eb9-9371-5ee2071060bc}</Project>
+      <Name>Veracity.Common.OAuth.AspNet</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Veracity.Common.Authentication.AspNet\Veracity.Common.Authentication.AspNet.csproj">
       <Project>{98b91f57-6f3e-46e3-b5b1-0fbf97d64a68}</Project>

@@ -12,9 +12,9 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="2.8.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" PrivateAssets="All" />
     <PackageReference Include="NetEscapades.Extensions.Logging.RollingFile" Version="1.0.0" />
-    <PackageReference Include="Stardust.Aadb2c.AuthenticationFilter.Core" Version="2.1.0" />
-    <PackageReference Include="Stardust.Interstellar.Rest" Version="3.4.9" />
-    <PackageReference Include="Stardust.Interstellar.Rest.Service" Version="3.4.8" />
+    <PackageReference Include="Stardust.Aadb2c.AuthenticationFilter.Core" Version="2.2.1" />
+    <PackageReference Include="Stardust.Interstellar.Rest" Version="4.0.0" />
+    <PackageReference Include="Stardust.Interstellar.Rest.Service" Version="4.0.0" />
     <PackageReference Include="Stardust.Nucleus" Version="5.0.3" />
     <PackageReference Include="Stardust.Particles" Version="5.0.2" />
   </ItemGroup>
@@ -23,8 +23,8 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Providers\Veracity.Common.OAuth\Veracity.Common.OAuth.csproj" />
     <ProjectReference Include="..\..\Veracity.Common.Authentication.AspNetCore\Veracity.Common.Authentication.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\Veracity.Common.OAuth.AspNetCore\Veracity.Common.OAuth.AspNetCore.csproj" />
     <ProjectReference Include="..\..\Veracity.Services.Api\Veracity.Services.Api.csproj" />
   </ItemGroup>
 </Project>

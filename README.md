@@ -6,6 +6,23 @@
 > - TenantName: dnvglb2cprod.onmicrosoft.com
 > - Services Api base url: https://api.veracity.com/Veracity/Services/V3
 
+## Package naming and usage
+
+Most of the packages are based on .net standard 2.0, however asp.net mvc5 is only supported for .net framework and therefore we use 'AspNetCore' and 'AspNet' as the 
+differentiator, where AspNet is for Asp.Net mvc5 applications.
+
+> If you are upgrading to > 2.2.0 and removing refreneces to Veracity.Common.OAuth make sure no copy of Veracity.Common.OAuth.dll is in any of your bin folders, this can cause type conflicts.
+
+|package id                                   |Description                                                                 |target framework  |
+|---------------------------------------------|----------------------------------------------------------------------------|------------------|
+|Veracity.Common.Authentication.Abstractions  |Common classed and abstraction used by the Veracity packages                |.net standard 2.0 |
+|Veracity.Common.Authentication.AspNet        |Log in with Veracity Identity in asp.net mvc5 applications.                 |.net 4.7.1		  |
+|Veracity.Common.Authentication.AspNetCore	  |Log in with Veracity Identity in aspnetcore applications.                   |.net standard 2.0 |
+|Veracity.Services.Api                        |SDK for accessing Veracity MyServices and Profile api.                      |.net standard 2.0 |
+|Veracity.Common.OAuth						  |Deprecated, used to simplify upgrade of existing apps		               |netcore2.x, net471|
+|Veracity.Common.OAuth.AspNet                 |Authentication library for the veracity services sdk for asp.net mvc5       |.net 4.7.1		  |
+|Veracity.Common.OAuth.AspNetCore             |Authentication library for the veracity services sdk for aspnetcore         |.net standard 2.0 |
+
 ## Veracity Identity
 
 > Veracity Identity can be used standalone or as the foundation for calling the Veracity API's.
@@ -106,7 +123,7 @@ Key Vault sample:
 Install the Veracity Identity Libraries (VIL)
 
 ```NUGET
-PM> Install-Package Veracity.Common.Authentication.AspNetCore -version 2.0.0
+PM> Install-Package Veracity.Common.Authentication.AspNetCore
 ```
 modify your startup.cs 
 
@@ -236,7 +253,7 @@ public Startup(IHostingEnvironment env)
 Install the Veracity Identity Libraries (VIL)
 
 ```NUGET
-PM> Install-Package Veracity.Common.Authentication.AspNet -version 2.0.0
+PM> Install-Package Veracity.Common.Authentication.AspNet
 ```
 
 For the .net framework it is a bit more fiddly to get the Authentication set up.
@@ -447,8 +464,8 @@ Properties
 #### aspnetcore
 
 ```NUGET
-PM> Install-Package Veracity.Common.OAuth -version 2.0.2
-PM> Install-Package Veracity.Services.Api -version 2.0.0
+PM> Install-Package Veracity.Common.OAuth.AspNetCore 
+PM> Install-Package Veracity.Services.Api 
 ```
 Setting up the services
 
@@ -538,8 +555,8 @@ Response:
 For asp.net applications we have also tried to make the differences as little as possible from the first example
 
 ```NUGET
-PM> Install-Package Veracity.Common.OAuth -version 2.0.2
-PM> Install-Package Veracity.Services.Api -version 2.0.0
+PM> Install-Package Veracity.Common.OAuth.AspNet
+PM> Install-Package Veracity.Services.Api
 ```
 
 global.asax.cs

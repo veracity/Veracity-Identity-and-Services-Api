@@ -11,7 +11,7 @@ This package is implemented using extension methods and not a full owin startup 
 
 1. Remove the old package
 2. Remove the owin startup reference in web.config
-3. install the package: Install-Package Veracity.Common.Authentication.AspNet -Version 2.0.2
+3. install the package: Install-Package Veracity.Common.Authentication.AspNet
 4. update web.config keys
     1. veracity:ClientId -> veracity:ClientId
     2. veracity:ClientSecret -> apiGW:clientSecret (should be secured in key vault or the like)
@@ -110,14 +110,14 @@ Sample web.config file
     <add key="apiGW:scope" value="https://dnvglb2ctest.onmicrosoft.com/a4a8e726-c1cc-407c-83a0-4ce37f1ce130/user_impersonation" />
     <add key="apiGW:redirectUrl" value="https://localhost:44330/" />
     <add key="apiGW:idp" value="ed815121-cdfa-4097-b524-e2b23cd36eb6" />
-<add key="myApiV3Url" value="https://api-test.veracity.com/platform/" />
+    <add key="myApiV3Url" value="https://api-test.veracity.com/platform/" />
 </appSettings>
 ```
 
 ## ASPNETCORE
 
 1. Remove the old package
-2. install the package: Install-Package Veracity.Common.Authentication.AspNetCore -Version 2.0.2
+2. install the package: Install-Package Veracity.Common.Authentication.AspNetCore
 3. Remove ConfigureServices(s=>s.AddSingleton<IVeracityIntegrationConfigService, VeracityIntegrationConfigService>()) from program.cs
 4. Remove ConfigureServices(s=>s.AddSingleton<IVeracityOpenIdManager, VeracityOpenIdManager>()) from program.cs
 5. Change Constructor, se sample below

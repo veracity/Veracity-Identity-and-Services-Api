@@ -12,6 +12,10 @@
     <RepositoryUrl>https://github.com/veracity/veracity.services.api</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageTags>Veracity Authentication OIDC B2C</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSource>True</IncludeSource>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Veracity.Services.Api.Extensions;
 
@@ -93,7 +94,12 @@ namespace Veracity.Services.Api.Models
 
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
+
         [JsonProperty("lastName")]
         public string LastName { get; set; }
+
+        [JsonProperty("extensions")]
+        [Obsolete("reserved veracity", false)]
+        public Dictionary<string, string> Extensions { get; set; }
     }
 }

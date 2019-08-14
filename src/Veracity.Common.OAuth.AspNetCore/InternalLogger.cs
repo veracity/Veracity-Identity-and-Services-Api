@@ -8,9 +8,9 @@ namespace Veracity.Common.OAuth.Providers
     {
         private readonly ILogger _logger;
 
-        public InternalLogger(ILogger logger)
+        public InternalLogger(IServiceProvider serviceProvider)
         {
-            _logger = logger;
+            _logger = serviceProvider.GetService(typeof(ILogger)) as ILogger;
         }
 
         public void Error(Exception error)

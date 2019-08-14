@@ -20,6 +20,9 @@ namespace Veracity.Services.Api.Models
         [Obsolete]
         public string InternalId { get; set; }
 
+        [Obsolete]
+        public bool? IsAdmin { get; set; }
+
         //Make the .net sdk graph like
         //[JsonIgnore]
         //public Task<CompanyInfo> CompanyDetailsAsync => MyExtensions.Companies().CompanyById(Id);

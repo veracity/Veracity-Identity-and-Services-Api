@@ -8,7 +8,7 @@ namespace Veracity.Common.Authentication
     {
         private readonly Microsoft.Extensions.Logging.ILogger _logger;
 
-        public LogWrapper(ILogger<VeracityService> logger)
+        public LogWrapper(Microsoft.Extensions.Logging.ILogger logger)
         {
             _logger = logger;
         }

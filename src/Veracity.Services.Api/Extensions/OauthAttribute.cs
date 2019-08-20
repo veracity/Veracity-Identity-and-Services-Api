@@ -37,5 +37,10 @@ namespace Veracity.Services.Api.Extensions
             req.Headers.Add("Authorization", await _provider.GetBearerTokenAsync());
             req.Headers.Add("Ocp-Apim-Subscription-Key", ConfigurationManagerHelper.GetValueOnKey("subscriptionKey"));
         }
+
+        public void BodyData(byte[] body)
+        {
+            
+        }
     }
 }

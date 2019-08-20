@@ -31,7 +31,7 @@
     <ProjectReference Include="..\Veracity.Common.Authentication.Abstractions\Veracity.Common.Authentication.Abstractions.csproj" />
     <ProjectReference Include="..\Veracity.Common.Authentication.AspNetCore\Veracity.Common.Authentication.AspNetCore.csproj" />
     <ProjectReference Include="..\Veracity.Services.Api\Veracity.Services.Api.csproj" />
-    <PackageReference Include="Stardust.Interstellar.Rest.Service.AspNetCore" Version="4.0.0" />
+    <PackageReference Include="Stardust.Interstellar.Rest.Service.AspNetCore" Version="4.1.0" />
     <PackageReference Include="Stardust.Particles" Version="5.0.2" />
   </ItemGroup>
 </Project>

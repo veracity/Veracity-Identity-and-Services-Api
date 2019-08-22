@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net471</TargetFramework>
-    <Version>2.2.2</Version>
+    <Version>2.2.3</Version>
     <Authors>Veracity</Authors>
     <Description>Authentication library for the veracity services sdk for asp.net mvc5</Description>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632</PackageIconUrl>
@@ -40,7 +40,6 @@
     <PackageReference Include="Microsoft.Owin.Security.OpenIdConnect" Version="4.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Owin" Version="1.0" />
-    <PackageReference Include="Stardust.Interstellar.Rest" Version="4.0.0" />
     <PackageReference Include="Stardust.Interstellar.Rest.Annotations" Version="4.1.1" />
     <PackageReference Include="Stardust.Interstellar.Rest.DependencyInjection">
       <Version>1.0.2</Version>

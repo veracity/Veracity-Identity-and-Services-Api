@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace HelloAspNetCore22
 {
@@ -12,6 +13,6 @@ namespace HelloAspNetCore22
 
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
-				.UseStartup<Startup>();
+				.UseStartup<Startup>().ConfigureLogging(c => { c.AddConsole();});
 	}
 }

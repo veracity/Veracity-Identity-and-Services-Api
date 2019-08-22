@@ -1,6 +1,8 @@
 ﻿
 using System;
+using Microsoft.Extensions.Logging;
 using Veracity.Common.Authentication;
+using ILogger = Veracity.Common.Authentication.ILogger;
 
 namespace Veracity.Common.OAuth.Providers
 {
@@ -10,7 +12,14 @@ namespace Veracity.Common.OAuth.Providers
 
         public InternalLogger(IServiceProvider serviceProvider)
         {
-            _logger = serviceProvider.GetService(typeof(ILogger)) as ILogger;
+            try
+            {
+                _logger = serviceProvider.GetService(typeof(ILogger<VeracityService>)) as ILogger;
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         public void Error(Exception error)

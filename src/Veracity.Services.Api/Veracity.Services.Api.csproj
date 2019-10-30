@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.2.3</Version>
+    <Version>2.2.4</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>DNVGL</Company>
     <Authors>Veracity by DNVGL</Authors>
@@ -17,6 +17,7 @@
 Veracity MyServices is your access point for engagement of digital interaction with DNV GL. You will find digital services like “Rules and Standards”, digital tools such as our OnDemand hosted service “Secure File Transfer“, our collaboration solution “Meeting Places” (SharePoint) and many other services. Some of the services are open to all users (like “Rules and Standards” and “Secure File Transfer”), while other services require an invitation from a DNV GL employee</Description>
     <PackageReleaseNotes>This is the General Avaiability release of our new open industry data platform
 Learn more at https://www.veracity.com
+increased the error limit for the CircuitBreaker
 
  See https://github.com/veracity/veracity.services.api for sample code.
 </PackageReleaseNotes>

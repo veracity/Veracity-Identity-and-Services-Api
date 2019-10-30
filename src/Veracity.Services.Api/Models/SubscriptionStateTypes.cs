@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace Veracity.Services.Api.Models
 {
     public enum SubscriptionStateTypes
@@ -6,7 +8,7 @@ namespace Veracity.Services.Api.Models
         Pending = 1,
         Rejected = 2,
         NotSubscribing = 3,
-        Null = 4,
+        NotDefined = 4,
         Error = 5
     }
 }

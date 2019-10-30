@@ -14,7 +14,7 @@ namespace Veracity.Services.Api
     //the IRoutePrefix translates into RoutePrefix attribute in webapi
     [Api("my")]
     [Oauth]
-    [CircuitBreaker(100, 5)]
+    [CircuitBreaker(1000, 2)]
     [SupportCode]
     [ErrorHandler(typeof(ExceptionWrapper))]
     [AuthorizeWrapper]

@@ -148,7 +148,7 @@ namespace Veracity.Services.Api.Extensions
             });
             _locator?.GetService<ILogger>()?.Message($"Error of type {exception.GetType()} has occured");
             return null;
-
+            
         }
 
         public Exception ProduceClientException(string statusMessage, HttpStatusCode status, Exception error, string value)

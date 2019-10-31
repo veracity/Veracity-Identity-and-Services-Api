@@ -9,7 +9,7 @@ namespace Veracity.Services.Api
 {
     [Api("directory/users")]
     [Oauth]
-    [CircuitBreaker(1000, 2)]
+    //[CircuitBreaker(1000, 2)]
     [SupportCode]
     [ErrorHandler(errorHandlerType: typeof(ExceptionWrapper))]
     [AuthorizeWrapper]

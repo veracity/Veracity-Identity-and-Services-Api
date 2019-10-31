@@ -11,7 +11,7 @@ namespace Veracity.Services.Api
 {
     [Api("directory")]
     [Oauth]
-    [CircuitBreaker(100, 5)]
+    //[CircuitBreaker(100, 5)]
     [SupportCode]
     [ErrorHandler(typeof(ExceptionWrapper))]
     [AuthorizeWrapper]

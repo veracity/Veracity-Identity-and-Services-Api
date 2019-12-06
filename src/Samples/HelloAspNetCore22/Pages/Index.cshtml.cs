@@ -16,8 +16,10 @@ namespace HelloAspNetCore22.Pages
             _apiClient = apiClient;
         }
 		public async Task OnGet()
-        { 
-            var userProfile = await _apiClient.My.Info();
+        {
+            var isDnvglUser = false;
+            var userProfile = await _apiClient.My.AddHeaderValue("x-include-internal-identity","true").Info();
+            if (userProfile.Extensions.TryGetValue("domain", out var domain) && domain == "VERIT") isDnvglUser = true;
             ViewData.Add("userProfile",userProfile);
         }
 	}

@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.2.6</Version>
+    <Version>2.2.7</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>DNVGL</Company>
     <Authors>Veracity by DNVGL</Authors>
-    <Copyright>Copyright © Veracity by DNVGL 2019</Copyright>
+    <Copyright>Copyright © Veracity by DNVGL 2020</Copyright>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632?s=200&amp;v=4</PackageIconUrl>
     <PackageTags>Veracity Services SDK</PackageTags>
     <Product>Veracity.Services.Api</Product>

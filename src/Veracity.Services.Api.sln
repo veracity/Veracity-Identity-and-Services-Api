@@ -47,9 +47,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veracity.Common.OAuth", "Pr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veracity.Common.Authentication.AspNet", "Veracity.Common.Authentication.AspNet\Veracity.Common.Authentication.AspNet.csproj", "{98B91F57-6F3E-46E3-B5B1-0FBF97D64A68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veracity.Common.OAuth.AspNetCore", "Veracity.Common.OAuth.AspNetCore\Veracity.Common.OAuth.AspNetCore.csproj", "{567EFA88-22E7-4F58-B43C-2543F152F9CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veracity.Common.OAuth.AspNetCore", "Veracity.Common.OAuth.AspNetCore\Veracity.Common.OAuth.AspNetCore.csproj", "{567EFA88-22E7-4F58-B43C-2543F152F9CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veracity.Common.OAuth.AspNet", "Providers\Veracity.Common.OAuth.AspNet\Veracity.Common.OAuth.AspNet.csproj", "{4F5ACDCE-2BA0-4EB9-9371-5EE2071060BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veracity.Common.OAuth.AspNet", "Providers\Veracity.Common.OAuth.AspNet\Veracity.Common.OAuth.AspNet.csproj", "{4F5ACDCE-2BA0-4EB9-9371-5EE2071060BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloAspNetCore31", "Samples\HelloAspNetCore31\HelloAspNetCore31.csproj", "{F815522C-ABA1-4EF1-8EB8-3771F04A41D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -179,6 +181,14 @@ Global
 		{4F5ACDCE-2BA0-4EB9-9371-5EE2071060BC}.Stag|Any CPU.Build.0 = Debug|Any CPU
 		{4F5ACDCE-2BA0-4EB9-9371-5EE2071060BC}.Test|Any CPU.ActiveCfg = Debug|Any CPU
 		{4F5ACDCE-2BA0-4EB9-9371-5EE2071060BC}.Test|Any CPU.Build.0 = Debug|Any CPU
+		{F815522C-ABA1-4EF1-8EB8-3771F04A41D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F815522C-ABA1-4EF1-8EB8-3771F04A41D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F815522C-ABA1-4EF1-8EB8-3771F04A41D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F815522C-ABA1-4EF1-8EB8-3771F04A41D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F815522C-ABA1-4EF1-8EB8-3771F04A41D6}.Stag|Any CPU.ActiveCfg = Debug|Any CPU
+		{F815522C-ABA1-4EF1-8EB8-3771F04A41D6}.Stag|Any CPU.Build.0 = Debug|Any CPU
+		{F815522C-ABA1-4EF1-8EB8-3771F04A41D6}.Test|Any CPU.ActiveCfg = Debug|Any CPU
+		{F815522C-ABA1-4EF1-8EB8-3771F04A41D6}.Test|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -198,6 +208,7 @@ Global
 		{98B91F57-6F3E-46E3-B5B1-0FBF97D64A68} = {B424EE34-34F9-458B-90CE-E1C2484892BD}
 		{567EFA88-22E7-4F58-B43C-2543F152F9CB} = {95BC36AA-FE46-440D-82D0-863221298492}
 		{4F5ACDCE-2BA0-4EB9-9371-5EE2071060BC} = {95BC36AA-FE46-440D-82D0-863221298492}
+		{F815522C-ABA1-4EF1-8EB8-3771F04A41D6} = {AAC8E77D-7E4B-4ECA-A282-B4F799D6A079}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A9CDA391-12A3-4F65-9CA5-B6E0163F6381}

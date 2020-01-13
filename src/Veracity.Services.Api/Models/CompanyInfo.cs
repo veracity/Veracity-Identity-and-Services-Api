@@ -59,5 +59,28 @@ namespace Veracity.Services.Api.Models
         [JsonProperty("internalId")]
         [Obsolete("Should only be used by internal applications", false)]
         public string InternalId { get; set; }
+
+        [Obsolete("Should only be used by internal applications", false)]
+        public Address[] Adresses { get; set; }
+    }
+    public class Address
+    {
+        [JsonProperty("addressType")]
+        public string AddressType { get; set; }
+
+        [JsonProperty("addressLines")]
+        public string[] AddressLines { get; set; }
+
+        [JsonProperty("city")]
+        public string City { get; set; }
+
+        [JsonProperty("country")]
+        public string Country { get; set; }
+
+        [JsonProperty("countryCode")]
+        public string CountryCode { get; set; }
+
+        [JsonProperty("zipCode")]
+        public string Zip { get; set; }
     }
 }

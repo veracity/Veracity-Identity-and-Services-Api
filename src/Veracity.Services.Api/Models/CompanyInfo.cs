@@ -80,6 +80,12 @@ namespace Veracity.Services.Api.Models
         [JsonProperty("countryCode")]
         public string CountryCode { get; set; }
 
+        [JsonProperty("stateRegion")]
+        public string StateRegion { get; set; }
+
+        [JsonProperty("invoiceSameAsVisiting")]
+        public bool? InvoiceSameAsVisiting { get; set; }
+
         [JsonProperty("zipCode")]
         public string Zip { get; set; }
     }

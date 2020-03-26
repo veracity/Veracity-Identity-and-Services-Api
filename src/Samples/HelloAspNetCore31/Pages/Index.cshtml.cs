@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Stardust.Interstellar.Rest.Client;
 using Veracity.Services.Api;
 
 namespace HelloAspNetCore31.Pages
@@ -21,6 +22,7 @@ namespace HelloAspNetCore31.Pages
         }
         public async Task OnGet()
         {
+            _client.My.AddHeaderValue("x-include-internal-identity", "true").GetMyCompanies();
             UserName = (await _client.My.Info()).Name;
         }
 

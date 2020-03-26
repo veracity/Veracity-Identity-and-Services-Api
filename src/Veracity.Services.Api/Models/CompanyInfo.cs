@@ -88,5 +88,8 @@ namespace Veracity.Services.Api.Models
 
         [JsonProperty("zipCode")]
         public string Zip { get; set; }
+
+        [JsonProperty("vat")]
+        public string Vat { get; set; }
     }
 }

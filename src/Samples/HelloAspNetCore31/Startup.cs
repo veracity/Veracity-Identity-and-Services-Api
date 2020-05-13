@@ -32,7 +32,7 @@ namespace HelloAspNetCore31
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", true, true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
-                .AddAzureKeyVault("https://veracitydevdaydemo.vault.azure.net/", new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback)), new DefaultKeyVaultSecretManager())
+                //.AddAzureKeyVault("https://veracitydevdaydemo.vault.azure.net/", new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback)), new DefaultKeyVaultSecretManager())
                 .AddEnvironmentVariables();
             Configuration = builder.Build(); 
         }
@@ -51,12 +51,13 @@ namespace HelloAspNetCore31
             });
             services.AddVeracity(Configuration)
                 .AddScoped(s => s.GetService<IHttpContextAccessor>().HttpContext.User)
-                .AddSingleton(ConstructDistributedCache)
-                .AddDistributedRedisCache(opt =>
-                {
-                    opt.Configuration = Configuration.GetSection("Veracity").GetValue<string>("RedisConnectionString");
-                    opt.InstanceName = "master3";
-                })
+                //.AddSingleton(ConstructDistributedCache)
+                //.AddDistributedRedisCache(opt =>
+                //{
+                //    opt.Configuration = Configuration.GetSection("Veracity").GetValue<string>("RedisConnectionString");
+                //    opt.InstanceName = "master3";
+                //})
+                .AddMemoryCache()
                 .AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"))
                 .AddAuthentication(sharedOptions =>
                 {

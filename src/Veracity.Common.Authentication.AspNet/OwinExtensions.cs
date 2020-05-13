@@ -59,6 +59,7 @@ namespace Veracity.Common.Authentication
                     RedirectUri = configuration.RedirectUrl,
                     PostLogoutRedirectUri = configuration.RedirectUrl,
                     ClientSecret = configuration.ClientSecret,
+                    ResponseType = "code",
                     // Specify the callbacks for each type of notifications
                     Notifications = new OpenIdConnectAuthenticationNotifications
                     {

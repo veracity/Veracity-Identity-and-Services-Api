@@ -41,11 +41,11 @@ namespace Veracity.Common.Authentication
             {
 
                 opts.Scope.Add(configuration.Scope);
-                opts.Scope.Add("email");
+                opts.Scope.Add("openid");
                 opts.Scope.Add("offline_access");
                 opts.ClientSecret = configuration.ClientSecret;
                 opts.AuthenticationMethod = OpenIdConnectRedirectBehavior.FormPost;
-                opts.ResponseType = "code id_token";
+                opts.ResponseType = "code";
             });
 
             return builder;
@@ -87,6 +87,7 @@ namespace Veracity.Common.Authentication
                 {
                     arg.HttpContext.User = arg.Principal;
                     var cache = arg.HttpContext.RequestServices.GetService<TokenCacheBase>();
+                    
                     var context = configuration.ConfidentialClientApplication(cache, s => { _logger?.Message(s); });//new ConfidentialClientApplication(ClientId(configuration), Authority(configuration), configuration.RedirectUrl, new ClientCredential(configuration.ClientSecret), cache, null);
                     var user = await context.AcquireTokenByAuthorizationCode(new[] { configuration.Scope }, arg.ProtocolMessage.Code).ExecuteAsync();
                     var policyValidator = arg.HttpContext.RequestServices.GetService<IPolicyValidation>();

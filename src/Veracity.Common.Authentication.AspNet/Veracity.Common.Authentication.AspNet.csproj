@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net471</TargetFramework>
-    <Version>2.2.2</Version>
+    <Version>2.2.3</Version>
     <Authors>Veracity</Authors>
     <Description>Log in with Veracity Identity in aspnetcore applications.</Description>
     <Copyright>Copyright © Veracity by DNVGL 2019</Copyright>

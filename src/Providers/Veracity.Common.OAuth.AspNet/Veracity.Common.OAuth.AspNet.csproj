@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net471</TargetFramework>
-    <Version>2.2.3</Version>
+    <Version>2.2.5</Version>
     <Authors>Veracity</Authors>
     <Description>Authentication library for the veracity services sdk for asp.net mvc5</Description>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632</PackageIconUrl>
@@ -27,11 +27,11 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.1.6" />
-    <PackageReference Include="Microsoft.IdentityModel.Logging" Version="5.3.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Logging" Version="6.5.1" />
     <PackageReference Include="Microsoft.IdentityModel.Protocol.Extensions" Version="1.0.3.308261200" />
     <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="5.3.0" />
     <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="5.3.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.3.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.5.1" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="2.1.2" />
     <PackageReference Include="Microsoft.Owin" Version="4.0.0" />
     <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.0.0" />

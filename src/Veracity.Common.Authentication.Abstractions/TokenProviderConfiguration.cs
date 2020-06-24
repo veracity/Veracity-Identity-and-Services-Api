@@ -1,4 +1,5 @@
-﻿using Stardust.Particles;
+﻿using System;
+using Stardust.Particles;
 
 namespace Veracity.Common.Authentication
 {
@@ -8,7 +9,7 @@ namespace Veracity.Common.Authentication
 
         public string RedirectUrl
         {
-            get => ConfigurationManagerHelper.GetValueOnKey("apiGW:redirectUrl");
+            get => ConfigurationManagerHelper.GetValueOnKey("apiGW:redirectUrl", "/singin-oidc");
             set => ConfigurationManagerHelper.SetValueOnKey("apiGW:redirectUrl", value, true);
         }
 
@@ -82,6 +83,22 @@ namespace Veracity.Common.Authentication
 
         public string ServiceId {
             get => ConfigurationManagerHelper.GetValueOnKey("veracityServiceId");
+            set => ConfigurationManagerHelper.SetValueOnKey("veracityServiceId", value, true);
+        }
+
+        public bool UpgradeHttp
+        {
+            get => ConfigurationManagerHelper.GetValueOnKey("upgradeHttp","false").Equals("true",StringComparison.InvariantCultureIgnoreCase);
+            set => ConfigurationManagerHelper.SetValueOnKey("upgradeHttp", value.ToString().ToLower(), true);
+        }
+
+        public string PolicyRedirectUrl
+        {
+            get
+            {
+                var d= ConfigurationManagerHelper.GetValueOnKey("veracityServiceId");
+                return d.IsNullOrWhiteSpace() ? RedirectUrl.Replace("/signin-oidc", "") : d;
+            }
             set => ConfigurationManagerHelper.SetValueOnKey("veracityServiceId", value, true);
         }
     }

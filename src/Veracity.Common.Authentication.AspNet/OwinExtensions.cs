@@ -37,6 +37,7 @@ namespace Veracity.Common.Authentication
         private static Action<Exception> _exceptionLogger;
         private static Action<string> _debugLogger;
         private static IAppBuilder _app;
+        private static string _redirectUrl;
 
         public static IAppBuilder ConfigureVeracity(this IAppBuilder app, string environment)
         {
@@ -48,7 +49,7 @@ namespace Veracity.Common.Authentication
         
         public static IAppBuilder UseVeracityAuthentication(this IAppBuilder app, TokenProviderConfiguration configuration)
         {
-
+            _redirectUrl = configuration.RedirectUrl;
             app.UseOpenIdConnectAuthentication(
                 new OpenIdConnectAuthenticationOptions
                 {
@@ -59,7 +60,7 @@ namespace Veracity.Common.Authentication
                     RedirectUri = configuration.RedirectUrl,
                     PostLogoutRedirectUri = configuration.RedirectUrl,
                     ClientSecret = configuration.ClientSecret,
-                    ResponseType = "code",
+                    ResponseType = "code id_token",
                     // Specify the callbacks for each type of notifications
                     Notifications = new OpenIdConnectAuthenticationNotifications
                     {
@@ -213,7 +214,7 @@ namespace Veracity.Common.Authentication
             {
                 var policy = ConfigurationManagerHelper.GetValueOnKey("serviceId").ContainsCharacters()
                     ? await validator.ValidatePolicyWithServiceSpesificTerms(ConfigurationManagerHelper.GetValueOnKey("serviceId"),notification.RedirectUri)
-                    : await validator.ValidatePolicy(notification.RedirectUri);
+                    : await validator.ValidatePolicy(notification.RedirectUri??_redirectUrl);
                 if (!policy.AllPoliciesValid)
                 {
                     _debugLogger?.Invoke($"policies validated, redirecting to {policy.RedirectUrl} for approval");

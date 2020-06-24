@@ -32,7 +32,7 @@ namespace HelloAspNetCore31
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", true, true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
-                //.AddAzureKeyVault("https://veracitydevdaydemo.vault.azure.net/", new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback)), new DefaultKeyVaultSecretManager())
+                .AddAzureKeyVault("https://veracitydevdaydemo.vault.azure.net/", new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback)), new DefaultKeyVaultSecretManager())
                 .AddEnvironmentVariables();
             Configuration = builder.Build(); 
         }
@@ -67,7 +67,7 @@ namespace HelloAspNetCore31
                 .AddVeracityAuthentication(Configuration)
                 .AddCookie();
 
-            services.AddMvc(options =>options.EnableEndpointRouting=false ).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options =>options.EnableEndpointRouting=false ).AddVeracityApiProxies(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url")).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         private IDistributedCache ConstructDistributedCache(IServiceProvider s)

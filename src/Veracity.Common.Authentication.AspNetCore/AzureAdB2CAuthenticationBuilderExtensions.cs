@@ -1,9 +1,14 @@
 ﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
@@ -14,6 +19,8 @@ namespace Veracity.Common.Authentication
 {
     internal static class AzureAdB2CAuthenticationBuilderExtensions
     {
+        private static AuthenticationBuilder _builder;
+        private static bool _upgradeHttp;
 
 
         public static AuthenticationBuilder AddAzureAdB2C(this AuthenticationBuilder builder)
@@ -26,6 +33,7 @@ namespace Veracity.Common.Authentication
         }
         public static AuthenticationBuilder AddAzureAdB2C(this AuthenticationBuilder builder, Action<AzureAdB2COptions> configureOptions, TokenProviderConfiguration configuration)
         {
+            _builder = builder;
             builder.Services.Configure(configureOptions);
 
             builder.Services.AddSingleton<IConfigureOptions<OpenIdConnectOptions>, ConfigureAzureOptions>()
@@ -36,16 +44,17 @@ namespace Veracity.Common.Authentication
                 .AddSingleton<ILogging, LogWrapper>()
                 .AddScoped(s => s.GetService<IHttpContextAccessor>().HttpContext.User)
 
-                .AddScoped<TokenCacheBase, DistributedTokenCache>();
+                .AddScoped<TokenCacheBase>(s => new DistributedTokenCache(s.GetService<IHttpContextAccessor>().HttpContext.User, s.GetService<IDistributedCache>(), s.GetService<ILogger>(), s.GetService<IDataProtector>()));
             builder.AddOpenIdConnect(opts =>
             {
-
+                _upgradeHttp = configuration.UpgradeHttp;
                 opts.Scope.Add(configuration.Scope);
                 opts.Scope.Add("openid");
                 opts.Scope.Add("offline_access");
                 opts.ClientSecret = configuration.ClientSecret;
                 opts.AuthenticationMethod = OpenIdConnectRedirectBehavior.FormPost;
-                opts.ResponseType = "code";
+                opts.ResponseType = "code id_token";
+
             });
 
             return builder;
@@ -71,31 +80,40 @@ namespace Veracity.Common.Authentication
                 options.CallbackPath = _azureOptions.CallbackPath;
 
                 options.TokenValidationParameters = new TokenValidationParameters { NameClaimType = "name" };
-
+                var handler = options.Events.OnAuthorizationCodeReceived;
                 options.Events = new OpenIdConnectEvents
                 {
                     OnRedirectToIdentityProvider = OnRedirectToIdentityProvider,
                     OnRemoteFailure = OnRemoteFailure,
-                    OnAuthorizationCodeReceived = context => OneAuthorizationCodeReceived(context, configuration)
+                    OnAuthorizationCodeReceived = context => OneAuthorizationCodeReceived(context, configuration, handler)
                 };
             }
-            
-            private async Task OneAuthorizationCodeReceived(AuthorizationCodeReceivedContext arg, TokenProviderConfiguration configuration)
+
+            private async Task OneAuthorizationCodeReceived(AuthorizationCodeReceivedContext arg, TokenProviderConfiguration configuration, Func<AuthorizationCodeReceivedContext, Task> handler)
             {
                 _logger?.Message("Auth code received...");
                 try
                 {
+                    //arg.HandleCodeRedemption();
                     arg.HttpContext.User = arg.Principal;
                     var cache = arg.HttpContext.RequestServices.GetService<TokenCacheBase>();
-                    
+
                     var context = configuration.ConfidentialClientApplication(cache, s => { _logger?.Message(s); });//new ConfidentialClientApplication(ClientId(configuration), Authority(configuration), configuration.RedirectUrl, new ClientCredential(configuration.ClientSecret), cache, null);
                     var user = await context.AcquireTokenByAuthorizationCode(new[] { configuration.Scope }, arg.ProtocolMessage.Code).ExecuteAsync();
+                    arg.HandleCodeRedemption(null, user.IdToken);
+                    var token = new JwtSecurityToken(user.IdToken);
+                    var claims = token.Claims.ToList();
+
+                    //
+                    claims.Add(new Claim("cacheId", user.Account.HomeAccountId.Identifier));
+                    await arg.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, arg.Principal);
                     var policyValidator = arg.HttpContext.RequestServices.GetService<IPolicyValidation>();
+
                     try
                     {
                         if (policyValidator != null)
                         {
-                            var policy = await ValidatePolicies(configuration, policyValidator, arg.ProtocolMessage.RedirectUri);
+                            var policy = await ValidatePolicies(configuration, policyValidator, arg.ProtocolMessage.RedirectUri ?? configuration.RedirectUrl);
                             if (policy.AllPoliciesValid)
                             {
                                 _logger?.Message("Policies validated!");
@@ -131,6 +149,8 @@ namespace Veracity.Common.Authentication
                 {
                     ex.Log();
                 }
+
+                await handler(arg);
             }
 
             private static async Task<ValidationResult> ValidatePolicies(TokenProviderConfiguration configuration,
@@ -171,6 +191,12 @@ namespace Veracity.Common.Authentication
                     context.ProtocolMessage.IssuerAddress = context.ProtocolMessage.IssuerAddress.ToLower()
                         .Replace($"/{defaultPolicy.ToLower()}/", $"/{policy.ToLower()}/");
                     context.Properties.Items.Remove(AzureAdB2COptions.PolicyAuthenticationProperty);
+                    
+                }
+                if (_upgradeHttp)
+                {
+                    if (context.ProtocolMessage.RedirectUri.StartsWith("http://"))
+                        context.ProtocolMessage.RedirectUri = context.ProtocolMessage.RedirectUri.Replace("http://", "https://");
                 }
                 return Task.CompletedTask;
             }

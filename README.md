@@ -222,7 +222,9 @@ Configuration
     "CallbackPath": "/signin-oidc",
     "Domain": "dnvglb2ctest.onmicrosoft.com",
     "SignUpSignInPolicyId": "B2C_1A_SignInWithADFSIdp",
-    "ResetPasswordPolicyId": "B2C_1A_SignInWithADFSIdp"
+    "ResetPasswordPolicyId": "B2C_1A_SignInWithADFSIdp",
+    "UpgradeHttp":true,//use this if you are behind a reverse proxy and have issues with the redirect url
+    "PolicyRedirectUrl":"the path to your main page in the application, normally the root url of the app."
   }
 }
 ```

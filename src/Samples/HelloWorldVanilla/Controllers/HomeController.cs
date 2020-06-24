@@ -24,9 +24,16 @@ namespace HelloWorldVanilla.Controllers
             ViewBag.Title = "Home Page";
             if (Request.IsAuthenticated)
             {
-                ViewBag.Email = (User.Identity as ClaimsIdentity)?.Claims
-                    .FirstOrDefault(c => c.Type == ClaimTypes.Upn)?.Value;
-                user = await _veracityClient.My.Info();
+                try
+                {
+                    ViewBag.Email = (User.Identity as ClaimsIdentity)?.Claims
+                               .FirstOrDefault(c => c.Type == ClaimTypes.Upn)?.Value;
+                    user = await _veracityClient.My.Info();
+                }
+                catch (System.Exception ex)
+                {
+
+                }
             }
             return View(user);
         }

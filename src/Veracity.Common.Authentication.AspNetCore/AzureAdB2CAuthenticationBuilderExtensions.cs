@@ -94,21 +94,11 @@ namespace Veracity.Common.Authentication
                 _logger?.Message("Auth code received...");
                 try
                 {
-                    //arg.HandleCodeRedemption();
                     arg.HttpContext.User = arg.Principal;
                     var cache = arg.HttpContext.RequestServices.GetService<TokenCacheBase>();
-
-                    var context = configuration.ConfidentialClientApplication(cache, s => { _logger?.Message(s); });//new ConfidentialClientApplication(ClientId(configuration), Authority(configuration), configuration.RedirectUrl, new ClientCredential(configuration.ClientSecret), cache, null);
+                    var context = configuration.ConfidentialClientApplication(cache, s => { _logger?.Message(s); });
                     var user = await context.AcquireTokenByAuthorizationCode(new[] { configuration.Scope }, arg.ProtocolMessage.Code).ExecuteAsync();
-                    arg.HandleCodeRedemption(null, user.IdToken);
-                    var token = new JwtSecurityToken(user.IdToken);
-                    var claims = token.Claims.ToList();
-
-                    //
-                    claims.Add(new Claim("cacheId", user.Account.HomeAccountId.Identifier));
-                    await arg.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, arg.Principal);
                     var policyValidator = arg.HttpContext.RequestServices.GetService<IPolicyValidation>();
-
                     try
                     {
                         if (policyValidator != null)

@@ -96,10 +96,10 @@ namespace Veracity.Common.Authentication
         {
             get
             {
-                var d= ConfigurationManagerHelper.GetValueOnKey("veracityServiceId");
+                var d= ConfigurationManagerHelper.GetValueOnKey("policyRedirectUrl");
                 return d.IsNullOrWhiteSpace() ? RedirectUrl.Replace("/signin-oidc", "") : d;
             }
-            set => ConfigurationManagerHelper.SetValueOnKey("veracityServiceId", value, true);
+            set => ConfigurationManagerHelper.SetValueOnKey("policyRedirectUrl", value, true);
         }
     }
 }

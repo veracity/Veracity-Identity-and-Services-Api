@@ -103,7 +103,7 @@ namespace Veracity.Common.Authentication
                     {
                         if (policyValidator != null)
                         {
-                            var policy = await ValidatePolicies(configuration, policyValidator, arg.ProtocolMessage.RedirectUri ?? configuration.RedirectUrl);
+                            var policy = await ValidatePolicies(configuration, policyValidator, arg.ProtocolMessage.RedirectUri ?? configuration.PolicyRedirectUrl??configuration.RedirectUrl);
                             if (policy.AllPoliciesValid)
                             {
                                 _logger?.Message("Policies validated!");

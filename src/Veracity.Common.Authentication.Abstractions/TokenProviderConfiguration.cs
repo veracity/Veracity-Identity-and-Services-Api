@@ -92,6 +92,12 @@ namespace Veracity.Common.Authentication
             set => ConfigurationManagerHelper.SetValueOnKey("upgradeHttp", value.ToString().ToLower(), true);
         }
 
+        public bool RequireMfa
+        {
+            get => ConfigurationManagerHelper.GetValueOnKey("requireMfa", "false").Equals("true", StringComparison.InvariantCultureIgnoreCase);
+            set => ConfigurationManagerHelper.SetValueOnKey("requireMfa", value.ToString().ToLower(), true);
+        }
+
         public string PolicyRedirectUrl
         {
             get

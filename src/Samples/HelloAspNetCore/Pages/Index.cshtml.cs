@@ -25,14 +25,22 @@ namespace HelloAspNetCore.Pages
 
         public async Task OnGet()
         {
-            if (User.Identity.IsAuthenticated)
+            try
             {
-                var user = await _api.My.SetSupportCode(User).Info();
-                ViewData["UserName"] = user.Name;
+                if (User.Identity.IsAuthenticated)
+                {
+                    var user = await _api.My.SetSupportCode(User).Info();
+                    ViewData["UserName"] = user.Name;
+                }
+                else
+                {
+                    ViewData["UserName"] = null;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ViewData["UserName"] = null;
+
+                throw;
             }
         }
     }

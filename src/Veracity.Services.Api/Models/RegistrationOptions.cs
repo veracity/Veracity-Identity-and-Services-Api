@@ -40,6 +40,10 @@ namespace Veracity.Services.Api.Models
         [JsonProperty("role")]
         public string Role { get; set; }
 
+
+        [JsonProperty("subscriptions")]
+        public SubscriptionRequest[] Subscriptions { get; set; }
+
         /// <summary>
         /// Specify the location to send the newly created user to after the registration process is completed
         /// </summary>
@@ -59,4 +63,25 @@ namespace Veracity.Services.Api.Models
 	    [JsonProperty("contactName")]
 	    public string ContactName { get; set; }
 	}
+
+    public class SubscriptionRequest
+    {
+        /// <summary>
+        /// Mandatory, The service id to create the subscription for
+        /// </summary>
+        [JsonProperty("serviceId")]
+        public string ServiceId { get; set; }
+
+        /// <summary>
+        /// Optional, the access level 
+        /// </summary>
+        [JsonProperty("role")]
+        public string Role { get; set; }
+
+        /// <summary>
+        /// Optional, define the sku if applicable
+        /// </summary>
+        [JsonProperty("sku")]
+        public string Sku { get; set; }
+    }
 }

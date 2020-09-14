@@ -107,9 +107,9 @@ Sample web.config file
     <add key="UnobtrusiveJavaScriptEnabled" value="true" />
     <add key="apiGW:clientId" value="db4b6456-8873-4358-8c5d-96c39750ec28" />
     <add key="apiGW:policy" value="B2C_1A_SignInWithADFSIdp" />
-    <add key="apiGW:scope" value="https://dnvglb2ctest.onmicrosoft.com/a4a8e726-c1cc-407c-83a0-4ce37f1ce130/user_impersonation" />
+    <add key="apiGW:scope" value="https://dnvglb2cprod.onmicrosoft.com/83054ebf-1d7b-43f5-82ad-b2bde84d7b75/user_impersonation" />
     <add key="apiGW:redirectUrl" value="https://localhost:44330/" />
-    <add key="apiGW:idp" value="ed815121-cdfa-4097-b524-e2b23cd36eb6" />
+    <add key="apiGW:idp" value="a68572e3-63ce-4bc1-acdc-b64943502e9d" />
     <add key="myApiV3Url" value="https://api-test.veracity.com/platform/" />
 </appSettings>
 ```

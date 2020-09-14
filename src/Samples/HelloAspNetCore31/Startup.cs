@@ -13,9 +13,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Stardust.Particles;
 using Veracity.Common.Authentication;
 using Veracity.Common.OAuth.Providers;
@@ -34,7 +36,7 @@ namespace HelloAspNetCore31
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
                 .AddAzureKeyVault("https://veracitydevdaydemo.vault.azure.net/", new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback)), new DefaultKeyVaultSecretManager())
                 .AddEnvironmentVariables();
-            Configuration = builder.Build(); 
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -51,13 +53,14 @@ namespace HelloAspNetCore31
             });
             services.AddVeracity(Configuration)
                 .AddScoped(s => s.GetService<IHttpContextAccessor>().HttpContext.User)
-                //.AddSingleton(ConstructDistributedCache)
-                //.AddDistributedRedisCache(opt =>
-                //{
-                //    opt.Configuration = Configuration.GetSection("Veracity").GetValue<string>("RedisConnectionString");
-                //    opt.InstanceName = "master3";
-                //})
-                .AddMemoryCache()
+//.AddSingleton(ConstructDistributedCache)
+//.AddDistributedRedisCache(opt =>
+//{
+//    opt.Configuration = Configuration.GetSection("Veracity").GetValue<string>("RedisConnectionString");
+//    opt.InstanceName = "master3";
+//})
+//.AddMemoryCache()
+.AddSingleton(ConstructDistributedCache)
                 .AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"))
                 .AddAuthentication(sharedOptions =>
                 {
@@ -67,15 +70,16 @@ namespace HelloAspNetCore31
                 .AddVeracityAuthentication(Configuration)
                 .AddCookie();
 
-            services.AddMvc(options =>options.EnableEndpointRouting=false ).AddVeracityApiProxies(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url")).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => options.EnableEndpointRouting = false).AddVeracityApiProxies(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url")).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         private IDistributedCache ConstructDistributedCache(IServiceProvider s)
         {
+            return new MemoryDistributedCache(new OptionsWrapper<MemoryDistributedCacheOptions>(new MemoryDistributedCacheOptions()));
             return s.GetService<IDistributedCache>();
         }
 
-        
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

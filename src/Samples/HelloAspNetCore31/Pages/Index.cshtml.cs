@@ -20,10 +20,18 @@ namespace HelloAspNetCore31.Pages
         {
             _client = client;
         }
+
         public async Task OnGet()
         {
-            _client.My.AddHeaderValue("x-include-internal-identity", "true").GetMyCompanies();
-            UserName = (await _client.My.Info()).Name;
+            try
+            {
+                _client.My.AddHeaderValue("x-include-internal-identity", "true").GetMyCompanies();
+                UserName = (await _client.My.Info()).Name;
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         public string UserName { get; set; }

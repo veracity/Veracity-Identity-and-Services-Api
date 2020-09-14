@@ -107,7 +107,8 @@ namespace Veracity.Common.Authentication
                 notification.ProtocolMessage.ResponseType = OpenIdConnectResponseTypes.IdToken;
                 notification.ProtocolMessage.IssuerAddress = notification.ProtocolMessage.IssuerAddress.ToLower().Replace(DefaultPolicy(configuration).ToLower(), policy.ToLower());
             }
-
+            if(configuration.RequireMfa)
+                notification.ProtocolMessage.SetParameter("mfa_required", "true");
             return Task.FromResult(0);
         }
 

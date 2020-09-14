@@ -33,6 +33,23 @@ differentiator, where AspNet is for Asp.Net mvc5 applications.
 
 > Detailed HTTP messages and flows: [Wire protocols](./WireProtocols.md)
 
+### Configuration options
+
+|key                           |Value                                         |Note                                                               |
+|------------------------------|----------------------------------------------|-------------------------------------------------------------------|
+|tenantId                      |a68572e3-63ce-4bc1-acdc-b64943502e9d          |Do not change this unless instructed by Veracity onboarding        |
+|clientId                      |from developer.veracity.com                   |You get this value from your project in ProHub                     |
+|clientSecret                  |from developer.veracity.com                   |You get this value from your project in ProHub                     |
+|instance                      |https://login.microsoftonline.com/tfp/        |Will change autumn 2020, watch developer.veracity.com for more info|
+|domain                        |dnvglb2cprod.onmicrosoft.com                  |or tenantId                                                        |
+|subscriptionKey               |from developer.veracity.com                   |You get this value from your project in ProHub                     |
+|policyRedirectUrl             |the url to pass to the policy api             |Your root url                                                      |
+|upgradeHttp                   |set to true if hosted in kubernetes           |Used with application proxies that terminate ssl                   |
+|serviceId                     |from developer.veracity.com                   |You get this value from your project in ProHub                     |
+|myServicesApi                 |https://api.veracity.com/veracity/services/v3 |the base url for the services and identity api                     |
+|policy                        |B2C_1A_SignInWithADFSIdp                      |Do not change this unless instructed by Veracity onboarding        |
+|requireMfa                    |true/false                                    |Enables mfa for all auth request.                                  | 
+
 ### Veracity Identity (Standalone)
 
 > The nuget packages 
@@ -220,7 +237,7 @@ Configuration
     "MyServicesApi": "https://api.veracity.com/Veracity/Services/V3",
     "Instance": "https://login.microsoftonline.com/tfp/",
     "CallbackPath": "/signin-oidc",
-    "Domain": "dnvglb2ctest.onmicrosoft.com",
+    "Domain": "dnvglb2cprod.onmicrosoft.com",
     "SignUpSignInPolicyId": "B2C_1A_SignInWithADFSIdp",
     "ResetPasswordPolicyId": "B2C_1A_SignInWithADFSIdp",
     "UpgradeHttp":true,//use this if you are behind a reverse proxy and have issues with the redirect url

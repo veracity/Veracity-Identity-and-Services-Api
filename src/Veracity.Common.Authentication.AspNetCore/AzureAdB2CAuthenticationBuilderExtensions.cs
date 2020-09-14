@@ -83,7 +83,7 @@ namespace Veracity.Common.Authentication
                 var handler = options.Events.OnAuthorizationCodeReceived;
                 options.Events = new OpenIdConnectEvents
                 {
-                    OnRedirectToIdentityProvider = OnRedirectToIdentityProvider,
+                    OnRedirectToIdentityProvider = context => OnRedirectToIdentityProvider(context, configuration),
                     OnRemoteFailure = OnRemoteFailure,
                     OnAuthorizationCodeReceived = context => OneAuthorizationCodeReceived(context, configuration, handler)
                 };
@@ -95,6 +95,8 @@ namespace Veracity.Common.Authentication
                 try
                 {
                     arg.HttpContext.User = arg.Principal;
+                    if (configuration.RequireMfa && !arg.Principal.Claims.Any(c => c.Type == "mfa_required" && c.Value == "true"))
+                        throw new UnauthorizedAccessException("MFA required");
                     var cache = arg.HttpContext.RequestServices.GetService<TokenCacheBase>();
                     var context = configuration.ConfidentialClientApplication(cache, s => { _logger?.Message(s); });
                     var user = await context.AcquireTokenByAuthorizationCode(new[] { configuration.Scope }, arg.ProtocolMessage.Code).ExecuteAsync();
@@ -169,7 +171,7 @@ namespace Veracity.Common.Authentication
                 Configure(Options.DefaultName, options, configuration);
             }
 
-            public Task OnRedirectToIdentityProvider(RedirectContext context)
+            public Task OnRedirectToIdentityProvider(RedirectContext context,TokenProviderConfiguration configuration)
             {
                 _logger?.Message("Redirecting");
                 var defaultPolicy = _azureOptions.DefaultPolicy;
@@ -188,6 +190,8 @@ namespace Veracity.Common.Authentication
                     if (context.ProtocolMessage.RedirectUri.StartsWith("http://"))
                         context.ProtocolMessage.RedirectUri = context.ProtocolMessage.RedirectUri.Replace("http://", "https://");
                 }
+                if (configuration.RequireMfa)
+                    context.ProtocolMessage.SetParameter("mfa_required", "true");
                 return Task.CompletedTask;
             }
 

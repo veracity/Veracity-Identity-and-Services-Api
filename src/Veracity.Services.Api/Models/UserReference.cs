@@ -19,5 +19,8 @@ namespace Veracity.Services.Api.Models
 
         [JsonProperty("email")]
         public override string Description { get; set; }
+
+        [JsonProperty("activated")]
+        public bool Activated { get; set; }
     }
 }

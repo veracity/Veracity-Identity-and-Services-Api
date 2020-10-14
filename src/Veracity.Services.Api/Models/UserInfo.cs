@@ -101,5 +101,17 @@ namespace Veracity.Services.Api.Models
         [JsonProperty("extensions")]
         [Obsolete("reserved veracity", false)]
         public Dictionary<string, string> Extensions { get; set; }
+
+        /// <summary>
+        /// Indicates if the account is managed by direct integration with the customer's domain
+        /// </summary>
+        [JsonProperty("managedAccount")]
+        public bool ManagedAccount { get; set; }
+
+        /// <summary>
+        /// True if the user is activated. User with this set to false will be deleted after 30 days from creation if not activated.
+        /// </summary>
+        [JsonProperty("activated")]
+        public bool Activated { get; set; }
     }
 }

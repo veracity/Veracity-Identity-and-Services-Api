@@ -50,7 +50,7 @@ namespace Veracity.Common.Authentication
             set => ConfigurationManagerHelper.SetValueOnKey("apiGW:doLogging", value.ToString(), true);
         }
 
-        public string Authority => $"https://login.microsoftonline.com/tfp/{TenantId}/{Policy}/v2.0/.well-known/openid-configuration";
+        
         public string ResourceId
         {
             get => ConfigurationManagerHelper.GetValueOnKey("apiGW:resourceId");

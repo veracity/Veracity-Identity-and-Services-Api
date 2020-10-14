@@ -53,7 +53,7 @@ namespace Veracity.Services.Api
         [Get("policies/{serviceId}/validate()", "Validates all myDnvgl policies and returns a list of the policies that needs attention")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
         [AuthorizeWrapper]
-        Task ValidatePolicy([In(InclutionTypes.Path)] string serviceId, [In(InclutionTypes.Header)]string returnUrl);
+        Task ValidatePolicy([In(InclutionTypes.Path)] string serviceId, [In(InclutionTypes.Header)]string returnUrl,  [InHeader]string skipSubscriptionCheck);
 
         [Get("policies/validate()", "Validates all myDnvgl policies and returns a list of the policies that needs attention")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]

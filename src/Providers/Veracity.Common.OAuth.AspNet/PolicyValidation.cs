@@ -76,7 +76,7 @@ namespace Veracity.Common.OAuth.Providers
         {
             try
             {
-                await _myService.ValidatePolicy(serviceId, protocolMessageRedirectUri);
+                await _myService.ValidatePolicy(serviceId, protocolMessageRedirectUri,"false");
                 return new ValidationResult
                 {
                     AllPoliciesValid = true

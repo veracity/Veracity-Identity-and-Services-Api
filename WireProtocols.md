@@ -30,7 +30,7 @@ Refresh:
 
 *signing redirect request sample:*
 ```
-GET https://login.microsoft.com/dnvglb2cprod.onmicrosoft.com/oauth2/v2.0/authorize?
+GET https://login.veracity.com/dnvglb2cprod.onmicrosoft.com/oauth2/v2.0/authorize?
 client_id={yourClientId}
 &response_type=code+id_token
 &redirect_uri={yourRedirectUrl}
@@ -50,7 +50,7 @@ id_token: eyJ0eXAiOiJKV1QiLCJhbGc......
 
 *Exchange auth code with access token:*
 ```
-POST https://login.microsoft.com/dnvglb2cprod.onmicrosoft.com/oauth2/v2.0/token?p=b2c_1_sign_in HTTP/1.1
+POST https://login.veracity.com/dnvglb2cprod.onmicrosoft.com/oauth2/v2.0/token?p=b2c_1_sign_in HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=authorization_code&client_id={yourClientId}&scope=https://dnvglb2cprod.onmicrosoft.com/83054ebf-1d7b-43f5-82ad-b2bde84d7b75/user_impersonation offline_access&code={receivedAuthCode}&redirect_uri={yourRedirectUrl}&client_secret={your-application-secret}
@@ -58,7 +58,7 @@ grant_type=authorization_code&client_id={yourClientId}&scope=https://dnvglb2cpro
 
 *Refresh access token request:*
 ```
-POST https://login.microsoft.com/dnvglb2cprod.onmicrosoft.com/oauth2/v2.0/token?p=b2c_1_sign_in HTTP/1.1
+POST https://login.veracity.com/dnvglb2cprod.onmicrosoft.com/oauth2/v2.0/token?p=b2c_1_sign_in HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=refresh_token&client_id={yourClientId}&client_secret={your-application-secret}&scope=https://dnvglb2cprod.onmicrosoft.com/83054ebf-1d7b-43f5-82ad-b2bde84d7b75/user_impersonation offline_access&refresh_token={receivedRefreshToken}&redirect_uri={yourRedirectUrl}
@@ -92,7 +92,7 @@ Refresh:
 
 *Signin request:*
 ```
-GET https://login.microsoft.com/dnvglb2cprod.onmicrosoft.com/oauth2/v2.0/authorize?
+GET https://login.veracity.com/dnvglb2cprod.onmicrosoft.com/oauth2/v2.0/authorize?
 client_id={yourClientId}
 &response_type=id_token+token
 &redirect_uri={yourRedirectUrl}
@@ -120,7 +120,7 @@ This flow is similar to authorization code flow but requires you to pop up an in
 
 *Native app login request:*
 ```
-GET https://login.microsoft.com/dnvglb2cprod.onmicrosoft.com/oauth2/v2.0/authorize?
+GET https://login.veracity.com/dnvglb2cprod.onmicrosoft.com/oauth2/v2.0/authorize?
 client_id={yourClientId}
 &response_type=code
 &redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob
@@ -157,8 +157,7 @@ There is currently 3 view points:
 At the current time we only have 1 version that we will support after August 2019. In Api Management you will find the Services Api under the 'Veracity MyServices' product. There you will find 3 api's:
 
 - https://api.veracity.com/Veracity/Services/V3: This is the most common endpoint to use. This will remain operational without breaking changes 1) after a V4 is released
-- https://api.veracity.com/Veracity/Services: This is the endpoint will update to V4 when we introduce it, and will, most likely, contain breaking changes. This is intended for the more adventurous of you.
-- https://api.veracity.com/platform: **Deprecated, do not use!** We will remove this at some point so if you are using it, it's time to update your app. The subscription key will still work after you update the base url.
+
 
 
 *1 note that there might be breaking changes if there are major security reasons for it*

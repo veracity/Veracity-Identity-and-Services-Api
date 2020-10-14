@@ -57,9 +57,15 @@ differentiator, where AspNet is for Asp.Net mvc5 applications.
 In this part we will go through the steps you need in order to connect your asp.net or aspnetcore application to Veracity Identity. The Veracity Identity libraries contain helper methods and tools to build 
 applications that authenticate with Veracity and the necessary infrastructure to obtain an access token and protect these. 
 
+### Multifactor authentication
+
+Veracity now supports service spesific MFA. Meaning that you as a service provider may require MFA for user to access your service. To enable this set the requireMfa config property to 'true'.
+
+
+
 ### Logout
 
-Currently we do not provide any prebuilt code to handle logout.
+Currently we do not provide any prebuilt code to handle logout. The reason for Veracity to provide a custom signout handler is to ensure that the user is loged out of all servcies. However there in not a 100% guarantee that the process will succseed so we need to show a information page in case the suer is using a public/shared device to access Veracity.
 
 logout process:
 1. redirect the user to /logout
@@ -132,7 +138,7 @@ Key Vault sample:
     return services;
 }
 ```
-
+See [Configure ASP.NET Core Data Protection](https://docs.microsoft.com/en-us/aspnet/core/security/data-protection/configuration/overview?view=aspnetcore-3.1) for details
 
 
 ### aspnetcore
@@ -235,13 +241,14 @@ Configuration
     "Scope": "https://dnvglb2cprod.onmicrosoft.com/83054ebf-1d7b-43f5-82ad-b2bde84d7b75/user_impersonation",
     "Policy": "B2C_1A_SignInWithADFSIdp",
     "MyServicesApi": "https://api.veracity.com/Veracity/Services/V3",
-    "Instance": "https://login.microsoftonline.com/tfp/",
+    "Instance": "https://login.veracity.com/tfp/",//we will use this if Microsoft can fix the custom domain feature in b2c. If not we will use https://dnvglb2cprod.b2clogin.com. We will default the right one when a descition is made
     "CallbackPath": "/signin-oidc",
     "Domain": "dnvglb2cprod.onmicrosoft.com",
     "SignUpSignInPolicyId": "B2C_1A_SignInWithADFSIdp",
     "ResetPasswordPolicyId": "B2C_1A_SignInWithADFSIdp",
     "UpgradeHttp":true,//use this if you are behind a reverse proxy and have issues with the redirect url
-    "PolicyRedirectUrl":"the path to your main page in the application, normally the root url of the app."
+    "PolicyRedirectUrl":"the path to your main page in the application, normally the root url of the app.",
+     "requireMfa": true //requires mfa for all users in order ot access the service
   }
 }
 ```

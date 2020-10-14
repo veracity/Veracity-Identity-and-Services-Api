@@ -110,7 +110,7 @@ Sample web.config file
     <add key="apiGW:scope" value="https://dnvglb2cprod.onmicrosoft.com/83054ebf-1d7b-43f5-82ad-b2bde84d7b75/user_impersonation" />
     <add key="apiGW:redirectUrl" value="https://localhost:44330/" />
     <add key="apiGW:idp" value="a68572e3-63ce-4bc1-acdc-b64943502e9d" />
-    <add key="myApiV3Url" value="https://api-test.veracity.com/platform/" />
+    <add key="myApiV3Url" value="https://api-test.veracity.com/veraciy/services/v3" />
 </appSettings>
 ```
 

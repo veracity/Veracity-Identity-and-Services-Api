@@ -51,7 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veracity.Common.OAuth.AspNe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veracity.Common.OAuth.AspNet", "Providers\Veracity.Common.OAuth.AspNet\Veracity.Common.OAuth.AspNet.csproj", "{4F5ACDCE-2BA0-4EB9-9371-5EE2071060BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloAspNetCore31", "Samples\HelloAspNetCore31\HelloAspNetCore31.csproj", "{F815522C-ABA1-4EF1-8EB8-3771F04A41D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloAspNetCore31", "Samples\HelloAspNetCore31\HelloAspNetCore31.csproj", "{F815522C-ABA1-4EF1-8EB8-3771F04A41D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -62,7 +62,10 @@ namespace Veracity.Services.Api.Models
 	    /// </summary>
 	    [JsonProperty("contactName")]
 	    public string ContactName { get; set; }
-	}
+
+        [JsonProperty("inviteMessage")]
+        public string InviteMessage { get; set; }
+    }
 
     public class SubscriptionRequest
     {

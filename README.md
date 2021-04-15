@@ -1,5 +1,7 @@
 # Veracity Identity and Services Api
 
+>> We are experiencing some issues with publishing the latest source code. We will continue to work on the issue. The documentation here is updated to fit the latest version of the nuget packages
+
 > Common config settings
 > - Scope: https://dnvglb2cprod.onmicrosoft.com/83054ebf-1d7b-43f5-82ad-b2bde84d7b75/user_impersonation
 > - TenantId: a68572e3-63ce-4bc1-acdc-b64943502e9d

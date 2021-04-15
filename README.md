@@ -40,7 +40,7 @@ differentiator, where AspNet is for Asp.Net mvc5 applications.
 |tenantId                      |a68572e3-63ce-4bc1-acdc-b64943502e9d          |Do not change this unless instructed by Veracity onboarding        |
 |clientId                      |from developer.veracity.com                   |You get this value from your project in ProHub                     |
 |clientSecret                  |from developer.veracity.com                   |You get this value from your project in ProHub                     |
-|instance                      |https://login.microsoftonline.com/tfp/        |Will change autumn 2020, watch developer.veracity.com for more info|
+|instance                      |https://login.veracity.com/        |Will change autumn 2020, watch developer.veracity.com for more info|
 |domain                        |dnvglb2cprod.onmicrosoft.com                  |or tenantId                                                        |
 |subscriptionKey               |from developer.veracity.com                   |You get this value from your project in ProHub                     |
 |policyRedirectUrl             |the url to pass to the policy api             |Your root url                                                      |
@@ -241,7 +241,7 @@ Configuration
     "Scope": "https://dnvglb2cprod.onmicrosoft.com/83054ebf-1d7b-43f5-82ad-b2bde84d7b75/user_impersonation",
     "Policy": "B2C_1A_SignInWithADFSIdp",
     "MyServicesApi": "https://api.veracity.com/Veracity/Services/V3",
-    "Instance": "https://login.veracity.com/tfp/",//we will use this if Microsoft can fix the custom domain feature in b2c. If not we will use https://dnvglb2cprod.b2clogin.com. We will default the right one when a descition is made
+    "Instance": "https://login.veracity.com/",
     "CallbackPath": "/signin-oidc",
     "Domain": "dnvglb2cprod.onmicrosoft.com",
     "SignUpSignInPolicyId": "B2C_1A_SignInWithADFSIdp",
@@ -370,6 +370,7 @@ Configuration
     <add key="myApiV3Url" value="https://api.veracity.com/Veracity/Services/V3" />
     <add key="apiGW:clientSecret" value="yourSecret" />
     <add key ="subscriptionKey" value="yourSubscriptionKey"/>
+    <add key="apiGW:instance" value="https://login.veracity.com"/>
   </appSettings>
 ```
 

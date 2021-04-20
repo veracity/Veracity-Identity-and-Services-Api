@@ -32,7 +32,7 @@ namespace Veracity.Common.Authentication
             _configuration = configuration;
         }
 
-        public async Task<string> GetBearerTokenAsync()
+        public async Task<string> GetBearerTokenAsync(string scopes)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace Veracity.Common.Authentication
                         Message = "Invalid token cache"
                     }, HttpStatusCode.Unauthorized);
                 }
-                var token = await context.AcquireTokenSilent(new[] { _configuration.Scope }, user).ExecuteAsync();
+                var token = await context.AcquireTokenSilent(scopes.Split(' '), user).ExecuteAsync();
                 return token.CreateAuthorizationHeader();
             }
             catch (Exception ex)

@@ -50,7 +50,7 @@ namespace VeracityIdentity.Pages
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,CancellationToken cancellationToken)
         {
-            request.Headers.Authorization=AuthenticationHeaderValue.Parse(await _handler.GetBearerTokenAsync());
+            request.Headers.Authorization=AuthenticationHeaderValue.Parse(await _handler.GetBearerTokenAsync(_config.Scope));
             request.Headers.Add("Ocp-Apim-Subscription-Key", _config.SubscriptionKey);
             return await base.SendAsync(request, cancellationToken);
         }

@@ -1,4 +1,6 @@
-﻿#if NET471
+﻿
+using Stardust.Particles;
+#if NET471
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -76,7 +78,7 @@ namespace Veracity.Common.OAuth.Providers
         {
             try
             {
-                await _myService.ValidatePolicy(serviceId, protocolMessageRedirectUri,"false");
+                await _myService.ValidatePolicy(serviceId, protocolMessageRedirectUri, ConfigurationManagerHelper.GetValueOnKey("skipSubscriptionCheck", "false"));
                 return new ValidationResult
                 {
                     AllPoliciesValid = true

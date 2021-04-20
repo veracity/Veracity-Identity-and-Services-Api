@@ -16,7 +16,7 @@ namespace Veracity.Services.Api
     [Oauth]
     [CircuitBreaker(1000, 2)]
     [SupportCode]
-    [ErrorHandler(typeof(ExceptionWrapper))]
+    [ErrorHandler(typeof(ExceptionWrapper))]    
     [AuthorizeWrapper]
     [ServiceInformation]
     [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
@@ -24,8 +24,10 @@ namespace Veracity.Services.Api
     {
         [Get("profile", "Retreives the profile of the current loged in user.", Summary = "Note that we will remove the company node from the result in the future")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
-        
         Task<MyUserInfo> Info();
+
+        [Get("picture", "Retreives the profile picture of the current logegd in user if one is set, otherwise a 404 is returned")]
+        Task<ProfilePicture> ProfilePicture();
 
         [Get("messages/count", "Get the current loged in users unread messages count")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]

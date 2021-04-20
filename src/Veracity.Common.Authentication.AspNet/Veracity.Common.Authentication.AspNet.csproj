@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net471</TargetFramework>
-    <Version>2.2.6</Version>
+    <Version>3.5.0</Version>
     <Authors>Veracity</Authors>
     <Description>Log in with Veracity Identity in aspnetcore applications.</Description>
-    <Copyright>Copyright © Veracity by DNVGL 2019</Copyright>
+    <Copyright>Copyright © Veracity by DNVGL 2021</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://developer.veracity.com/docs</PackageProjectUrl>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632</PackageIconUrl>

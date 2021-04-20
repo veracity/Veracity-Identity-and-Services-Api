@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using Microsoft.Extensions.Primitives;
 using Stardust.Interstellar.Rest.Annotations;
@@ -18,12 +19,12 @@ namespace Veracity.Services.Api.Extensions
         {
             _provider = provider;
         }
-        public void SetHeader(HttpWebRequest req)
+        public void SetHeader(HttpRequestMessage req)
         {
-            req.UserAgent = "veracity.services;sdk3.1";
+            req.Headers.UserAgent.Add(new ProductInfoHeaderValue("veracity.services","sdk5.0"));// = "veracity.services;sdk3.1";
         }
 
-        public void GetHeader(HttpWebResponse response)
+        public void GetHeader(HttpResponseMessage response)
         {
 
         }

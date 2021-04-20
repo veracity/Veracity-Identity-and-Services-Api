@@ -11,14 +11,14 @@ namespace Veracity.Common.Authentication
             TokenCacheBase cache, Action<string> _debugLogger)
         {
             var context = ConfidentialClientApplicationBuilder.Create(ClientId(configuration))
-                .WithClientSecret(configuration.ClientSecret).WithB2CAuthority(Authority(configuration))
+                .WithClientSecret(configuration.ClientSecret).WithB2CAuthority(Authority(configuration))//.WithAuthority(Authority(configuration),false)//.WithB2CAuthority(Authority(configuration))
                 .WithRedirectUri(configuration.RedirectUrl)
                 .WithLogging((level, message, pii) => { _debugLogger?.Invoke(message); })
                 .Build();
             cache.SetCacheInstance(context.UserTokenCache);
             return context;
         }
-        public static string Authority(TokenProviderConfiguration configuration) => $"https://login.microsoftonline.com/tfp/{TenantId(configuration)}/{configuration.Policy}/v2.0/.well-known/openid-configuration";
+        public static string Authority(TokenProviderConfiguration configuration) => $"{configuration.Instance}{(configuration.Instance.EndsWith("/")?"":"/")}tfp/{TenantId(configuration)}/{configuration.Policy}/v2.0/.well-known/openid-configuration";
 
         public static string ClientId(TokenProviderConfiguration configuration) => configuration.ClientId;
 

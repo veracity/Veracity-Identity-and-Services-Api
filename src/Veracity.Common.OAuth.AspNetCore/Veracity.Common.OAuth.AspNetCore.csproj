@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.2.7</Version>
+    <Version>3.5.0</Version>
     <Authors>Veracity</Authors>
     <Description>Authentication library for the veracity services sdk for aspnetcore</Description>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632</PackageIconUrl>
@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/veracity/veracity.services.api</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageTags>Veracity Services SDK Authentication OAuth B2C aspnetcore</PackageTags>
-    <Copyright>Copyright © Veracity by DNVGL 2019</Copyright>
+    <Copyright>Copyright © Veracity by DNVGL 2021</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>
@@ -31,7 +31,7 @@
     <ProjectReference Include="..\Veracity.Common.Authentication.Abstractions\Veracity.Common.Authentication.Abstractions.csproj" />
     <ProjectReference Include="..\Veracity.Common.Authentication.AspNetCore\Veracity.Common.Authentication.AspNetCore.csproj" />
     <ProjectReference Include="..\Veracity.Services.Api\Veracity.Services.Api.csproj" />
-    <PackageReference Include="Stardust.Interstellar.Rest.Service.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Stardust.Interstellar.Rest.Service.AspNetCore" Version="5.0.1" />
     <PackageReference Include="Stardust.Particles" Version="5.0.2" />
   </ItemGroup>
 </Project>

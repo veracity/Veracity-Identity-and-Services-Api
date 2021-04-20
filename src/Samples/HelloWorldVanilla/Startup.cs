@@ -19,7 +19,7 @@ namespace HelloWorldVanilla
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseLoggingHook(e =>
+            app.UseLoggingHook(e => 
                 {
                     //Write exception to log
                 },

@@ -2,6 +2,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Stardust.Particles;
 using Veracity.Common.Authentication;
 using Veracity.Services.Api;
 
@@ -70,7 +71,7 @@ namespace Veracity.Common.OAuth.Providers
         {
             try
             {
-                await _myService.ValidatePolicy(serviceId,protocolMessageRedirectUri,"false");
+                await _myService.ValidatePolicy(serviceId,protocolMessageRedirectUri, ConfigurationManagerHelper.GetValueOnKey("skipSubscriptionCheck", "false"));
                 return new ValidationResult
                 {
                     AllPoliciesValid = true

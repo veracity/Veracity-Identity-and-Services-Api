@@ -1,4 +1,5 @@
 ﻿
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using Stardust.Interstellar.Rest.Client;
 using Stardust.Interstellar.Rest.Extensions;
@@ -20,7 +21,7 @@ namespace Veracity.Common.OAuth.Providers
         /// <param name="services"></param>
         /// <param name="myServicesApiBaseUrl">the base address for the service</param>
         /// <returns></returns>
-        public static IServiceCollection AddVeracityServices(this IServiceCollection services, string myServicesApiBaseUrl)
+        public static IServiceCollection AddVeracityServices(this IServiceCollection services, string myServicesApiBaseUrl,Action<IServiceCollection> additionalServices=null)
         {
             services.AddInterstellar();
             services.AddScoped(s => s.CreateRestClient<IMy>(myServicesApiBaseUrl));
@@ -31,6 +32,8 @@ namespace Veracity.Common.OAuth.Providers
             services.AddScoped(s => s.CreateRestClient<IServicesDirectory>(myServicesApiBaseUrl));
             services.AddScoped(s => s.CreateRestClient<IDataContainerService>(myServicesApiBaseUrl));
             services.AddScoped(s => new ApiClientConfiguration(myServicesApiBaseUrl));
+            if(additionalServices!=null)
+            additionalServices.Invoke(services);
             services.AddScoped<IPolicyValidation, PolicyValidation>();
             services.AddSingleton<IDataProtector, DataProtectorNetCore>();
             //Or add a common api accessor for the veracity MyServices api.

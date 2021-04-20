@@ -60,7 +60,7 @@ namespace HelloWorld.Controllers
                     BaseAddress = new Uri(ConfigurationManager.AppSettings["myApiV3Url"]),
                     DefaultRequestHeaders =
                     {
-                        Authorization = AuthenticationHeaderValue.Parse(await _tokenProvider.GetBearerTokenAsync()),
+                        Authorization = AuthenticationHeaderValue.Parse(await _tokenProvider.GetBearerTokenAsync(new TokenProviderConfiguration().Scope)),
                         
 
                     }

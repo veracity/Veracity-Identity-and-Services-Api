@@ -88,7 +88,7 @@ namespace Veracity.Common.Authentication
 
 
 
-        public static string Authority(TokenProviderConfiguration configuration) => $"https://login.microsoftonline.com/tfp/{TenantId(configuration)}/{configuration.Policy}/v2.0/.well-known/openid-configuration";
+        public static string Authority(TokenProviderConfiguration configuration) => $"{ConfigurationManagerHelper.GetValueOnKey("Instance", "https://login.veracity.com/")}{TenantId(configuration)}/{configuration.Policy}/v2.0/.well-known/openid-configuration";
 
         public static string ClientId(TokenProviderConfiguration configuration) => configuration.ClientId;
 

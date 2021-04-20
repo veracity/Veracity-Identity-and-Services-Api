@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
@@ -85,13 +86,14 @@ namespace Veracity.Common.Authentication
                 {
                     OnRedirectToIdentityProvider = context => OnRedirectToIdentityProvider(context, configuration),
                     OnRemoteFailure = OnRemoteFailure,
-                    OnAuthorizationCodeReceived = context => OneAuthorizationCodeReceived(context, configuration, handler)
+                    OnAuthorizationCodeReceived = context => OnAuthorizationCodeReceived(context, configuration, handler)
                 };
             }
 
-            private async Task OneAuthorizationCodeReceived(AuthorizationCodeReceivedContext arg, TokenProviderConfiguration configuration, Func<AuthorizationCodeReceivedContext, Task> handler)
+            private async Task OnAuthorizationCodeReceived(AuthorizationCodeReceivedContext arg, TokenProviderConfiguration configuration, Func<AuthorizationCodeReceivedContext, Task> handler)
             {
                 _logger?.Message("Auth code received...");
+                var timer = Stopwatch.StartNew();
                 try
                 {
                     arg.HttpContext.User = arg.Principal;
@@ -100,12 +102,16 @@ namespace Veracity.Common.Authentication
                     var cache = arg.HttpContext.RequestServices.GetService<TokenCacheBase>();
                     var context = configuration.ConfidentialClientApplication(cache, s => { _logger?.Message(s); });
                     var user = await context.AcquireTokenByAuthorizationCode(new[] { configuration.Scope }, arg.ProtocolMessage.Code).ExecuteAsync();
+                    _logger?.Message($"exchanging code with access token took: {timer.ElapsedMilliseconds}ms");
                     var policyValidator = arg.HttpContext.RequestServices.GetService<IPolicyValidation>();
                     try
                     {
                         if (policyValidator != null)
                         {
+                            var timer2 = Stopwatch.StartNew();
                             var policy = await ValidatePolicies(configuration, policyValidator, arg.ProtocolMessage.RedirectUri ?? configuration.PolicyRedirectUrl??configuration.RedirectUrl);
+                            timer2.Stop();
+                            _logger?.Message($"Policy check took {timer2.ElapsedMilliseconds}ms. ");
                             if (policy.AllPoliciesValid)
                             {
                                 _logger?.Message("Policies validated!");
@@ -141,7 +147,8 @@ namespace Veracity.Common.Authentication
                 {
                     ex.Log();
                 }
-
+                timer.Stop();
+                _logger?.Message($"Total on code received  took {timer.ElapsedMilliseconds}ms. ");
                 await handler(arg);
             }
 

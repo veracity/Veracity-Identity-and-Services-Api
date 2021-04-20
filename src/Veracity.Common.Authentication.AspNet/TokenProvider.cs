@@ -21,7 +21,7 @@ namespace Veracity.Common.Authentication
 
         
 
-        public async Task<string> GetBearerTokenAsync()
+        public async Task<string> GetBearerTokenAsync(string scopes)
         {
             var cache = GetCache();
             var context = tokenProviderConfiguration.ConfidentialClientApplication(cache, null);
@@ -35,7 +35,7 @@ namespace Veracity.Common.Authentication
                 }, HttpStatusCode.Unauthorized);
             }
 
-            var token = await context.AcquireTokenSilent(new[] {tokenProviderConfiguration.Scope}, user).ExecuteAsync();
+            var token = await context.AcquireTokenSilent(scopes.Split(' '), user).ExecuteAsync();
             return token.CreateAuthorizationHeader();
         }
 

@@ -4,6 +4,6 @@ namespace Veracity.Common.Authentication
 {
     public interface ITokenHandler
     {
-        Task<string> GetBearerTokenAsync();
+        Task<string> GetBearerTokenAsync(string scopes);
     }
 }

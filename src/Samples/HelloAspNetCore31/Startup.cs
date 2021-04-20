@@ -97,9 +97,14 @@ namespace HelloAspNetCore31
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseVeracity();
+            app.UseRouting().UseAuthorization().UseEndpoints(r =>
+            {
+                r.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                r.MapRazorPages();
+            });
         }
     }
 }

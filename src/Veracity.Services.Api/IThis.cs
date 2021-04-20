@@ -84,6 +84,8 @@ namespace Veracity.Services.Api
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadAccess, ParameterIndex = 0)]
         Task NotifyUsers([InPath] string serviceId, [In(InclutionTypes.Body)] NotificationMessage message, [InHeader] string channelId);
 
-
+        [Get("services/{serviceId}/subscribers/{userId}/picture", "Gets the profile picture of the user if there is a subscription and the user has uploaded a profile picture to veracity")]
+        [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadAccess)]
+        Task<ProfilePicture> GetUserProfilePicture([InPath] string serviceId, [In(InclutionTypes.Path)] string userId);
     }
 }

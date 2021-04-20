@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net471</TargetFramework>
-    <Version>2.2.6</Version>
+    <Version>3.5.0</Version>
     <Authors>Veracity</Authors>
     <Description>Authentication library for the veracity services sdk for asp.net mvc5</Description>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632</PackageIconUrl>
@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/veracity/veracity.services.api</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageTags>Veracity Services SDK Authentication OAuth B2C asp.net mvc5</PackageTags>
-    <Copyright>Copyright © Veracity by DNVGL 2019</Copyright>
+    <Copyright>Copyright © Veracity by DNVGL 2021</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>
@@ -40,7 +40,6 @@
     <PackageReference Include="Microsoft.Owin.Security.OpenIdConnect" Version="4.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Owin" Version="1.0" />
-    <PackageReference Include="Stardust.Interstellar.Rest.Annotations" Version="4.1.1" />
     <PackageReference Include="Stardust.Interstellar.Rest.DependencyInjection">
       <Version>1.0.2</Version>
     </PackageReference>
@@ -48,13 +47,12 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.3.0" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
     <PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.2" />
     <ProjectReference Include="..\..\Veracity.Common.Authentication.AspNet\Veracity.Common.Authentication.AspNet.csproj" />
-    <PackageReference Include="Stardust.Interstellar.Rest" Version="4.1.2" />
-    <PackageReference Include="Stardust.Interstellar.Rest.Service.AspNet" Version="4.1.0" />
+    <PackageReference Include="Stardust.Interstellar.Rest.Service.AspNet" Version="5.0.0" />
     <PackageReference Include="Stardust.Particles" Version="5.0.2" />
     <ProjectReference Include="..\..\Veracity.Common.Authentication.Abstractions\Veracity.Common.Authentication.Abstractions.csproj" />
     <ProjectReference Include="..\..\Veracity.Services.Api\Veracity.Services.Api.csproj" />

@@ -43,6 +43,12 @@ namespace Veracity.Common.Authentication
             set => ConfigurationManagerHelper.SetValueOnKey("apiGW:policy", value, true);
         }
 
+
+        public string Instance
+        {
+            get => ConfigurationManagerHelper.GetValueOnKey("apiGW:instance");
+            set => ConfigurationManagerHelper.SetValueOnKey("apiGW:instance", value, true);
+        }
         internal object AppUrl => RedirectUrl.EndsWith("/") ? RedirectUrl.Remove(RedirectUrl.Length - 1, 1) : RedirectUrl;
         public static bool DoLogging
         {
@@ -106,6 +112,12 @@ namespace Veracity.Common.Authentication
                 return d.IsNullOrWhiteSpace() ? RedirectUrl.Replace("/signin-oidc", "") : d;
             }
             set => ConfigurationManagerHelper.SetValueOnKey("policyRedirectUrl", value, true);
+        }
+
+        public bool SkipSubscriptionCheck
+        {
+            get => ConfigurationManagerHelper.GetValueOnKey("skipSubscriptionCheck", "false").Equals("true", StringComparison.InvariantCultureIgnoreCase);
+            set => ConfigurationManagerHelper.SetValueOnKey("skipSubscriptionCheck", value.ToString().ToLower(), true);
         }
     }
 }

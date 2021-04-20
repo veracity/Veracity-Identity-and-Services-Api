@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using Microsoft.Extensions.Primitives;
 using Stardust.Interstellar.Rest.Extensions;
@@ -21,7 +23,7 @@ namespace Veracity.Services.Api.Extensions
             return _handler;
         }
 
-        protected override void DoSetHeader(IStateContainer state, HttpWebRequest req)
+        protected override void DoSetHeader(IStateContainer state, HttpRequestMessage req)
         {
             try
             {
@@ -35,10 +37,10 @@ namespace Veracity.Services.Api.Extensions
             }
         }
 
-        protected override void DoGetHeader(IStateContainer state, HttpWebResponse response)
+        protected override void DoGetHeader(IStateContainer state, HttpResponseMessage response)
         {
 
-            var code = response.Headers.Get("x-supportCode");
+            var code = response.Headers.Contains("x-supportCode") ? response.Headers.GetValues("x-supportCode").FirstOrDefault():null;
             if (string.IsNullOrWhiteSpace(code)) return;
             GetHandler()?.SetSupportCode(code);
         }

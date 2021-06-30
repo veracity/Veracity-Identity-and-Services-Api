@@ -75,7 +75,7 @@ namespace Veracity.Common.OAuth.Providers
                 return new ValidationResult
                 {
                     AllPoliciesValid = true
-                };
+                };  
             }
             catch (ServerException e)
             {

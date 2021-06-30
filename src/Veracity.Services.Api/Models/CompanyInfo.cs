@@ -62,6 +62,9 @@ namespace Veracity.Services.Api.Models
 
         [Obsolete("Should only be used by internal applications", false)]
         public Address[] Adresses { get; set; }
+
+        [JsonProperty("vat")]
+        public string Vat { get; set; }
     }
     public class Address
     {
@@ -89,6 +92,7 @@ namespace Veracity.Services.Api.Models
         [JsonProperty("zipCode")]
         public string Zip { get; set; }
 
+        [Obsolete("This should be retrieve from the company rather than address", false)]
         [JsonProperty("vat")]
         public string Vat { get; set; }
     }

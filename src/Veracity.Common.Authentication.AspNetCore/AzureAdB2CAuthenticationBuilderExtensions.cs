@@ -197,7 +197,7 @@ namespace Veracity.Common.Authentication
                     if (context.ProtocolMessage.RedirectUri.StartsWith("http://"))
                         context.ProtocolMessage.RedirectUri = context.ProtocolMessage.RedirectUri.Replace("http://", "https://");
                 }
-                if (configuration.RequireMfa)
+                if (configuration.RequireMfa || (context.Properties.Items.TryGetValue("RequireMfa",out var requireMfa) && requireMfa == "true"))
                     context.ProtocolMessage.SetParameter("mfa_required", "true");
                 return Task.CompletedTask;
             }

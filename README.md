@@ -61,7 +61,28 @@ applications that authenticate with Veracity and the necessary infrastructure to
 
 Veracity now supports service spesific MFA. Meaning that you as a service provider may require MFA for user to access your service. To enable this set the requireMfa config property to 'true'.
 
+For more advanced MFA scenarios you can inject your custom logic:
 
+```CS
+services.AddVeracity(Configuration)
+                .AddScoped(s => s.GetService<IHttpContextAccessor>().HttpContext.User)
+                .AddSingleton(ConstructDistributedCache)
+                .AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"),services=> services.AddScoped(s => s.CreateRestClient<IWtfClient>("https://localhost:44344/")))
+                
+                .AddAuthentication(sharedOptions =>
+                {
+                    sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                })
+
+                .AddVeracityAuthentication(Configuration, isMfaRequiredOptions: (httpContext, authenticationProperties) =>
+                {
+                    //do custom logic there
+                    return true;
+                })
+                .AddCookie();
+
+```
 
 ### Logout
 
@@ -124,7 +145,7 @@ public void ConfigureServices(IServiceCollection services)
 #### Data protection
 
 Access and refresh tokens are to regarded as confidential information and must be protected in rest. Veracity.Common.Authentication does support protection of access/refresh tokens through the IDataProtector interface.
-If you do token chaching through SQL or Redis tokens needs to be encrupted in a way that all servers in the application cluster can read/write to the cache, and to acheive this you need to shave the key securely between the instances.
+If you do token chaching through SQL or Redis tokens needs to be encrypted in a way that all servers in the application cluster can read/write to the cache, and to acheive this you need to shave the key securely between the instances.
 
 Key Vault sample:
 ```CS
@@ -191,6 +212,7 @@ public void ConfigureServices(IServiceCollection services)
 
     services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 }
+
 ```
 1. add the Veracity Core Infrastructure (*AddVeracity(Configuration)*)
 2. add the data protector (*AddSingleton(ConstructDataProtector)*)
@@ -199,6 +221,7 @@ public void ConfigureServices(IServiceCollection services)
 5. add cookie authentication (*AddCookie()*)
 
 Make sure you include UseAuthentication to enable the authentication middleware
+
 ```CS
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {

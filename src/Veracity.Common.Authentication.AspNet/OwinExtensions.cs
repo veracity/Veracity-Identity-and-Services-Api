@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -7,6 +8,8 @@ using System.Web;
 using System.Web.Hosting;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Owin;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Notifications;
 using Microsoft.Owin.Security.OpenIdConnect;
 using Newtonsoft.Json;
@@ -18,7 +21,11 @@ namespace Veracity.Common.Authentication
 {
     public static class OwinExtensions
     {
-
+        public static void SetLogHandlers(Action<Exception,string> errorLogger, Action<string> debugLogger)
+        {
+            _errorLogger = errorLogger;
+            _debugLogger = debugLogger;
+        }
         
         public static void SetServiceProviderFactory(Func<IServiceProvider> factoryMethod)
         {
@@ -38,6 +45,19 @@ namespace Veracity.Common.Authentication
         private static Action<string> _debugLogger;
         private static IAppBuilder _app;
         private static string _redirectUrl;
+        private static Func<IOwinContext, bool> _conditionalMfaFunc
+            ;
+        private static Action<Exception, string> _errorLogger;
+
+        private static bool IsMfaRequired(RedirectToIdentityProviderNotification<OpenIdConnectMessage, OpenIdConnectAuthenticationOptions> context, TokenProviderConfiguration configuration)
+        {
+            return configuration.RequireMfa || (_conditionalMfaFunc?.Invoke(context.OwinContext) ?? false);
+        }
+
+        private static bool IsMfaRequired(AuthorizationCodeReceivedNotification context, TokenProviderConfiguration configuration)
+        {
+            return configuration.RequireMfa || (_conditionalMfaFunc?.Invoke(context.OwinContext) ?? false);
+        }
 
         public static IAppBuilder ConfigureVeracity(this IAppBuilder app, string environment)
         {
@@ -47,8 +67,9 @@ namespace Veracity.Common.Authentication
             return app;
         }
         
-        public static IAppBuilder UseVeracityAuthentication(this IAppBuilder app, TokenProviderConfiguration configuration)
+        public static IAppBuilder UseVeracityAuthentication(this IAppBuilder app, TokenProviderConfiguration configuration, Func<IOwinContext, bool> isMfaRequiredOptions=null)
         {
+            _conditionalMfaFunc = isMfaRequiredOptions;
             _redirectUrl = configuration.RedirectUrl;
             app.UseOpenIdConnectAuthentication(
                 new OpenIdConnectAuthenticationOptions
@@ -107,7 +128,7 @@ namespace Veracity.Common.Authentication
                 notification.ProtocolMessage.ResponseType = OpenIdConnectResponseTypes.IdToken;
                 notification.ProtocolMessage.IssuerAddress = notification.ProtocolMessage.IssuerAddress.ToLower().Replace(DefaultPolicy(configuration).ToLower(), policy.ToLower());
             }
-            if(configuration.RequireMfa)
+            if(IsMfaRequired(notification,configuration))
                 notification.ProtocolMessage.SetParameter("mfa_required", "true");
             return Task.FromResult(0);
         }
@@ -118,6 +139,7 @@ namespace Veracity.Common.Authentication
         private static Task OnAuthenticationFailed(
             AuthenticationFailedNotification<OpenIdConnectMessage, OpenIdConnectAuthenticationOptions> notification, TokenProviderConfiguration configuration)
         {
+            _errorLogger?.Invoke(notification.Exception, "external error");
             notification.HandleResponse();
 
             // Handle the error code that Azure AD B2C throws when trying to reset a password from the login page 
@@ -145,10 +167,11 @@ namespace Veracity.Common.Authentication
          */
         private static async Task OnAuthorizationCodeReceived(AuthorizationCodeReceivedNotification notification, TokenProviderConfiguration configuration)
         {
-            var c = HttpContext.Current;
+            var ct = HttpContext.Current;
             try
             {
-
+                if (IsMfaRequired(notification,configuration) && !notification.AuthenticationTicket.Identity.Claims.Any(c => c.Type == "mfa_required" && c.Value == "true"))
+                    throw new UnauthorizedAccessException("MFA required");
                 await ExchangeAuthCodeWithToken(notification, configuration);
 
                 try
@@ -157,7 +180,7 @@ namespace Veracity.Common.Authentication
                     notification.OwinContext.Authentication.SignIn(notification.AuthenticationTicket.Identity);
                     notification.Response.Redirect(notification.RedirectUri);
                     notification.HandleResponse();
-                    HttpContext.Current = c;
+                    HttpContext.Current = ct;
                     
                 }
                 catch (AggregateException aex)
@@ -168,20 +191,20 @@ namespace Veracity.Common.Authentication
                         _exceptionLogger?.Invoke(aex.InnerException);
 
                     }
-                    HttpContext.Current = c;
+                    HttpContext.Current = ct;
                     if (aex.InnerException is ServerException serverException)
                         HandlePolicyViolation(notification, serverException);
                 }
                 catch (ServerException ex)
                 {
                     _exceptionLogger?.Invoke(ex);
-                    HttpContext.Current = c;
+                    HttpContext.Current = ct;
                     HandlePolicyViolation(notification, ex);
                 }
             }
             catch (Exception ex)
             {
-                HttpContext.Current = c;
+                HttpContext.Current = ct;
                 _exceptionLogger?.Invoke(ex);
                 throw;
             }

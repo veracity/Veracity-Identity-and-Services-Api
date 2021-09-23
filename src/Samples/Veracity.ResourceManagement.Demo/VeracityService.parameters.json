@@ -1,0 +1,23 @@
+﻿  [
+    {
+      "name": "rgName",
+      "value": "SampleServide1",
+      "type": "string"
+    },
+    {
+      "name": "serviceName",
+      "value": "SampeApplication1",
+      "type": "string"
+    },
+    {
+      "name": "appUrl",
+      "value": "https://veracitysample1.azurewebsites.net",
+      "type": "string"
+    },
+    {
+      "name": "appReplyUrl",
+      "value": "https://veracitysample1.azurewebsites.net/signin-oidc",
+      "type": "string"
+    }
+  ]
+

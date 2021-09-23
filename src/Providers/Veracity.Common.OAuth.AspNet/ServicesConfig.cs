@@ -12,6 +12,7 @@ namespace Veracity.Common.OAuth.Providers
 
         protected override IServiceCollection Configure(IServiceCollection services)
         {
+            
             services.AddScoped<ITokenHandler,TokenProvider>();
             if (IncludeProxies)
                 AddProxies(services);

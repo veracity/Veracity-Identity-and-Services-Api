@@ -1,0 +1,146 @@
+﻿{
+  "variables": [
+    {
+      "name": "appName",
+      "value": "$concat(parameter('serviceName'),'_app')",
+      "type": "string"
+    }
+  ],
+  "resourceGroup": {
+    "name": "$parameter('rgName')",
+    "description": "testing stuff!",
+    "tags": [ "demo", "test", "whatever" ]
+  },
+  "resources": [
+    {
+      "sections": {
+        "properties": {
+          "businessOwnerId": null,
+          "description": "",
+          "category": null,
+          "shortName": "NP_Dev_DemoService",
+          "productionService": false,
+          "openInNewTab": true,
+          "visible": true,
+          "serviceUrl": "$parameter('appUrl')",
+          "shortDescription": "",
+          "technicalContactEmail": "",
+          "providerCompanyName": null,
+          "tags": [ "Sample", "Dev" ]
+        },
+        "administrators": {
+          "c681d6fb-fcac-4bd2-9168-312035262633": {
+            "owner": true,
+            "roles": [
+              "MYDNV_ADM_SUBS"
+            ],
+            "isServicePrincipal": false
+          },
+          "50535920-9ae4-48b1-a4fc-f044c349d995": {
+            "owner": false,
+            "roles": [
+              "MYDNV_ADM_SERVICE"
+            ],
+            "isServicePrincipal": true
+          },
+          "a218465a-5705-4728-843b-bd665b2eea9f": {
+            "owner": false,
+            "roles": [
+              "MYDNV_ADM_WIDG"
+            ],
+            "isServicePrincipal": true
+          }
+        },
+        "advanced": {
+          "parentServiceId": null,
+          "childServiceIds": [],
+          "passwordPolicy": null,
+          "accessLevels": {
+            "useAccessLevels": true,
+            "accessLevels": [
+              {
+                "accessLevelName": "reader"
+              },
+              {
+                "accessLevelName": "contributor"
+              },
+              {
+                "accessLevelName": "owner"
+              }
+            ]
+          }
+        }
+      },
+      "name": "$parameter('serviceName')",
+      "sku": "standard",
+      "resourceType": "veracity.service"
+    },
+    {
+      "sections": {
+        "properties": {
+          "isApi": false,
+          "clientType": "Confidential",
+          "redirectUrls": [
+            "$parameter('appReplyUrl')"
+          ],
+          "applicationUrl": "$parameter('appUrl')",
+          "allowImplicitGrantFlow": true,
+          "appIdUri": null,
+          "tokenVersion": 2,
+          "publishedScopes": [],
+          "services": [
+            "$resources[?name== parameter('serviceName')].id"
+          ],
+          "secretManagementOptions": "rollover"
+        },
+        "advanced": {
+          "apiProductSubscriptions": [
+            {
+              "productId": "veracity-platfrom-api",
+              "productName": "Veracity Platform API"
+            }
+          ],
+          "clients": [],
+          "apiAcceses": [
+            {
+              "apiClientId": "a4a8e726-c1cc-407c-83a0-4ce37f1ce130",
+              "scopes": [
+                "user_impersonation"
+              ]
+            }
+          ]
+        }
+      },
+      "name": "$variable('appName')",
+      "sku": "app",
+      "resourceType": "veracity.application"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "serviceId",
+      "value": "$resources[?name== parameter('serviceName')].id",
+      "type": "string"
+    },
+    {
+      "name": "apimProduct",
+      "value": "$resources[?name== variable('appName')].sections.advanced.apiProductSubscriptions[*].{id:productId,subscriptionKey:key}",
+      "type": "object"
+    },
+    {
+      "name": "clientId",
+      "value": "$resources[?name== variable('appName')].id",
+      "type": "string"
+    },
+    {
+      "name": "secret",
+      "value": "$resources[?name== variable('appName')].sections.properties.secrets[0].secretText",
+      "type": "string"
+    },
+    {
+      "name": "appRegCombined",
+      "value": "$resources[?name== variable('appName')].{clientId:id,secret:sections.properties.secrets[0].secretText,apiKeys:sections.advanced.apiProductSubscriptions[*].{id:productId,subscriptionKey:key}}",
+      "type": "string"
+    }
+  ]
+}

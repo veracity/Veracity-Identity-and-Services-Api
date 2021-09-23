@@ -23,6 +23,7 @@ namespace Veracity.Common.Authentication
         private static AuthenticationBuilder _builder;
         private static bool _upgradeHttp;
 
+        private static Func<HttpContext, AuthenticationProperties, bool> _conditionalMfaFunc;
 
         public static AuthenticationBuilder AddAzureAdB2C(this AuthenticationBuilder builder)
             => builder.AddAzureAdB2C(_ => { }, new TokenProviderConfiguration());
@@ -30,6 +31,19 @@ namespace Veracity.Common.Authentication
         public static AuthenticationBuilder AddAzureAdB2C(this AuthenticationBuilder builder,
             Action<AzureAdB2COptions> configureOptions)
         {
+            return builder.AddAzureAdB2C(configureOptions, new TokenProviderConfiguration());
+        }
+
+        public static AuthenticationBuilder AddAzureAdB2C(this AuthenticationBuilder builder, Func<HttpContext, AuthenticationProperties, bool> isMfaRequiredOptions)
+        {
+            _conditionalMfaFunc = isMfaRequiredOptions;
+            return builder.AddAzureAdB2C(_ => { }, new TokenProviderConfiguration());
+        }
+
+        public static AuthenticationBuilder AddAzureAdB2C(this AuthenticationBuilder builder,
+            Action<AzureAdB2COptions> configureOptions, Func<HttpContext, AuthenticationProperties, bool> isMfaRequiredOptions)
+        {
+            _conditionalMfaFunc = isMfaRequiredOptions;
             return builder.AddAzureAdB2C(configureOptions, new TokenProviderConfiguration());
         }
         public static AuthenticationBuilder AddAzureAdB2C(this AuthenticationBuilder builder, Action<AzureAdB2COptions> configureOptions, TokenProviderConfiguration configuration)
@@ -97,7 +111,7 @@ namespace Veracity.Common.Authentication
                 try
                 {
                     arg.HttpContext.User = arg.Principal;
-                    if (configuration.RequireMfa && !arg.Principal.Claims.Any(c => c.Type == "mfa_required" && c.Value == "true"))
+                    if (IsMfaRequired(arg,configuration) && !arg.Principal.Claims.Any(c => c.Type == "mfa_required" && c.Value == "true"))
                         throw new UnauthorizedAccessException("MFA required");
                     var cache = arg.HttpContext.RequestServices.GetService<TokenCacheBase>();
                     var context = configuration.ConfidentialClientApplication(cache, s => { _logger?.Message(s); });
@@ -197,9 +211,19 @@ namespace Veracity.Common.Authentication
                     if (context.ProtocolMessage.RedirectUri.StartsWith("http://"))
                         context.ProtocolMessage.RedirectUri = context.ProtocolMessage.RedirectUri.Replace("http://", "https://");
                 }
-                if (configuration.RequireMfa)
+                if (IsMfaRequired(context, configuration))
                     context.ProtocolMessage.SetParameter("mfa_required", "true");
                 return Task.CompletedTask;
+            }
+
+            private static bool IsMfaRequired(RedirectContext context, TokenProviderConfiguration configuration)
+            {
+                return configuration.RequireMfa||(_conditionalMfaFunc?.Invoke(context.HttpContext,context.Properties)??false);
+            }
+
+            private static bool IsMfaRequired(AuthorizationCodeReceivedContext context, TokenProviderConfiguration configuration)
+            {
+                return configuration.RequireMfa || (_conditionalMfaFunc?.Invoke(context.HttpContext,context.Properties) ?? false);
             }
 
             public Task OnRemoteFailure(RemoteFailureContext context)

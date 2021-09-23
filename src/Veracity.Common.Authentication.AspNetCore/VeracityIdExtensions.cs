@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Stardust.Particles;
@@ -75,6 +76,24 @@ namespace Veracity.Common.Authentication
                 configuration.Bind("Veracity", options);
 
             });
+            return builder;
+        }
+
+        public static AuthenticationBuilder AddVeracityAuthentication(this AuthenticationBuilder builder, Action<AzureAdB2COptions> options, Func<HttpContext, AuthenticationProperties, bool> isMfaRequiredOptions)
+        {
+
+            builder.AddAzureAdB2C(options,isMfaRequiredOptions);
+            return builder;
+        }
+
+        public static AuthenticationBuilder AddVeracityAuthentication(this AuthenticationBuilder builder, IConfiguration configuration, Func<HttpContext, AuthenticationProperties, bool> isMfaRequiredOptions, Func<AuthorizationCodeReceivedContext, Task> additionalAuthCodeHandling = null)
+        {
+            AzureAdB2CAuthenticationBuilderExtensions.AdditionalAuthCodeHandling = additionalAuthCodeHandling;
+            builder.AddVeracityAuthentication(options =>
+            {
+                configuration.Bind("Veracity", options);
+
+            },isMfaRequiredOptions);
             return builder;
         }
 

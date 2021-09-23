@@ -54,6 +54,7 @@ namespace WebApplication1
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            
             services.AddVeracity(Configuration)
                 .AddScoped(s => s.GetService<IHttpContextAccessor>().HttpContext.User)
                 .AddSingleton(ConstructDistributedCache)
@@ -64,8 +65,12 @@ namespace WebApplication1
                     sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
                 })
-                
-                .AddVeracityAuthentication(Configuration)
+
+                .AddVeracityAuthentication(Configuration, isMfaRequiredOptions: (httpContext, authenticationProperties) =>
+                {
+                    //do custom logic there
+                    return true;
+                })
                 .AddCookie();
 
             services.AddMvc(options => options.EnableEndpointRouting = false)

@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 using Veracity.Services.Api.Extensions;
 

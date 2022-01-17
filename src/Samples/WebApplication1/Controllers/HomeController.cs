@@ -37,6 +37,7 @@ namespace WebApplication1.Controllers
 
                 throw;
             }
+            var services = await _myService.MyServices();
             return View(await _myService.Info());
         }
 

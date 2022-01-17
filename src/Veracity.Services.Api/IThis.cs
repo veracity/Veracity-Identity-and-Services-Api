@@ -26,11 +26,11 @@ namespace Veracity.Services.Api
 
         [Get("subscribers/{userId}", "Get all users with a subscription to this service. Paged query: uses 0 based page index", Summary = Constants.Warning300)]
         [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ReadAccess)]
-        Task<UserReference> GetServiceUser([In(InclutionTypes.Path)] string userId);
+        Task<SubscriptionReference> GetServiceUser([In(InclutionTypes.Path)] string userId);
 
         [Get("services/{serviceId}/subscribers/{userId}", "Get all users with a subscription to this service. Paged query: uses 0 based page index", Summary = Constants.Warning300)]
         [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ReadAccess)]
-        Task<UserReference> GetUserForService([InPath]string serviceId, [In(InclutionTypes.Path)] string userId);
+        Task<SubscriptionReference> GetUserForService([InPath]string serviceId, [In(InclutionTypes.Path)] string userId);
 
         [Get("services/{serviceId}/subscribers", "Get all users with a subscription to this service. Paged query: uses 0 based page index")]
         [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ReadAccess, ParameterIndex = 0)]

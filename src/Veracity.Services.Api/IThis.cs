@@ -87,5 +87,8 @@ namespace Veracity.Services.Api
         [Get("services/{serviceId}/subscribers/{userId}/picture", "Gets the profile picture of the user if there is a subscription and the user has uploaded a profile picture to veracity")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadAccess)]
         Task<ProfilePicture> GetUserProfilePicture([InPath] string serviceId, [In(InclutionTypes.Path)] string userId);
+
+        [Get("services/{serviceId}/subscribers/{userId}/policy/validate()")]
+        Task VerifySubscriberPolicy([In(InclutionTypes.Path)] string serviceId, [In(InclutionTypes.Path)] string userId, [In(InclutionTypes.Header)] string returnUrl, [InHeader] string skipSubscriptionCheck);
     }
 }

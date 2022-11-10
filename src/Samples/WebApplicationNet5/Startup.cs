@@ -37,7 +37,7 @@ namespace WebApplication1
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", true, true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
-                .AddAzureKeyVault("https://veracitydevdaydemo.vault.azure.net/", new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback)), new DefaultKeyVaultSecretManager())
+                .AddAzureKeyVault("https://veracitydevsample.vault.azure.net/", new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback)), new DefaultKeyVaultSecretManager())
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -58,7 +58,7 @@ namespace WebApplication1
             services.AddVeracity(Configuration)
                 .AddScoped(s => s.GetService<IHttpContextAccessor>().HttpContext.User)
                 .AddSingleton(ConstructDistributedCache)
-                .AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"), services => services.AddScoped(s => s.CreateRestClient<IWtfClient>("https://localhost:44344/")))
+                .AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"), services => services.AddScoped(s => s.CreateRestClient<IWtfClient>("https://localhost:63493/")))
 
                 .AddAuthentication(sharedOptions =>
                 {

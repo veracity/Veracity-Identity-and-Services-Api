@@ -26,7 +26,7 @@ using Veracity.Common.Authentication;
 using Veracity.Common.OAuth.Providers;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
-namespace WebApplication1
+namespace WebApplicationNet5
 {
     public class Startup
     {

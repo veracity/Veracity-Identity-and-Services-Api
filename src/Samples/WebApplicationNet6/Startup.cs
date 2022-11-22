@@ -1,45 +1,30 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.KeyVault;
-using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Microsoft.Extensions.Options;
-using netCore5.Api;
+using WebApplicationNet7.Api;
 using Stardust.Interstellar.Rest.Client;
 using Stardust.Interstellar.Rest.Service;
 using Stardust.Particles;
 using Veracity.Common.Authentication;
 using Veracity.Common.OAuth.Providers;
-using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
-namespace WebApplicationNet5
+namespace WebApplicationNet7
 {
     public class Startup
     {
-        public Startup(IWebHostEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var azureServiceTokenProvider = new AzureServiceTokenProvider();
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", true, true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
-                .AddAzureKeyVault("https://veracitydevdaydemo.vault.azure.net/", new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback)), new DefaultKeyVaultSecretManager())
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -54,12 +39,12 @@ namespace WebApplicationNet5
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
+
             services.AddVeracity(Configuration)
                 .AddScoped(s => s.GetService<IHttpContextAccessor>().HttpContext.User)
                 .AddSingleton(ConstructDistributedCache)
-                .AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"),services=> services.AddScoped(s => s.CreateRestClient<IWtfClient>("https://localhost:44344/")))
-                
+                .AddVeracityServices(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"), services => services.AddScoped(s => s.CreateRestClient<IWtfClient>("https://localhost:63493/")))
+
                 .AddAuthentication(sharedOptions =>
                 {
                     sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -74,7 +59,7 @@ namespace WebApplicationNet5
                 .AddCookie();
 
             services.AddMvc(options => options.EnableEndpointRouting = false)
-                .AddAsController<ITestService,TestApi>()
+                .AddAsController<ITestService, TestApi>()
                 .AddVeracityApiProxies(ConfigurationManagerHelper.GetValueOnKey("myApiV3Url"))
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }

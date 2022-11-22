@@ -53,9 +53,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloAspNetCore31", "Sample
 EndProject
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "Veracity.ResourceManagement.Demo", "Samples\Veracity.ResourceManagement.Demo\Veracity.ResourceManagement.Demo.deployproj", "{CE4EC6B4-BE3C-40BB-84EC-F5EE1962EF41}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "netCore6", "Samples\WebApplicationNet6\netCore6.csproj", "{7394EDAC-0487-46E0-8A53-8700BFB3CAD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationNet6", "Samples\WebApplicationNet6\WebApplicationNet6.csproj", "{7394EDAC-0487-46E0-8A53-8700BFB3CAD5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "netCore7", "Samples\WebApplicationNet7\netCore7.csproj", "{49770986-2DD5-46FC-89AA-39A733D916C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationNet7", "Samples\WebApplicationNet7\WebApplicationNet7.csproj", "{49770986-2DD5-46FC-89AA-39A733D916C0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationNet5", "Samples\WebApplicationNet5\WebApplicationNet5.csproj", "{7E5DE0FB-AF4D-481B-B6C8-DA30442ADC3F}"
 EndProject

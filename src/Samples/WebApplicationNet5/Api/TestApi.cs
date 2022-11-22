@@ -14,7 +14,7 @@ using Stardust.Particles;
 using Veracity.Common.Authentication;
 using Veracity.Services.Api.Extensions;
 
-namespace netCore5.Api
+namespace WebApplicationNet7.Api
 {
     [Api("api")]
     public interface ITestService:IServiceExtensions

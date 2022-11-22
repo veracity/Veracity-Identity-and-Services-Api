@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
 
-namespace WebApplicationNet5
+namespace WebApplicationNet7
 {
     public class Program
     {

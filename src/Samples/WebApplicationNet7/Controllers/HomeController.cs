@@ -1,16 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using netCore5.Api;
+using WebApplicationNet7.Api;
 using Veracity.Services.Api;
-using WebApplicationNet5.Models;
+using WebApplicationNet7.Models;
 
-namespace WebApplicationNet5.Controllers
+namespace WebApplicationNet7.Controllers
 {
     public class HomeController : Controller
     {

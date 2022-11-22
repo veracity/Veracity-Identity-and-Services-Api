@@ -11,14 +11,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using netCore5.Api;
+using WebApplicationNet7.Api;
 using Stardust.Interstellar.Rest.Client;
 using Stardust.Interstellar.Rest.Service;
 using Stardust.Particles;
 using Veracity.Common.Authentication;
 using Veracity.Common.OAuth.Providers;
 
-namespace WebApplicationNet5
+namespace WebApplicationNet7
 {
     public class Startup
     {

@@ -8,14 +8,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Stardust.Interstellar.Rest.Annotations;
-using Stardust.Interstellar.Rest.Annotations.Rest.Extensions;
 using Stardust.Interstellar.Rest.Extensions;
 using Stardust.Interstellar.Rest.Service;
 using Stardust.Particles;
 using Veracity.Common.Authentication;
 using Veracity.Services.Api.Extensions;
 
-namespace netCore5.Api
+namespace WebApplicationNet7.Api
 {
     [Api("api")]
     public interface ITestService:IServiceExtensions

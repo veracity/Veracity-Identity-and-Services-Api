@@ -1,13 +1,12 @@
+using Azure.Extensions.AspNetCore.Configuration.Secrets;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace WebApplicationNet5
+namespace WebApplicationNet7
 {
     public class Program
     {
@@ -18,9 +17,24 @@ namespace WebApplicationNet5
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            .ConfigureAppConfiguration((context, config) =>
+            {
+                var builtConfig = config.Build();
+
+                var keyVaultEndpoint = builtConfig["KeyVaultEndpoint"];
+                if (!string.IsNullOrEmpty(keyVaultEndpoint))
                 {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    var secretClient = new SecretClient(
+                        new Uri(keyVaultEndpoint),
+                        new DefaultAzureCredential());
+                    config.AddAzureKeyVault(secretClient, new KeyVaultSecretManager());
+                    config.AddEnvironmentVariables();
+                }
+            })     
+
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }

@@ -60,8 +60,11 @@ namespace Veracity.Common.OAuth.Providers
             _logger?.Error(e);
             if (e.Status == HttpStatusCode.NotAcceptable)
             {
-
-                var url = e.GetErrorData<ValidationError>().Url; //Getting the redirect url from the error message.
+                var validationError = e.GetErrorData<ValidationError>();
+                var url = validationError.Url; //Getting the redirect url from the error message.
+                if ((validationError.SubscriptionMissing ?? false) && ConfigurationManagerHelper
+                        .GetValueOnKey("missingSubscriptionUrl").ContainsCharacters())
+                    url = ConfigurationManagerHelper.GetValueOnKey("missingSubscriptionUrl");
                 return new ValidationResult
                 {
                     RedirectUrl = url,

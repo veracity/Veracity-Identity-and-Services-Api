@@ -8,5 +8,8 @@ namespace Veracity.Common.Authentication
         public string Url { get; set; }
         [JsonProperty("violatedPolicies")]
         public string[] ViolatedPolicies { get; set; }
+
+        [JsonProperty("subscriptionMissing")]
+        public bool? SubscriptionMissing { get; set; }
     }
 }

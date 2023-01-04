@@ -75,6 +75,17 @@ namespace Veracity.Common.Authentication
             return builder;
         }
 
+        internal static IServiceCollection AddDeamoApp(this IServiceCollection builder, TokenProviderConfiguration configuration)
+        {
+            builder
+                .AddScoped<ITokenHandler, CCTokenProvider>()
+                .AddSingleton<TokenProviderConfiguration, TokenProviderConfiguration>()
+                .AddSingleton<ILogger, LogWrapper>()
+                .AddSingleton<ILogging, LogWrapper>();
+            
+
+            return builder;
+        }
         public class ConfigureAzureOptions : IConfigureNamedOptions<OpenIdConnectOptions>
         {
             private readonly ILogger _logger;

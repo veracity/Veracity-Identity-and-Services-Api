@@ -58,4 +58,46 @@ namespace Veracity.Common.Authentication
         }
 
     }
+    internal class CCTokenProvider : ITokenHandler
+    {
+        private readonly TokenProviderConfiguration _configuration;
+        private readonly IServiceProvider _appApplicationServices;
+        public static string Authority(TokenProviderConfiguration configuration) => $"https://login.microsoftonline.com/tfp/{configuration.TenantId}/{configuration.Policy}/v2.0/.well-known/openid-configuration";
+        public CCTokenProvider() : this(new TokenProviderConfiguration())
+        {
+        }
+
+        public CCTokenProvider(IServiceProvider appApplicationServices) : this(appApplicationServices, new TokenProviderConfiguration())
+        {
+            _appApplicationServices = appApplicationServices;
+        }
+
+        private CCTokenProvider(TokenProviderConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        private CCTokenProvider(IServiceProvider appApplicationServices, TokenProviderConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        public async Task<string> GetBearerTokenAsync(string scopes)
+        {
+            try
+            {
+                
+                var context = _configuration.ConfidentialClientApplication(null, null);
+               
+                var token = await context.AcquireTokenForClient(scopes.Split(' ')).ExecuteAsync();
+                return token.CreateAuthorizationHeader();
+            }
+            catch (Exception ex)
+            {
+                _appApplicationServices.GetService<ILogger<TokenProvider>>().LogError(ex, ex.Message);
+                return null;
+            }
+        }
+
+    }
 }

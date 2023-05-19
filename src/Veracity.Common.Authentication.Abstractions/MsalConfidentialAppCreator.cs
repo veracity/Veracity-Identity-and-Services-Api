@@ -15,7 +15,7 @@ namespace Veracity.Common.Authentication
                 .WithRedirectUri(configuration.RedirectUrl)
                 .WithLogging((level, message, pii) => { _debugLogger?.Invoke(message); })
                 .Build();
-            cache.SetCacheInstance(context.UserTokenCache);
+            cache?.SetCacheInstance(context.UserTokenCache);
             return context;
         }
         public static string Authority(TokenProviderConfiguration configuration) => $"{configuration.Instance}{(configuration.Instance.EndsWith("/")?"":"/")}tfp/{TenantId(configuration)}/{configuration.Policy}/v2.0/.well-known/openid-configuration";

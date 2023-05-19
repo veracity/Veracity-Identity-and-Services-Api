@@ -62,16 +62,16 @@ namespace Veracity.Common.Authentication
             return services;
         }
 
-        public static IServiceCollection AddVeracityDeamonApp(this IServiceCollection services, Func<IConfigurationReader> func)
+        public static IServiceCollection AddVeracityDeamonApp(this IServiceCollection services, Func<IConfiguration> func)
         {
-            ConfigurationManagerHelper.SetManager(func.Invoke());
-            services.AddDeamoApp(new TokenProviderConfiguration());
-            return services;
+            return services.AddVeracityDeamonApp(func.Invoke());
         }
-        public static IServiceCollection AddVeracityDeamonApp(this IServiceCollection services, IConfigurationReader configuration)
+        public static IServiceCollection AddVeracityDeamonApp(this IServiceCollection services, IConfiguration configuration,string key="Veracity")
         {
-            ConfigurationManagerHelper.SetManager(configuration);
-            services.AddDeamoApp(new TokenProviderConfiguration());
+            ConfigurationManagerHelper.SetManager(new NullConfig());
+            var t = new TokenProviderConfiguration();
+            configuration.Bind(key, t);
+            services.AddDeamoApp(t);
             return services;
         }
         public static AuthenticationBuilder AddVeracityAuthentication(this AuthenticationBuilder builder, Action<AzureAdB2COptions> options)

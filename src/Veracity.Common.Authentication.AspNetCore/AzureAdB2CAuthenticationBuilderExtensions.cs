@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Stardust.Particles;
@@ -122,11 +123,14 @@ namespace Veracity.Common.Authentication
                 try
                 {
                     arg.HttpContext.User = arg.Principal;
-                    if (IsMfaRequired(arg,configuration) && !arg.Principal.Claims.Any(c => c.Type == "mfa_required" && c.Value == "true"))
+                    if (IsMfaRequired(arg, configuration) &&
+                        !arg.Principal.Claims.Any(c => c.Type == "mfa_required" && c.Value == "true"))
                         throw new UnauthorizedAccessException("MFA required");
                     var cache = arg.HttpContext.RequestServices.GetService<TokenCacheBase>();
                     var context = configuration.ConfidentialClientApplication(cache, s => { _logger?.Message(s); });
-                    var user = await context.AcquireTokenByAuthorizationCode(new[] { configuration.Scope }, arg.ProtocolMessage.Code).ExecuteAsync();
+                    var user = await context
+                        .AcquireTokenByAuthorizationCode(new[] { configuration.Scope }, arg.ProtocolMessage.Code)
+                        .ExecuteAsync();
                     _logger?.Message($"exchanging code with access token took: {timer.ElapsedMilliseconds}ms");
                     var policyValidator = arg.HttpContext.RequestServices.GetService<IPolicyValidation>();
                     try
@@ -134,7 +138,9 @@ namespace Veracity.Common.Authentication
                         if (policyValidator != null)
                         {
                             var timer2 = Stopwatch.StartNew();
-                            var policy = await ValidatePolicies(configuration, policyValidator, arg.ProtocolMessage.RedirectUri ?? configuration.PolicyRedirectUrl??configuration.RedirectUrl);
+                            var policy = await ValidatePolicies(configuration, policyValidator,
+                                arg.ProtocolMessage.RedirectUri ??
+                                configuration.PolicyRedirectUrl ?? configuration.RedirectUrl);
                             timer2.Stop();
                             _logger?.Message($"Policy check took {timer2.ElapsedMilliseconds}ms. ");
                             if (policy.AllPoliciesValid)
@@ -145,7 +151,8 @@ namespace Veracity.Common.Authentication
                             else
                             {
                                 _logger?.Message("Not all policies is valid, redirecting to Veracity");
-                                arg.Response.Redirect(policy.RedirectUrl); //Getting the redirect url from the error message.
+                                arg.Response.Redirect(policy
+                                    .RedirectUrl); //Getting the redirect url from the error message.
                                 arg.HandleResponse();
                             }
                         }
@@ -167,6 +174,18 @@ namespace Veracity.Common.Authentication
                         HandleServerException(arg, ex);
                     }
 
+                }
+                catch (MsalClientException ex)
+                {
+                    _logger?.Message(ex.Message);
+                    _logger?.Error(ex);
+                }
+                catch (MsalServiceException ex)
+                {
+                    _logger?.Message(ex.ResponseBody);
+                    _logger?.Message(ex.Message);
+                    _logger?.Message(ex.Claims??"");
+                    _logger?.Error(ex);
                 }
                 catch (Exception ex)
                 {

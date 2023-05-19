@@ -8,10 +8,6 @@ using Veracity.Services.Api.Models;
 
 namespace Veracity.Services.Api
 {
-
-    
-    //Define the service as an interface almost as you would with a normal webapi controller. 
-    //the IRoutePrefix translates into RoutePrefix attribute in webapi
     [Api("my")]
     [Oauth]
     [CircuitBreaker(1000, 2)]

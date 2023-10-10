@@ -26,15 +26,7 @@ namespace WebApplicationNet7.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            try
-            {
-                var whatEver = await _testClient.GetTheThingAsync();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            
             var services = await _myService.MyServices();
             return View(await _myService.Info());
         }

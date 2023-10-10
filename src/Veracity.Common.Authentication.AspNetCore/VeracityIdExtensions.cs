@@ -15,7 +15,7 @@ namespace Veracity.Common.Authentication
 
         public static IServiceCollection AddVeracity(this IServiceCollection services, IConfiguration configuration, string key, TokenProviderConfiguration tokenProviderConfiguration)
         {
-            ConfigurationManagerHelper.SetManager(new NullConfig());
+            ConfigurationManagerHelper.SetManager(new NullConfig()); 
             configuration.Bind(key, tokenProviderConfiguration);
             return services;
         }

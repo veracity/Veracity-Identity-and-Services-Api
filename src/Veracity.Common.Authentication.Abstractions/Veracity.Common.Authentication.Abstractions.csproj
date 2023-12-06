@@ -5,21 +5,21 @@
     <RootNamespace>Veracity.Common.Authentication</RootNamespace>
     <Authors>Veracity</Authors>
     <Description>Abstractions used by Veracity Identity</Description>
-    <Copyright>Copyright © Veracity by DNVGL 2021</Copyright>
+    <Copyright>Copyright © Veracity by DNVGL 2023</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://developer.veracity.com/docs</PackageProjectUrl>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632</PackageIconUrl>
     <RepositoryUrl>https://github.com/veracity/veracity.services.api</RepositoryUrl>
     <RepositoryType>github</RepositoryType> 
     <PackageTags>Veracity Authentication OIDC B2C</PackageTags>
-    <Version>3.5.1</Version>
+    <Version>3.6.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>3.5.1.0</AssemblyVersion>
+    <AssemblyVersion>3.6.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.40.0" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.56.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Stardust.Particles" Version="5.0.2" />
   </ItemGroup>

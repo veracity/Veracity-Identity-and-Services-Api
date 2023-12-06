@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
-    <Version>3.6.1</Version>
+    <Version>3.6.5</Version>
     <Authors>Veracity</Authors>
     <Description>Authentication library for the veracity services sdk for aspnetcore</Description>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/28704632</PackageIconUrl>

@@ -20,37 +20,37 @@ namespace Veracity.Services.Api
         [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ReadAccess)]
         Task<IEnumerable<ServiceReference>> GetServices([In(InclutionTypes.Path)] int page, [In(InclutionTypes.Path)] int pageSize);
 
-        [Get("subscribers", "Get all users with a subscription to this service. Paged query: uses 0 based page index", Summary = Constants.Warning300)]
+        [Get("subscribers", "Get all users with a subscription to this servicein the tenant if provided, or it will get from system tenant. Paged query: uses 0 based page index", Summary = Constants.Warning300)]
         [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ReadAccess)]
-        Task<IEnumerable<UserReference>> GetUsers([In(InclutionTypes.Path)] int page, [In(InclutionTypes.Path)] int pageSize);
+        Task<IEnumerable<UserReference>> GetUsers([In(InclutionTypes.Path)] int page, [In(InclutionTypes.Path)] int pageSize, [InHeader] string tenantId = null);
 
-        [Get("subscribers/{userId}", "Get all users with a subscription to this service. Paged query: uses 0 based page index", Summary = Constants.Warning300)]
+        [Get("subscribers/{userId}", "Get all subscription to this user in the tenant if provided, or it will get from system tenant.", Summary = Constants.Warning300)]
         [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ReadAccess)]
-        Task<SubscriptionReference> GetServiceUser([In(InclutionTypes.Path)] string userId);
+        Task<SubscriptionReference> GetServiceUser([In(InclutionTypes.Path)] string userId, [InHeader] string tenantId = null);
 
-        [Get("services/{serviceId}/subscribers/{userId}", "Get all users with a subscription to this service. Paged query: uses 0 based page index", Summary = Constants.Warning300)]
+        [Get("services/{serviceId}/subscribers/{userId}", "Checks if a user has a subscription to the service and the access level if any in the tenant if provided, or it will get from system tenant.", Summary = Constants.Warning300)]
         [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ReadAccess)]
-        Task<SubscriptionReference> GetUserForService([InPath]string serviceId, [In(InclutionTypes.Path)] string userId);
+        Task<SubscriptionReference> GetUserForService([InPath]string serviceId, [In(InclutionTypes.Path)] string userId, [InHeader] string tenantId = null);
 
-        [Get("services/{serviceId}/subscribers", "Get all users with a subscription to this service. Paged query: uses 0 based page index")]
+        [Get("services/{serviceId}/subscribers", "Get all users with a subscription to this service in the tenant if provided, or it will get from system tenant. Paged query: uses 0 based page index")]
         [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ReadAccess, ParameterIndex = 0)]
-        Task<IEnumerable<UserReference>> GetServiceUsers([In(InclutionTypes.Path)]string serviceId, [In(InclutionTypes.Path)] int page, [In(InclutionTypes.Path)] int pageSize);
+        Task<IEnumerable<UserReference>> GetServiceUsers([In(InclutionTypes.Path)]string serviceId, [In(InclutionTypes.Path)] int page, [In(InclutionTypes.Path)] int pageSize, [InHeader] string tenantId = null);
 
-        [Put("subscribers/{userId}", "Add a user subscription to the service", Summary = Constants.Warning300)]
+        [Put("subscribers/{userId}", "Add a user subscription to the service in the tenant if provided, or it will use system tenant", Summary = Constants.Warning300)]
         [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ManageServiceSubscriptions)]
-        Task AddUserAsync([In(InclutionTypes.Path)] string userId, [In(InclutionTypes.Body)] SubscriptionOptions options);
+        Task AddUserAsync([In(InclutionTypes.Path)] string userId, [In(InclutionTypes.Body)] SubscriptionOptions options, [InHeader] string tenantId = null);
 
-        [Put("services/{serviceId}/subscribers/{userId}", "Add a user subscription to the service with the provided id .Only available for the root service for nested services")]
+        [Put("services/{serviceId}/subscribers/{userId}", "Add a user subscription to the service with the provided id in the tenant if provided, or it will use system tenant. Only available for the root service for nested services")]
         [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ManageServiceSubscriptions, ParameterIndex = 1)]
-        Task AddServiceUser([In(InclutionTypes.Path)] string userId, [In(InclutionTypes.Path)] string serviceId, [In(InclutionTypes.Body)] SubscriptionOptions options);
+        Task AddServiceUser([In(InclutionTypes.Path)] string userId, [In(InclutionTypes.Path)] string serviceId, [In(InclutionTypes.Body)] SubscriptionOptions options, [InHeader] string tenantId = null);
 
-        [Delete("services/{serviceId}/subscribers/{userId}", "Remove servive subscription from the user .Only available for the root service for nested services")]
+        [Delete("services/{serviceId}/subscribers/{userId}", "Remove servive subscription from the user in the tenant if provided, or it will use system tenant. Only available for the root service for nested services")]
         [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ManageServiceSubscriptions, ParameterIndex = 1)]
-        Task RemoveServiceUser([In(InclutionTypes.Path)] string userId, [In(InclutionTypes.Path)] string serviceId);
+        Task RemoveServiceUser([In(InclutionTypes.Path)] string userId, [In(InclutionTypes.Path)] string serviceId, [InHeader] string tenantId = null);
 
-        [Delete("subscribers/{userId}", "Remove servive subscription from the user ", Summary = Constants.Warning300)]
+        [Delete("subscribers/{userId}", "Remove servive subscription for the user from this service in the tenant if provided, or it will use system tenant.", Summary = Constants.Warning300)]
         [AccessControllGate(AccessControllTypes.UserAndService, RoleTypes.ManageServiceSubscriptions)]
-        Task RemoveUser([In(InclutionTypes.Path)] string userId);
+        Task RemoveUser([In(InclutionTypes.Path)] string userId, [InHeader] string tenantId = null);
 
         [Get("user/resolve({email})", "Get the user id from the email address", Summary = "Note that an email address may be connected to more than one user account")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ManageServiceSubscriptions)]

@@ -35,13 +35,13 @@ namespace Veracity.Services.Api
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
         Task<IEnumerable<CompanyReference>> GetUserCompanies([In(InclutionTypes.Path)] string userid);
 
-        [Get("{userid}/services", "Get a list of the users servcies. Paged query: uses 0 based page index")]
+        [Get("{userid}/services", "Get a list of the users servcies in the tenant if provided, or it will use system tenant. Paged query: uses 0 based page index")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
-        Task<IEnumerable<ServiceReference>> GetUserServices([In(InclutionTypes.Path)] string userid, [In(InclutionTypes.Path)] int page, [In(InclutionTypes.Path)] int pageSize);
+        Task<IEnumerable<ServiceReference>> GetUserServices([In(InclutionTypes.Path)] string userid, [In(InclutionTypes.Path)] int page, [In(InclutionTypes.Path)] int pageSize, [InHeader] string tenantId = null);
 
-        [Get("{userid}/services/{serviceId}","Get the detailed subscription information")]
+        [Get("{userid}/services/{serviceId}", "Gets the subscription state for a user with respect to the service provided in the tenant if provided, or it will use system tenant.")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
-        Task<SubscriptionDetails> GetUserSubscriptionDetails([In(InclutionTypes.Path)] string userid, [In(InclutionTypes.Path)] string serviceId);
+        Task<SubscriptionDetails> GetUserSubscriptionDetails([In(InclutionTypes.Path)] string userid, [In(InclutionTypes.Path)] string serviceId, [InHeader] string tenantId = null);
 
 
     }

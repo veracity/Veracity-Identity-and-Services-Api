@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationNet7", "Sampl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veracity.Common.Authentication.AspNetCore", "Veracity.Common.Authentication.AspNetCore\Veracity.Common.Authentication.AspNetCore.csproj", "{29153779-0742-423F-A641-D4BC4BBF5B33}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationNet8", "Samples\WebApplicationNet8\WebApplicationNet8.csproj", "{78BD7497-EA4C-43F8-B931-A47B2399E566}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,14 @@ Global
 		{29153779-0742-423F-A641-D4BC4BBF5B33}.Stag|Any CPU.Build.0 = Debug|Any CPU
 		{29153779-0742-423F-A641-D4BC4BBF5B33}.Test|Any CPU.ActiveCfg = Debug|Any CPU
 		{29153779-0742-423F-A641-D4BC4BBF5B33}.Test|Any CPU.Build.0 = Debug|Any CPU
+		{78BD7497-EA4C-43F8-B931-A47B2399E566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78BD7497-EA4C-43F8-B931-A47B2399E566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78BD7497-EA4C-43F8-B931-A47B2399E566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78BD7497-EA4C-43F8-B931-A47B2399E566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78BD7497-EA4C-43F8-B931-A47B2399E566}.Stag|Any CPU.ActiveCfg = Debug|Any CPU
+		{78BD7497-EA4C-43F8-B931-A47B2399E566}.Stag|Any CPU.Build.0 = Debug|Any CPU
+		{78BD7497-EA4C-43F8-B931-A47B2399E566}.Test|Any CPU.ActiveCfg = Debug|Any CPU
+		{78BD7497-EA4C-43F8-B931-A47B2399E566}.Test|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +107,7 @@ Global
 		{7394EDAC-0487-46E0-8A53-8700BFB3CAD5} = {AAC8E77D-7E4B-4ECA-A282-B4F799D6A079}
 		{49770986-2DD5-46FC-89AA-39A733D916C0} = {AAC8E77D-7E4B-4ECA-A282-B4F799D6A079}
 		{29153779-0742-423F-A641-D4BC4BBF5B33} = {B424EE34-34F9-458B-90CE-E1C2484892BD}
+		{78BD7497-EA4C-43F8-B931-A47B2399E566} = {AAC8E77D-7E4B-4ECA-A282-B4F799D6A079}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A9CDA391-12A3-4F65-9CA5-B6E0163F6381}

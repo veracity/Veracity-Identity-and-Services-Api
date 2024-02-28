@@ -29,9 +29,12 @@ namespace Veracity.Services.Api
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
         Task<int> GetMessageCount();
 
-        [Get("messages", "Read the users messages. All: include read messages")]
+        [Get("messages", "Read the users messages. All: include read messages. ImportantOnly: only include important messages")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
-       Task<IEnumerable<MessageReference>> GetMessagesAsync([In(InclutionTypes.Path)] bool all);
+        Task<IEnumerable<MessageReference>> GetMessagesAsync([In(InclutionTypes.Path)] bool all, [InHeader] string importantOnly = null);
+
+        [Patch("messages", "Marks all unread messages as read. ImportantOnly: only mark important messages as read")]
+        Task MarkAllMessagesAsRead([In(InclutionTypes.Header)] string importantOnly = null);
 
         //Notice the In attribute for the parameters, it is equivalent with FromBody and FromUri and is required (it currently defaults to FromBody :(  )
         [Get("messages/{messageId}")]
@@ -58,9 +61,9 @@ namespace Veracity.Services.Api
         [AuthorizeWrapper]
         Task ValidatePolicies([In(InclutionTypes.Header)]string returnUrl);
 
-        [Get("services", "Returns all services for the user")]
+        [Get("services", "Returns all services for the user inside the tenant with id:tenantId. System tenant id is Guid.empty. if tenantId is null, it will return all services from all tenants include system tenant.")]
         [AccessControllGate(AccessControllTypes.User, RoleTypes.IsValidUser)]
         [AuthorizeWrapper]
-        Task<IEnumerable<MyServiceReference>> MyServices();
+        Task<IEnumerable<MyServiceReference>> MyServices([In(InclutionTypes.Header)] string tenantId = null);
     }
 }

@@ -27,6 +27,14 @@ namespace Veracity.Services.Api.Models
         [JsonProperty("public")]
         public bool Public { get; set; }
 
+        [JsonProperty("tenantId")]
+        public string TenantId { get; set; }
+
+        //
+        // Summary:
+        //     The pricing tier of the service installed in the tenant, optional.
+        public string PricingTier { get; set; }
+
         [JsonProperty("id")]
         public string Id
         {

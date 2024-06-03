@@ -184,7 +184,7 @@ private IDataProtector ConstructDataProtector(IServiceProvider s)
 }
 
 ```
-these two methods allow you to control how and were the access tokens are stored. In this example we use a memory cache with basic protection. For 
+these two methods allow you to control how and were the access tokens are stored. In this example we use a memory cache with basic protection. Please be aware that memory will be whiped when you rebuild, so it could cause the veracity api call failed. You need to clear the cookies and login again to make the veracity api call work. For 
 distributed/scalable applications you need to change *ConstructDistributedCache* to use a persistent store like Redis or SQL, Microsoft has pacakges that implements
 *IDistributedCache* for SQL and Redis.
 In distributed/scalabe applications you need to protect the tokens in the same way in every instance, meening you need to provide a cryptographic key or certificate. 

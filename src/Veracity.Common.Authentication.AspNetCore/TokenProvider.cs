@@ -12,7 +12,7 @@ namespace Veracity.Common.Authentication
     {
         private readonly TokenProviderConfiguration _configuration;
         private readonly IServiceProvider _appApplicationServices;
-        public static string Authority(TokenProviderConfiguration configuration) => $"https://login.microsoftonline.com/tfp/{configuration.TenantId}/{configuration.Policy}/v2.0/.well-known/openid-configuration";
+        public static string Authority(TokenProviderConfiguration configuration) => $"{configuration.Instance}/{configuration.TenantId}/{configuration.Policy}/v2.0/.well-known/openid-configuration";
         public TokenProvider() : this(new TokenProviderConfiguration())
         {
         }
@@ -62,7 +62,7 @@ namespace Veracity.Common.Authentication
     {
         private readonly TokenProviderConfiguration _configuration;
         private readonly IServiceProvider _appApplicationServices;
-        public static string Authority(TokenProviderConfiguration configuration) => $"https://login.microsoftonline.com/tfp/{configuration.TenantId}/{configuration.Policy}/v2.0/.well-known/openid-configuration";
+        public static string Authority(TokenProviderConfiguration configuration) => $"{configuration.Instance}/{configuration.TenantId}/{configuration.Policy}/v2.0/.well-known/openid-configuration";
         public CCTokenProvider() : this(new TokenProviderConfiguration())
         {
         }

@@ -51,7 +51,7 @@ namespace WebApplicationNet7.Api
     {
         private readonly TokenProviderConfiguration _configuration;
         private readonly IServiceProvider _appApplicationServices;
-        public static string Authority(TokenProviderConfiguration configuration) => $"https://login.microsoftonline.com/tfp/{configuration.TenantId}/{configuration.Policy}/v2.0/.well-known/openid-configuration";
+        public static string Authority(TokenProviderConfiguration configuration) => $"{configuration.Instance}/{configuration.TenantId}/{configuration.Policy}/v2.0/.well-known/openid-configuration";
         public AdditionalScopeHandler() : this(new TokenProviderConfiguration())
         {
         }

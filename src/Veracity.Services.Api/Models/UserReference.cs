@@ -26,5 +26,8 @@ namespace Veracity.Services.Api.Models
 
         [JsonProperty("activated")]
         public bool Activated { get; set; }
+
+        [JsonProperty("tenantId")]
+        public string TenantId { get; set; }
     }
 }

@@ -168,6 +168,7 @@ namespace Veracity.Common.Authentication
                         {
                             HandleServerException(arg, e);
                         }
+                        else if (AzureAdB2COptions.TerminateOnPolicyException) throw new Exception(aex.Message, aex);
                     }
                     catch (ServerException ex)
                     {
@@ -179,6 +180,7 @@ namespace Veracity.Common.Authentication
                 {
                     _logger?.Message(ex.Message);
                     _logger?.Error(ex);
+                    if (AzureAdB2COptions.TerminateOnPolicyException) throw new Exception(ex.Message, ex);
                 }
                 catch (MsalServiceException ex)
                 {
@@ -186,10 +188,12 @@ namespace Veracity.Common.Authentication
                     _logger?.Message(ex.Message);
                     _logger?.Message(ex.Claims??"");
                     _logger?.Error(ex);
+                    if (AzureAdB2COptions.TerminateOnPolicyException) throw new Exception(ex.Message, ex);
                 }
                 catch (Exception ex)
                 {
                     ex.Log();
+                    if (AzureAdB2COptions.TerminateOnPolicyException) throw new Exception(ex.Message, ex);
                 }
                 timer.Stop();
                 _logger?.Message($"Total on code received  took {timer.ElapsedMilliseconds}ms. ");
@@ -213,6 +217,7 @@ namespace Veracity.Common.Authentication
                     arg.Response.Redirect(e.GetErrorData<ValidationError>().Url); //Getting the redirect url from the error message.
 
                 }
+                else if (AzureAdB2COptions.TerminateOnPolicyException) throw new Exception(e.Message, e);
             }
 
 

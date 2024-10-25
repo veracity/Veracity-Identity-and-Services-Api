@@ -15,7 +15,7 @@ namespace Veracity.Common.Authentication
 
         public static IServiceCollection AddVeracity(this IServiceCollection services, IConfiguration configuration, string key, TokenProviderConfiguration tokenProviderConfiguration)
         {
-            ConfigurationManagerHelper.SetManager(new NullConfig()); 
+            ConfigurationManagerHelper.SetManager(new NullConfig(configuration,key)); 
             configuration.Bind(key, tokenProviderConfiguration);
             return services;
         }
@@ -32,7 +32,7 @@ namespace Veracity.Common.Authentication
 
         public static IServiceCollection AddVeracity(this IServiceCollection services, IConfiguration configuration, string key, out TokenProviderConfiguration tokenProviderConfiguration)
         {
-            ConfigurationManagerHelper.SetManager(new NullConfig());
+            ConfigurationManagerHelper.SetManager(new NullConfig(configuration,key));
 
             var t = new TokenProviderConfiguration();
             configuration.Bind(key, t);
@@ -68,7 +68,7 @@ namespace Veracity.Common.Authentication
         }
         public static IServiceCollection AddVeracityDeamonApp(this IServiceCollection services, IConfiguration configuration,string key="Veracity")
         {
-            ConfigurationManagerHelper.SetManager(new NullConfig());
+            ConfigurationManagerHelper.SetManager(new NullConfig(configuration, key));
             var t = new TokenProviderConfiguration();
             configuration.Bind(key, t);
             services.AddDeamoApp(t);

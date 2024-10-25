@@ -17,5 +17,7 @@
         public string CallbackPath { get; set; }
 
         public string DefaultPolicy => SignUpSignInPolicyId;
+
+        public static bool TerminateOnPolicyException { get; set; }
     }
 }

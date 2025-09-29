@@ -12,9 +12,9 @@
     <RepositoryUrl>https://github.com/veracity/veracity.services.api</RepositoryUrl>
     <RepositoryType>github</RepositoryType> 
     <PackageTags>Veracity Authentication OIDC B2C</PackageTags>
-    <Version>3.6.2</Version>
+    <Version>3.6.3</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>3.6.2.0</AssemblyVersion>
+    <AssemblyVersion>3.6.3.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Identity.Client;
 
 namespace Veracity.Common.Authentication
@@ -36,17 +34,12 @@ namespace Veracity.Common.Authentication
         private static void ValidateConfig(TokenProviderConfiguration configuration)
         {
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            ValidateRequiredString(configuration.ClientId, nameof(configuration.ClientId));
-            ValidateRequiredString(configuration.ClientSecret, nameof(configuration.ClientSecret));
-            ValidateRequiredString(configuration.RedirectUrl, nameof(configuration.RedirectUrl));
-            ValidateRequiredString(configuration.TenantId, nameof(configuration.TenantId));
-            ValidateRequiredString(configuration.Policy, nameof(configuration.Policy));
-            ValidateRequiredString(configuration.Instance, nameof(configuration.Instance));
-        }
-
-        private static void ValidateRequiredString(string value, string name)
-        {
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(name, name + " cannot be null or empty");
+            ValidationHelper.ValidateRequiredString(configuration.ClientId, nameof(configuration.ClientId));
+            ValidationHelper.ValidateRequiredString(configuration.ClientSecret, nameof(configuration.ClientSecret));
+            ValidationHelper.ValidateRequiredString(configuration.RedirectUrl, nameof(configuration.RedirectUrl));
+            ValidationHelper.ValidateRequiredString(configuration.TenantId, nameof(configuration.TenantId));
+            ValidationHelper.ValidateRequiredString(configuration.Policy, nameof(configuration.Policy));
+            ValidationHelper.ValidateRequiredString(configuration.Instance, nameof(configuration.Instance));
         }
     }
 }

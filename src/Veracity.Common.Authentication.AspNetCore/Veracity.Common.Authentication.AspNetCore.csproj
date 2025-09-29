@@ -11,7 +11,7 @@
     <RepositoryType>github</RepositoryType>
     <PackageTags>Veracity Authentication OIDC B2C</PackageTags>
     <Description>Log in with Veracity Identity in aspnetcore applications.</Description>
-    <Version>3.6.5.3</Version>
+    <Version>3.6.5.4</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>

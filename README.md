@@ -84,6 +84,70 @@ services.AddVeracity(Configuration)
 
 ```
 
+### Customizing OpenId Connect events
+You can supply a full OpenIdConnectEvents object through AzureAdB2COptions.OpenIdConnectEvents when calling AddVeracityAuthentication.
+
+There is two ways to configure Veracity authentication:
+
+1. Full options action (manually setting all required properties) + events.
+   Use this when you don't bind from configuration and must specify every required option explicitly.
+2. IConfiguration binding plus supplying only custom events. Required properties are read from configuration and you only add extra event handlers.
+
+Option 1: Full options action
+```csharp
+services
+  .AddAuthentication(o =>
+  {
+      o.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+      o.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+  })
+  .AddVeracityAuthentication(opts =>
+  {
+      opts.ClientId = "...";
+      opts.Instance = "https://login.veracity.com";
+      opts.Domain = "dnvglb2cprod.onmicrosoft.com";
+      opts.SignUpSignInPolicyId = "B2C_1A_SignInWithADFSIdp";
+      opts.CallbackPath = "/signin-oidc"; // or whatever your redirect path is
+      opts.Scope = "";
+
+      // Add only the event handlers you need
+      opts.OpenIdConnectEvents = new OpenIdConnectEvents
+      {
+          OnTokenValidated = async ctx =>
+          {
+          },
+          OnRemoteFailure = ctx =>
+          {
+          }
+      };
+  })
+  .AddCookie();
+```
+
+Option 2: IConfiguration binding + events only
+```csharp
+// appsettings.json contains Veracity section with required properties.
+services
+    .Configure(opts =>
+    {
+        opts.OpenIdConnectEvents.OnTokenValidated = ctx =>
+        {
+
+        };
+    })
+    .AddAuthentication(sharedOptions =>
+    {
+        sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+    })
+    .AddVeracityAuthentication(builder.Configuration, isMfaRequiredOptions: (httpContext, authenticationProperties) =>
+    {
+        //do custom logic there
+        return true;
+    })
+```
+
+
 ### Logout
 
 Currently we do not provide any prebuilt code to handle logout. The reason for Veracity to provide a custom signout handler is to ensure that the user is loged out of all servcies. However there in not a 100% guarantee that the process will succseed so we need to show a information page in case the suer is using a public/shared device to access Veracity.

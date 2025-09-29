@@ -76,24 +76,6 @@ namespace Veracity.Common.Authentication
             return builder;
         }
 
-        public static IServiceCollection AddOnTokenValidated(this IServiceCollection services, Func<TokenValidatedContext, Task> handler, string scheme = OpenIdConnectDefaults.AuthenticationScheme)
-        {
-            if (handler == null) throw new ArgumentNullException(nameof(handler));
-
-            services.PostConfigure<OpenIdConnectOptions>(scheme, options =>
-            {
-                var prev = options.Events?.OnTokenValidated;
-                options.Events ??= new OpenIdConnectEvents();
-                options.Events.OnTokenValidated = async ctx =>
-                {
-                    if (prev != null) await prev(ctx);
-                    await handler(ctx);
-                };
-            });
-
-            return services;
-        }
-
         internal static IServiceCollection AddDeamoApp(this IServiceCollection builder, TokenProviderConfiguration configuration)
         {
             builder
@@ -119,22 +101,86 @@ namespace Veracity.Common.Authentication
 
             internal void Configure(string name, OpenIdConnectOptions options, TokenProviderConfiguration configuration)
             {
+                ValidateAzureOptions(_azureOptions);
                 options.ClientId = _azureOptions.ClientId;
                 options.Authority = $"{_azureOptions.Instance}/{_azureOptions.Domain}/{_azureOptions.SignUpSignInPolicyId}/v2.0";
                 options.UseTokenLifetime = true;
                 options.CallbackPath = _azureOptions.CallbackPath;
 
                 options.TokenValidationParameters = new TokenValidationParameters { NameClaimType = "name" };
-                var handler = options.Events.OnAuthorizationCodeReceived;
+                var userProvided = _azureOptions.OpenIdConnectEvents;
+
                 options.Events = new OpenIdConnectEvents
                 {
-                    OnRedirectToIdentityProvider = context => OnRedirectToIdentityProvider(context, configuration),
-                    OnRemoteFailure = OnRemoteFailure,
-                    OnAuthorizationCodeReceived = context => OnAuthorizationCodeReceived(context, configuration, handler)
+                    OnRedirectToIdentityProvider = async context =>
+                    {
+                        await OnRedirectToIdentityProvider(context, configuration);
+                        await userProvided.OnRedirectToIdentityProvider(context);
+                    },
+                    OnRemoteFailure = async context =>
+                    {
+                        await OnRemoteFailure(context);
+                        await userProvided.OnRemoteFailure(context);
+                    },
+                    OnAuthorizationCodeReceived = async context =>
+                    {
+                        await OnAuthorizationCodeReceived(context, configuration);
+                        await userProvided.OnAuthorizationCodeReceived(context);
+                    },
+                    OnTokenValidated = async context =>
+                    {
+                        await userProvided.OnTokenValidated(context);
+                    },
+                    OnAccessDenied = async context =>
+                    {
+                        await userProvided.OnAccessDenied(context);
+                    },
+                    OnAuthenticationFailed = async context =>
+                    {
+                        await userProvided.OnAuthenticationFailed(context);
+                    },
+                    OnMessageReceived = async context =>
+                    {
+                        await userProvided.OnMessageReceived(context);
+                    },
+                    OnRedirectToIdentityProviderForSignOut = async context =>
+                    {
+                        await userProvided.OnRedirectToIdentityProviderForSignOut(context);
+                    },
+                    OnRemoteSignOut = async context =>
+                    {
+                        await userProvided.OnRemoteSignOut(context);
+                    },
+                    OnSignedOutCallbackRedirect = async context =>
+                    {
+                        await userProvided.OnSignedOutCallbackRedirect(context);
+                    },
+                    OnTicketReceived = async context =>
+                    {
+                        await userProvided.OnTicketReceived(context);
+                    },
+                    OnTokenResponseReceived = async context =>
+                    {
+                        await userProvided.OnTokenResponseReceived(context);
+                    },
+                    OnUserInformationReceived = async context =>
+                    {
+                        await userProvided.OnUserInformationReceived(context);
+                    }
                 };
             }
 
-            private async Task OnAuthorizationCodeReceived(AuthorizationCodeReceivedContext arg, TokenProviderConfiguration configuration, Func<AuthorizationCodeReceivedContext, Task> handler)
+            private static void ValidateAzureOptions(AzureAdB2COptions azureOptions)
+            {
+                if (azureOptions == null) throw new ArgumentNullException(nameof(azureOptions));
+                ValidationHelper.ValidateRequiredString(azureOptions.ClientId, nameof(azureOptions.ClientId));
+                ValidationHelper.ValidateRequiredString(azureOptions.Instance, nameof(azureOptions.Instance));
+                ValidationHelper.ValidateRequiredString(azureOptions.Domain, nameof(azureOptions.Domain));
+                ValidationHelper.ValidateRequiredString(azureOptions.SignUpSignInPolicyId, nameof(azureOptions.SignUpSignInPolicyId));
+                ValidationHelper.ValidateRequiredString(azureOptions.CallbackPath, nameof(azureOptions.CallbackPath));
+            }
+
+            private async Task OnAuthorizationCodeReceived(AuthorizationCodeReceivedContext arg, TokenProviderConfiguration configuration)
             {
                 _logger?.Message("Auth code received...");
                 var timer = Stopwatch.StartNew();
@@ -215,7 +261,6 @@ namespace Veracity.Common.Authentication
                 }
                 timer.Stop();
                 _logger?.Message($"Total on code received  took {timer.ElapsedMilliseconds}ms. ");
-                await handler(arg);
             }
 
             private static async Task<ValidationResult> ValidatePolicies(TokenProviderConfiguration configuration,

@@ -1,4 +1,8 @@
-﻿namespace Veracity.Common.Authentication
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+
+namespace Veracity.Common.Authentication
 {
     public class AzureAdB2COptions:TokenProviderConfiguration
     {
@@ -19,5 +23,7 @@
         public string DefaultPolicy => SignUpSignInPolicyId;
 
         public static bool TerminateOnPolicyException { get; set; }
+
+        public OpenIdConnectEvents OpenIdConnectEvents { get; set; } = new();
     }
 }

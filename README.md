@@ -128,11 +128,13 @@ Option 2: IConfiguration binding + events only
 ```csharp
 // appsettings.json contains Veracity section with required properties.
 services
-    .Configure(opts =>
+    .Configure<AzureAdB2COptions>(opts =>
     {
-        opts.OpenIdConnectEvents.OnTokenValidated = ctx =>
+        opts.OpenIdConnectEvents.OnTokenValidated = async ctx =>
         {
-
+        };
+		opts.OpenIdConnectEvents.OnRemoteFailure = ctx =>
+        {
         };
     })
     .AddAuthentication(sharedOptions =>

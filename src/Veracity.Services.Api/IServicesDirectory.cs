@@ -20,15 +20,15 @@ namespace Veracity.Services.Api
     {
         [Get("services/{id}", "Get the detailed service description by the provided id")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
-        Task<ServiceInfo> GetServiceById([In(InclutionTypes.Path)] string id, [In(InclutionTypes.Header)] string tenantId = null);
+        Task<ServiceInfo> GetServiceById([In(InclusionTypes.Path)] string id, [In(InclusionTypes.Header)] string tenantId = null);
 
 
         [Get("services/{id}/users", "Get the list of users subscribing to the service. Paged query: uses 0 based page index")]
         [AccessControllGate(AccessControllTypes.ServiceThenUser, RoleTypes.ReadDirectoryAccess)]
-        Task<IEnumerable<UserReference>> GetUsers([In(InclutionTypes.Path)] string id, [In(InclutionTypes.Path)] int page, [In(InclutionTypes.Path)] int pageSize, [In(InclutionTypes.Header)] string tenantId = null);
+        Task<IEnumerable<UserReference>> GetUsers([In(InclusionTypes.Path)] string id, [In(InclusionTypes.Path)] int page, [In(InclusionTypes.Path)] int pageSize, [In(InclusionTypes.Header)] string tenantId = null);
 
         [Get("services/{serviceId}/administrators/{userId}","Internal only")]
         [Obsolete("Only for Veracity internal usage, this will be removed at a later stage", false)]
-        Task<bool> IsAdmin([In(InclutionTypes.Path)] string userId, [In(InclutionTypes.Path)] string serviceId);
+        Task<bool> IsAdmin([In(InclusionTypes.Path)] string userId, [In(InclusionTypes.Path)] string serviceId);
     }
 }

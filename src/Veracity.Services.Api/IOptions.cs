@@ -17,7 +17,7 @@ namespace Veracity.Services.Api
 		Task GetViewPoints();
 
 		[Options("options/{viewPoint}", "Provides CORS requirements and details about the viewpoints")]
-		Task GetOptions1([In(InclutionTypes.Path)] string viewPoint);
+		Task GetOptions1([In(InclusionTypes.Path)] string viewPoint);
 
 		[Options("options")]
 		Task GetOptions();
@@ -28,6 +28,6 @@ namespace Veracity.Services.Api
 
 		[Get("cache/invalidate/{id}", "Invalidate the cached item with the provided id")]
 		[AuthorizeWrapper]
-		Task InvalidateCache([In(InclutionTypes.Path)]string id);
+		Task InvalidateCache([In(InclusionTypes.Path)]string id);
 	}
 }
